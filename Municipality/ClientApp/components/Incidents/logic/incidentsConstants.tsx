@@ -1,0 +1,1 @@
+﻿export const REQUEST_INCIDENTS = 'REQUEST_INCIDENTS';
