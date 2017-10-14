@@ -20,6 +20,29 @@ namespace Municipality
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+            .ConfigureAppConfiguration((builderContext, config) =>
+            {
+                IHostingEnvironment env = builderContext.HostingEnvironment;
+
+                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+            })
+                .UseKestrel(options =>
+                {
+                    // Do not add the Server HTTP header when using the Kestrel Web Server.
+                    options.AddServerHeader = false;
+                })
+                // $Start-WebServer-IIS$
+                .UseIISIntegration()
+                // $End-WebServer-IIS$
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConsole();
+                    logging.AddDebug();
+                })
+
                 .Build();
     }
 }

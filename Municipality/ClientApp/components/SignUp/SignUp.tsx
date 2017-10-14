@@ -21,6 +21,8 @@ class SignUp extends React.Component<IProps, any> {
     }
 
     public render() {
+        //console.log(this.props.history.goBack())
+        console.log(this.props)
         return <div>
             <input value={this.props.email} />
             <input value={this.props.password} />
@@ -31,12 +33,6 @@ class SignUp extends React.Component<IProps, any> {
     }
 }
 
-export default connect(
-    mapStateToProps, // Selects which state properties are merged into the component's props
-    dispatchProps                 // Selects which action creators are merged into the component's props
-)(SignUp) as typeof SignUp;
-
-
 function mapStateToProps(state: ApplicationState): IState {
     return {
         email: state.signUp.email,
@@ -44,5 +40,14 @@ function mapStateToProps(state: ApplicationState): IState {
         confirmPassword: state.signUp.confirmPassword
     };
 };
+
+
+export default connect(
+    mapStateToProps, // Selects which state properties are merged into the component's props
+    dispatchProps                 // Selects which action creators are merged into the component's props
+)(SignUp) as typeof SignUp;
+
+
+
 
 

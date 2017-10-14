@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Models;
 using Microsoft.Extensions.Logging;
 using SmartService.ViewModels;
+using System.Linq;
+using Repositories;
 
 namespace Municipality.Controllers
 {
@@ -15,20 +17,24 @@ namespace Municipality.Controllers
     {
         #region Fields
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;       
-        
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IIncidentRepository _incidentsRepository;
+
         #endregion
         #region Constructors
         public AccountController(
 
            SignInManager<ApplicationUser> signInManager,
-           UserManager<ApplicationUser> userManager          
+           UserManager<ApplicationUser> userManager,
+           IIncidentRepository incidentsRepository
           )
         {
 
             _signInManager = signInManager;
             _userManager = userManager;
-            
+            _incidentsRepository = incidentsRepository;
+
+
         }
         #endregion
         #region Public methods
@@ -90,8 +96,7 @@ namespace Municipality.Controllers
         }
 
         [HttpPost("api/sign-up/")]
-        [AllowAnonymous]
-                
+        [AllowAnonymous]                
         public async Task<IActionResult> Signup([FromBody] SignupViewModel model)
         {
             ViewData["ReturnUrl"] = "returnUrl";
@@ -188,13 +193,18 @@ namespace Municipality.Controllers
         [HttpGet("api/account/authorized-user")]
         [Produces("application/json")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAuthorizedUser() => Json(
-                new
-                {
-                    User = "Andrey Gavrilovych"
-                }
-            );
+        public async Task<IActionResult> GetAuthorizedUser()
+        {
 
+            var res = _incidentsRepository.All().ToList();
+            return Json(
+                            new
+                            {
+                                User = "Andrey Gavrilovych"
+                            }
+                        );
+
+        }
         #endregion
         #region Helpers
 

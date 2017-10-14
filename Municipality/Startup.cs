@@ -7,6 +7,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Repositories.EntityFramework;
+using Repositories.EntityFramework.Repositories;
+using Repositories;
+using AzureLogger;
+using Municipality.Extensions;
 
 namespace Municipality
 {
@@ -23,7 +31,37 @@ namespace Municipality
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+            {
+                // Password settings
+                config.Password.RequiredLength = 6;
+                config.Password.RequireDigit = true;
+                config.Password.RequiredUniqueChars = 3;
+                // Lockout settings
+                config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                config.Lockout.MaxFailedAccessAttempts = 5;
+                config.Lockout.AllowedForNewUsers = true;
+                // User settings
+                config.User.RequireUniqueEmail = true;
+                // SignIn settings
+                config.SignIn.RequireConfirmedEmail = true;
+                config.SignIn.RequireConfirmedPhoneNumber = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddScoped<IIncidentStatusRepository, IncidentStatusRepository>();
+            services.AddScoped<IIncidentRepository, IncidentRepository>();
+
             services.AddMvc();
+           
+
+
+            services.AddSingleton(Configuration.GetSection("AzureStorageTables").Get<LoggerPOCO>());
+            services.AddScoped<ICosmosLogger, Logger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +82,7 @@ namespace Municipality
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -55,6 +93,18 @@ namespace Municipality
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+            //if (env.IsDevelopment())
+            //{
+            //    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //    {
+            //        var appContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+
+            //        appContext.Database.EnsureDeleted();
+            //        appContext.Database.Migrate();
+            //        appContext.EnsureSeedData(env);
+
+            //    }
+            //}
         }
     }
 }
