@@ -15,6 +15,8 @@ namespace Models
         public double Longitude { get; set; }
         public double Latitude { get; set; }
 
+        public string FilePath { get; set; }
+
         //relationships
         public int IncidentStatusId { get; set; }
         public virtual IncidentStatus IncidentStatus { get; set; }

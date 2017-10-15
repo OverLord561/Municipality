@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { IIncident } from './logic/incidentsState';
 import Incident from './Incident';
 
-import GoogleMap  from 'google-map-react';
+import GoogleMap from 'google-map-react';
 
 const AnyReactComponent = ({ text }: any) => <div className="elem">{text}</div>;
 
@@ -28,23 +28,23 @@ export default class MapContainer extends React.Component<IInnerProps, any> {
         const K_MARGIN_TOP = 30;
         const K_MARGIN_RIGHT = 30;
         const K_MARGIN_BOTTOM = 30;
-        const K_MARGIN_LEFT = 30;
-        
-        return (
-            <GoogleMap 
+        const K_MARGIN_LEFT = 30;        
+
+        return <div  className="col-lg-6 block">
+            <GoogleMap
                 bootstrapURLKeys={{
                     key: "AIzaSyAxVVyh7rh6kKCYhxyWZSY_xkDNZ4YIK3k",
-                    language: 'uk'                   
+                    language: 'uk'
                 }}
-               
+
                 defaultCenter={this.state.center}
                 defaultZoom={this.state.zoom}
                 margin={[K_MARGIN_TOP, K_MARGIN_RIGHT, K_MARGIN_BOTTOM, K_MARGIN_LEFT]}
-                
-                
+
+
             >
                 {this.props.incidents.map(function (incident, index) {
-                   
+
                     return <Incident
                         key={index}
                         lat={incident.lat}
@@ -52,8 +52,9 @@ export default class MapContainer extends React.Component<IInnerProps, any> {
                         incident={incident}
                     />
                 })}
-                
+
             </GoogleMap >
-        );
+        </div>
+
     }
 }

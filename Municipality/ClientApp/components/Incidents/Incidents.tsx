@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import { IState } from './logic/incidentsState';
 import * as actions from './logic/incidentsActions';
-import Geolocation from "./Geolocation"
 
+import Creation from "./Creation";
 
 import MapContainer from './MapContainer';
 
@@ -28,21 +28,16 @@ class Incidents extends React.Component<IProps, any> {
 
     public render() {
         
-        const _hg = {
-            height: "780px",
-            width: "100%",
-            marginTop: "30px",
-            marginBottom: "30px"
-        }
+       
 
-        return <div style={_hg} className="map">
-            <Geolocation
-                
-            />
+        return <div className="row">
+           
 
             <MapContainer
                 incidents={this.props.incidents}
             />
+
+            <Creation />
 
         </div>;
     }

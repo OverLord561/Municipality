@@ -11,8 +11,8 @@ using System;
 namespace Repositories.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171014145635_Initial")]
-    partial class Initial
+    [Migration("20171015190843_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -674,6 +674,8 @@ namespace Repositories.EntityFramework.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("FilePath");
 
                     b.Property<int>("IncidentStatusId");
 

@@ -674,11 +674,13 @@ namespace Repositories.EntityFramework.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("FilePath");
+
                     b.Property<int>("IncidentStatusId");
 
-                    b.Property<double>("Lat");
+                    b.Property<double>("Latitude");
 
-                    b.Property<double>("Lng");
+                    b.Property<double>("Longitude");
 
                     b.Property<string>("Title")
                         .IsRequired();
