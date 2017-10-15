@@ -2,6 +2,11 @@
   "name": "Municipality",
   "version": "0.0.0",
   "dependencies": {
+    "@types/google-map-react": {
+      "version": "0.23.0",
+      "from": "@types/google-map-react@latest",
+      "resolved": "https://registry.npmjs.org/@types/google-map-react/-/google-map-react-0.23.0.tgz"
+    },
     "@types/history": {
       "version": "4.6.0",
       "from": "@types/history@4.6.0",
@@ -320,6 +325,11 @@
           "resolved": "https://registry.npmjs.org/micromatch/-/micromatch-3.0.3.tgz"
         }
       }
+    },
+    "axios": {
+      "version": "0.16.2",
+      "from": "axios@>=0.16.2-0 <0.17.0-0",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-0.16.2.tgz"
     },
     "babel-code-frame": {
       "version": "6.22.0",
@@ -880,6 +890,11 @@
       "from": "event-source-polyfill@0.0.9",
       "resolved": "https://registry.npmjs.org/event-source-polyfill/-/event-source-polyfill-0.0.9.tgz"
     },
+    "eventemitter3": {
+      "version": "1.2.0",
+      "from": "eventemitter3@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/eventemitter3/-/eventemitter3-1.2.0.tgz"
+    },
     "events": {
       "version": "1.1.1",
       "from": "events@>=1.0.0 <2.0.0",
@@ -960,6 +975,18 @@
       "from": "flatten@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/flatten/-/flatten-1.0.2.tgz"
     },
+    "follow-redirects": {
+      "version": "1.2.5",
+      "from": "follow-redirects@>=1.2.3-0 <2.0.0-0",
+      "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.2.5.tgz",
+      "dependencies": {
+        "debug": {
+          "version": "2.6.9",
+          "from": "debug@>=2.6.9 <3.0.0",
+          "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
+        }
+      }
+    },
     "for-in": {
       "version": "1.0.2",
       "from": "for-in@>=1.0.1 <2.0.0",
@@ -1009,6 +1036,11 @@
       "version": "9.18.0",
       "from": "globals@>=9.0.0 <10.0.0",
       "resolved": "https://registry.npmjs.org/globals/-/globals-9.18.0.tgz"
+    },
+    "google-map-react": {
+      "version": "0.24.0",
+      "from": "google-map-react@latest",
+      "resolved": "https://registry.npmjs.org/google-map-react/-/google-map-react-0.24.0.tgz"
     },
     "graceful-fs": {
       "version": "4.1.11",
@@ -1738,6 +1770,11 @@
       "from": "pinkie-promise@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/pinkie-promise/-/pinkie-promise-2.0.1.tgz"
     },
+    "point-geometry": {
+      "version": "0.0.0",
+      "from": "point-geometry@0.0.0",
+      "resolved": "https://registry.npmjs.org/point-geometry/-/point-geometry-0.0.0.tgz"
+    },
     "posix-character-classes": {
       "version": "0.1.1",
       "from": "posix-character-classes@>=0.1.0 <0.2.0",
@@ -2325,6 +2362,11 @@
           "resolved": "https://registry.npmjs.org/ajv/-/ajv-5.2.1.tgz"
         }
       }
+    },
+    "scriptjs": {
+      "version": "2.5.8",
+      "from": "scriptjs@>=2.5.7 <3.0.0",
+      "resolved": "https://registry.npmjs.org/scriptjs/-/scriptjs-2.5.8.tgz"
     },
     "semver": {
       "version": "5.3.0",

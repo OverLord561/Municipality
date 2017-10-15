@@ -16,7 +16,8 @@ namespace AzureLogger
         public Logger(LoggerPOCO configuration)
         {
             _configuration = configuration;
-            this._table = CreateTableAsync(tableName).Result;
+            this._table = null;
+            //this._table = new CloudTable(); CreateTableAsync(tableName).Result;
         }
 
         #region Service Methods

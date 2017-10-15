@@ -6,6 +6,11 @@ import { ApplicationState } from '../../store';
 import { IState } from './logic/incidentsState';
 import * as actions from './logic/incidentsActions';
 
+import MapContainer from './MapContainer';
+
+import './Incidents.css';
+
+
 
 
 type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
@@ -22,10 +27,19 @@ class Incidents extends React.Component<IProps, any> {
         this.props.getIncidents();
     }
 
+
     public render() {
-       
-        return <div>            
-          Google map
+        
+        const _hg = {
+            height: "780px",
+            width: "100%",
+            marginTop: "30px",
+            marginBottom: "30px"
+        }
+
+        return <div style={_hg} className="map">
+
+            <MapContainer />
 
         </div>;
     }
@@ -33,7 +47,7 @@ class Incidents extends React.Component<IProps, any> {
 
 function mapStateToProps(state: ApplicationState): IState {
     return {
-        incidents: state.incidents.incidents       
+        incidents: state.incidents.incidents
     };
 };
 

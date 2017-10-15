@@ -30,7 +30,7 @@ export class NavMenu extends React.Component<{}, {}> {
 
                         <li>
                             <NavLink to={'/incidents'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-share-alt'></span> Incidents
+                                <span className='glyphicon glyphicon-warning-sign'></span> Incidents
                             </NavLink>
                         </li>
 

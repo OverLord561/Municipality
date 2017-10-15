@@ -32,8 +32,8 @@ namespace Municipality.Extensions
                     Description= "Затрудняє рух громадського транспорту",
                     IncidentStatusId = @new.Id,
                     IncidentStatus= @new,
-                    Longitude = 48.462592,
-                    Latitude = 35.049769
+                    Latitude = 48.462592,
+                    Longitude = 35.049769
 
                 },
                 new Incident
@@ -42,8 +42,8 @@ namespace Municipality.Extensions
                     Description= "Прохід громадян неможливий",
                     IncidentStatusId = progress.Id,
                     IncidentStatus= progress,
-                    Longitude = 48.466126,
-                    Latitude = 35.049526
+                    Latitude = 48.466126,
+                    Longitude = 35.049526
                 },
                 new Incident
                 {
@@ -51,8 +51,8 @@ namespace Municipality.Extensions
                     Description= "Тролебус виїхав на обочину",
                     IncidentStatusId = closed.Id,
                     IncidentStatus= closed,
-                    Longitude = 48.469868,
-                    Latitude = 35.054096
+                    Latitude = 48.469868,
+                    Longitude = 35.054096
                 },
                 new Incident
                 {
@@ -60,8 +60,8 @@ namespace Municipality.Extensions
                     Description= "Прорив водної магістралі. Машина провалилась.",
                     IncidentStatusId = @new.Id,
                     IncidentStatus= @new,
-                    Longitude = 48.467271,
-                    Latitude = 35.040321
+                    Latitude = 48.467271,
+                    Longitude = 35.040321
                 }
                 
             };
