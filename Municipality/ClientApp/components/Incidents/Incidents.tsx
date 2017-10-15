@@ -1,17 +1,15 @@
 ﻿import * as React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { ApplicationState } from '../../store';
 import { IState } from './logic/incidentsState';
 import * as actions from './logic/incidentsActions';
+import Geolocation from "./Geolocation"
+
 
 import MapContainer from './MapContainer';
 
 import './Incidents.css';
-
-
-
 
 type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 
@@ -38,8 +36,13 @@ class Incidents extends React.Component<IProps, any> {
         }
 
         return <div style={_hg} className="map">
+            <Geolocation
+                
+            />
 
-            <MapContainer />
+            <MapContainer
+                incidents={this.props.incidents}
+            />
 
         </div>;
     }

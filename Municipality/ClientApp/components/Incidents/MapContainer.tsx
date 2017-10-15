@@ -1,6 +1,8 @@
 ﻿import * as React from "react";
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { IIncident } from './logic/incidentsState';
+import Incident from './Incident';
 
 import GoogleMap  from 'google-map-react';
 
@@ -8,13 +10,17 @@ const AnyReactComponent = ({ text }: any) => <div className="elem">{text}</div>;
 
 const Dnipropetrovsk: any = { lat: 48.460861, lng: 35.056737 };
 
-export default class MapContainer extends React.Component<any, any> {
-    constructor(props: any) {
+interface IInnerProps {
+    incidents: IIncident[];
+}
+
+export default class MapContainer extends React.Component<IInnerProps, any> {
+    constructor(props: IInnerProps) {
 
         super(props);
         this.state = {
             center: Dnipropetrovsk,
-            zoom: 10
+            zoom: 15
         };
     }
     render() {
@@ -37,11 +43,16 @@ export default class MapContainer extends React.Component<any, any> {
                 
                 
             >
-                <AnyReactComponent
-                    lat={48.462592}
-                    lng={35.049769}                    
-                    text={'Упало дерево'}
-                />
+                {this.props.incidents.map(function (incident, index) {
+                   
+                    return <Incident
+                        key={index}
+                        lat={incident.lat}
+                        lng={incident.lng}
+                        incident={incident}
+                    />
+                })}
+                
             </GoogleMap >
         );
     }

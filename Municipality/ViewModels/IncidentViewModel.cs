@@ -10,8 +10,8 @@ namespace Municipality.ViewModels
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }       
+        public double Lng { get; set; }
+        public double Lat { get; set; }       
         public int StatusId { get; set; }
         public string Status { get; set; }
     }

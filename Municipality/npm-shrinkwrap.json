@@ -2174,6 +2174,11 @@
       "from": "react-dom@15.6.1",
       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.6.1.tgz"
     },
+    "react-geolocated": {
+      "version": "2.1.0",
+      "from": "react-geolocated@latest",
+      "resolved": "https://registry.npmjs.org/react-geolocated/-/react-geolocated-2.1.0.tgz"
+    },
     "react-hot-loader": {
       "version": "3.0.0-beta.7",
       "from": "react-hot-loader@3.0.0-beta.7",

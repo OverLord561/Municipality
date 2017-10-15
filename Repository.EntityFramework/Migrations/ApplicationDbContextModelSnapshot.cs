@@ -676,9 +676,9 @@ namespace Repositories.EntityFramework.Migrations
 
                     b.Property<int>("IncidentStatusId");
 
-                    b.Property<double>("Latitude");
+                    b.Property<double>("Lat");
 
-                    b.Property<double>("Longitude");
+                    b.Property<double>("Lng");
 
                     b.Property<string>("Title")
                         .IsRequired();

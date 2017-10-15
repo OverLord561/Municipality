@@ -7,8 +7,8 @@ export interface IIncident {
     id: number;
     title: string;
     description: string;
-    longitude: string;
-    latitude: string;
+    lng: string;
+    lat: string;
     status: string;
     statusId: number;
 }
@@ -21,8 +21,8 @@ export function getInitialState(): IState {
             id: 0,
             title: " ",
             description: " ",
-            latitude: " ",
-            longitude: " ",
+            lat: " ",
+            lng: " ",
             status: " ",
             statusId: 0
         }]
