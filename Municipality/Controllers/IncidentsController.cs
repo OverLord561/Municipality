@@ -47,32 +47,39 @@ namespace Municipality.Controllers
         [HttpPost("api/incident")]
         [Produces("application/json")]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateIncident([FromBody]CreateIncidentViewModel incident)
+        public async Task<IActionResult> CreateIncident()
         {
-            
+            var file = Request.Form.Files[0];
+
             //.SaveAs(Server.MapPath("/Content/Images/Uploads/" + fileName));
             StatusCodeResult result = null;
             try
             {
-                if (incident.File != null)
+                if (file != null)
                 {
                     // путь к папке Files
-                    string path = "/images/incidents/" + incident.File.FileName;
+                    string path = "/images/incidents/" + file.FileName;
 
-                    await _incidentsRepository.AddAsync(new Incident {
-                        Title = incident.Title,
-                        Description = incident.Description,
+                    string lat = Request.Form["lat"].ToString();
+                    string lng = Request.Form["lng"].ToString();
+
+                                       
+                   
+                    await _incidentsRepository.AddAsync(new Incident
+                    {
+                        Title = Request.Form["title"],
+                        Description = Request.Form["description"],
+                        Latitude = double.Parse(lat, System.Globalization.CultureInfo.InvariantCulture),
+                        Longitude = double.Parse(lng, System.Globalization.CultureInfo.InvariantCulture),
                         FilePath = path,
-                        Latitude = incident.Lat,
-                        Longitude = incident.Lng,
                         IncidentStatusId = 1,
-                        IncidentStatus = _incidentStatusesRepository.SingleOrDefault(x=>x.Id == 1)
+                        IncidentStatus = _incidentStatusesRepository.SingleOrDefault(x => x.Id == 1)
                     });
 
                     // сохраняем файл в папку Files в каталоге wwwroot
                     using (var fileStream = new FileStream(_hostingEnvironment.WebRootPath + path, FileMode.Create))
                     {
-                        await incident.File.CopyToAsync(fileStream);
+                        await file.CopyToAsync(fileStream);
                     }
 
                     result = Ok();

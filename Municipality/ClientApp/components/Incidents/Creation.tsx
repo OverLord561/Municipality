@@ -10,6 +10,7 @@ interface IInnerState {
     lat: any;
     lng: any;
     file: any;
+    [key: string]:string;
    
 }
 
@@ -45,7 +46,21 @@ interface IInnerState {
 
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
-        axios.post('/api/incident', this.state, config)
+        var incident = new FormData();
+
+        var state: IInnerState = this.state;
+
+        Object.keys(state).map(function (key) {
+            console.log(key + state[key]);
+            incident.append(key.toString(), state[key]);
+        });
+
+        console.log(incident)
+       
+      
+
+
+        axios.post('/api/incident', incident, config)
             .then(response => {
                 console.log(response)
         }).catch(error => {
