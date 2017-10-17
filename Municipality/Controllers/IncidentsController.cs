@@ -83,6 +83,7 @@ namespace Municipality.Controllers
                     }
 
                     result = Ok();
+                    return await GetIncidents();
                 }
             }
             catch (Exception ex)

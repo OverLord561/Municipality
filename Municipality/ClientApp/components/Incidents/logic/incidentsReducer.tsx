@@ -22,6 +22,13 @@ export const incidentsReducer: IReducer<IState> = (state = initialState, action)
 
             return newstate;
         }
+        case types.SET_CURRENT_POSITION: {
+            let newstate = Object.assign({}, state, {
+                center: action.center
+            });
+            return newstate;
+
+        };
     }
     return state;
 } 

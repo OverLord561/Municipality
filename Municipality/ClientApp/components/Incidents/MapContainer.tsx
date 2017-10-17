@@ -1,9 +1,9 @@
 ﻿import * as React from "react";
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { IIncident } from './logic/incidentsState';
+import { IIncident, IPoint } from './logic/incidentsState';
 import Incident from './Incident';
-
+import { GeolocatedProps, geolocated } from 'react-geolocated';
 import GoogleMap from 'google-map-react';
 
 const AnyReactComponent = ({ text }: any) => <div className="elem">{text}</div>;
@@ -11,18 +11,32 @@ const AnyReactComponent = ({ text }: any) => <div className="elem">{text}</div>;
 const Dnipropetrovsk: any = { lat: 48.460861, lng: 35.056737 };
 
 interface IInnerProps {
-    incidents: IIncident[];
+    incidents: IIncident[];    
 }
 
-export default class MapContainer extends React.Component<IInnerProps, any> {
+class MapContainer extends React.Component<IInnerProps, any> {
     constructor(props: IInnerProps) {
 
         super(props);
         this.state = {
-            center: Dnipropetrovsk,
+            center: Dnipropetrovsk, 
             zoom: 15
         };
     }
+
+    //center is our position
+    componentWillReceiveProps(nextProps: any, nextState: any) {
+
+        this.setState({
+            center: {
+                lat: nextProps.coords && nextProps.coords.latitude,
+                lng: nextProps.coords && nextProps.coords.longitude
+            }
+            
+        });
+    }
+
+
     render() {
 
         const K_MARGIN_TOP = 30;
@@ -37,11 +51,9 @@ export default class MapContainer extends React.Component<IInnerProps, any> {
                     language: 'uk'
                 }}
 
-                defaultCenter={this.state.center}
+                center={this.state.center}
                 defaultZoom={this.state.zoom}
                 margin={[K_MARGIN_TOP, K_MARGIN_RIGHT, K_MARGIN_BOTTOM, K_MARGIN_LEFT]}
-
-
             >
                 {this.props.incidents.map(function (incident, index) {
 
@@ -58,3 +70,5 @@ export default class MapContainer extends React.Component<IInnerProps, any> {
 
     }
 }
+
+export default geolocated()(MapContainer);

@@ -1,6 +1,6 @@
 ﻿
 export interface IState {
-    incidents: IIncident[];
+    incidents: IIncident[];    
 }
 
 export interface IIncident {
@@ -9,10 +9,16 @@ export interface IIncident {
     description: string;
     lng: string;
     lat: string;
-    status: string;
+    status: string;   
     statusId: number;
 }
 
+export interface IPoint {
+    lat: number;
+    lng: number;
+}
+
+const Dnipropetrovsk: IPoint = { lat: 48.460861, lng: 35.056737 };
 
 export function getInitialState(): IState {
 
@@ -23,9 +29,8 @@ export function getInitialState(): IState {
             description: " ",
             lat: " ",
             lng: " ",
-            status: " ",
+            status: " ",            
             statusId: 0
         }]
-
     }
 }

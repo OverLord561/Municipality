@@ -1,8 +1,10 @@
 ﻿import * as React from 'react';
 import autobind from 'autobind-decorator';
 import axios from 'axios';
-
+import { IIncident, IPoint } from './logic/incidentsState';
 import { GeolocatedProps, geolocated } from 'react-geolocated';
+
+
 
 interface IInnerState {
     title: string;
@@ -10,12 +12,17 @@ interface IInnerState {
     lat: any;
     lng: any;
     file: any;
-    [key: string]:string;
+    [key: string]: string; 
    
 }
 
- class Creation extends React.Component<any, IInnerState> {
-    constructor(props: any) {
+interface IInnerProps {
+    createIncident: (incident: FormData) => void;
+    
+}
+
+class Creation extends React.Component<IInnerProps, IInnerState> {
+    constructor(props: IInnerProps) {
         super(props);
         this.state = {
             title: "",
@@ -41,10 +48,7 @@ interface IInnerState {
 
     @autobind
     CreateIncident(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        console.log(this.state)
-
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+        event.preventDefault();      
 
         var incident = new FormData();
 
@@ -54,18 +58,9 @@ interface IInnerState {
             console.log(key + state[key]);
             incident.append(key.toString(), state[key]);
         });
+        
+        this.props.createIncident(incident);
 
-        console.log(incident)
-       
-      
-
-
-        axios.post('/api/incident', incident, config)
-            .then(response => {
-                console.log(response)
-        }).catch(error => {
-            console.log(error);
-        });
     }
 
     @autobind

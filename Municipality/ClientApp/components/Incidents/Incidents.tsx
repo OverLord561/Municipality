@@ -2,8 +2,9 @@
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
-import { IState } from './logic/incidentsState';
+import { IState, IPoint } from './logic/incidentsState';
 import * as actions from './logic/incidentsActions';
+import autobind from 'autobind-decorator';
 
 import Creation from "./Creation";
 
@@ -14,7 +15,8 @@ import './Incidents.css';
 type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 
 const dispatchProps = {
-    getIncidents: actions.GetIncidents
+    getIncidents: actions.GetIncidents,
+    createIncident: actions.CreateIncidents
 };
 
 
@@ -27,9 +29,6 @@ class Incidents extends React.Component<IProps, any> {
 
 
     public render() {
-        
-       
-
         return <div className="row">
            
 
@@ -37,7 +36,9 @@ class Incidents extends React.Component<IProps, any> {
                 incidents={this.props.incidents}
             />
 
-            <Creation />
+            <Creation
+                createIncident={this.props.createIncident}
+            />
 
         </div>;
     }
@@ -45,7 +46,7 @@ class Incidents extends React.Component<IProps, any> {
 
 function mapStateToProps(state: ApplicationState): IState {
     return {
-        incidents: state.incidents.incidents
+        incidents: state.incidents.incidents       
     };
 };
 
