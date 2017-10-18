@@ -2,6 +2,8 @@ import * as WeatherForecasts from './WeatherForecasts';
 import * as Counter from './Counter';
 import * as SignUp from '../components/SignUp/logic/signUpState';
 import * as SignUpReducer from '../components/SignUp/logic/signUpReducer';
+import * as SignIn from '../components/SignIn/logic/signInState';
+import * as SignInReducer from '../components/SignIn/logic/signInReducer';
 import * as Incidents from '../components/Incidents/logic/incidentsState';
 import * as IncidentsReducer from '../components/Incidents/logic/incidentsReducer';
 
@@ -12,6 +14,7 @@ export interface ApplicationState {
     weatherForecasts: WeatherForecasts.WeatherForecastsState;
     signUp: SignUp.IState;
     incidents: Incidents.IState;
+    signIn: SignIn.IState;
 
 }
 
@@ -21,8 +24,9 @@ export interface ApplicationState {
 export const reducers = {
     counter: Counter.reducer,
     weatherForecasts: WeatherForecasts.reducer,
-    signUp: SignUpReducer.ordersReducer,
-    incidents: IncidentsReducer.incidentsReducer
+    signUp: SignUpReducer.signUpReducer,
+    incidents: IncidentsReducer.incidentsReducer,
+    signIn: SignInReducer.signInReducer
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

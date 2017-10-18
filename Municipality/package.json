@@ -17,6 +17,7 @@
     "aspnet-prerendering": "^3.0.1",
     "aspnet-webpack": "^2.0.1",
     "aspnet-webpack-react": "^3.0.0",
+    "autobind-decorator": "^2.1.0",
     "awesome-typescript-loader": "3.2.1",
     "axios": "^0.16.2",
     "bootstrap": "3.3.7",

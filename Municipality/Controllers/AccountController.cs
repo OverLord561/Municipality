@@ -52,9 +52,8 @@ namespace Municipality.Controllers
             return View();
         }
 
-        [HttpPost("/api/sign-in/")]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]       
+        [HttpPost("api/sign-in/")]
+        [AllowAnonymous]              
         public async Task<IActionResult> Signin(SigninViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -96,17 +95,19 @@ namespace Municipality.Controllers
         }
 
         [HttpPost("api/sign-up/")]
+        [Produces("application/json")]
         [AllowAnonymous]                
         public async Task<IActionResult> Signup([FromBody] SignupViewModel model)
         {
-            ViewData["ReturnUrl"] = "returnUrl";
+            StatusCodeResult res = null;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {                      
-                    return RedirectToLocal("returnUrl");
+                {
+                    res = Ok();
+                    return await Task.FromResult(res);
                 }
                 AddErrors(result);
             }

@@ -1,5 +1,5 @@
-﻿import { getInitialState, IState } from './signUpState';
-import * as types from './signUpConstants';
+﻿import { getInitialState, IState } from './signInState';
+import * as types from './signInConstants';
 
 type KnownAction = any;
 
@@ -9,10 +9,10 @@ declare interface IReducer<TState> {
 
 const initialState = getInitialState();
 
-export const signUpReducer: IReducer<IState> = (state = initialState, action) => {  
+export const signInReducer: IReducer<IState> = (state = initialState, action) => {  
 
     switch (action.type) {
-        case types.REGISTER:
+        case types.AUTHORIZE:
             console.log(action.param)
     }
     return state;

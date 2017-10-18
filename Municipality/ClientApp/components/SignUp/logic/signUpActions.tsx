@@ -3,17 +3,19 @@ import { IState } from './signUpState';
 import { ApplicationState } from '../../../store';
 import axios from 'axios';
 
-export const Authorize = () => {
-
+export const Register = (data: IState, callback: any) => {
+   
    // let URL = `/api/sign-up/`;
-    let URL = 'api/account/authorized-user';
+    let URL = '/api/sign-up/';
+    const config = { headers: { 'Content-Type':  "application/json;charset=utf-8" } };
     return (dispatch: any, getStore: any) => {
-        let state: IState = getStore().signUp;
-        console.log(state)
+        
         //return axios.post(URL,state)       
-        return axios.get(URL)  
+        return axios.post(URL, data)  
             .then(response => {
-                console.log(response);                 
+                if (response.status == 200) {
+                    callback();                    
+                }                 
                 }).catch(error => {
                     console.log(error);
                 });
