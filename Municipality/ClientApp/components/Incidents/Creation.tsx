@@ -5,33 +5,30 @@ import { IIncident, IPoint } from './logic/incidentsState';
 import { GeolocatedProps, geolocated } from 'react-geolocated';
 
 
-
 interface IInnerState {
     title: string;
     description: string;
     lat: any;
     lng: any;
-    file: any;
-  
+    file: any;  
     [key: string]: string;
 
 }
 
 interface IInnerProps {
-    createIncident: (incident: any) => void;
-
+    createIncident: (incident: FormData) => void;   
 }
 
 class Creation extends React.Component<IInnerProps, IInnerState> {
     constructor(props: IInnerProps) {
         super(props);
         this.state = {
-            title: "",
-            description: "",
+            title: "1",
+            description: "1",
             lat: "",
             lng: "",
             file: "",
-            fileName:""
+            fileName:"no file attached"
         }
     }
     @autobind
@@ -53,7 +50,8 @@ class Creation extends React.Component<IInnerProps, IInnerState> {
        
         event.preventDefault();
 
-        var incident = new FormData();
+        var incident = new FormData();     
+      
 
         var state: IInnerState = this.state;
 

@@ -15,7 +15,6 @@ export interface ApplicationState {
     signUp: SignUp.IState;
     incidents: Incidents.IState;
     signIn: SignIn.IState;
-
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using

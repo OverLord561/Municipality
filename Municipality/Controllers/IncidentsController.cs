@@ -87,7 +87,8 @@ namespace Municipality.Controllers
                         FilePath = path,
                         IncidentStatusId = 1,
                         IncidentStatus = _incidentStatusesRepository.SingleOrDefault(x => x.Id == 1),
-                        UserId = userId
+                        UserId = userId,
+                        Adress = Request.Form["adress"]
                     });
 
                     // сохраняем файл в папку Files в каталоге wwwroot

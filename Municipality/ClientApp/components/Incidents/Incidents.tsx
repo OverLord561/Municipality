@@ -17,7 +17,7 @@ type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 const dispatchProps = {
     getIncidents: actions.GetIncidents,
     createIncident: actions.CreateIncidents,
-    focusIncident: actions.FocusIncident
+    focusIncident: actions.FocusIncident  
 };
 
 
@@ -41,7 +41,7 @@ class Incidents extends React.Component<IProps, any> {
                 <div className="row">
                     <div className="col-lg-4">
                         <Creation
-                            createIncident={this.props.createIncident}
+                            createIncident={this.props.createIncident}                           
                         />
                     </div>
                     <div className="col-lg-8">

@@ -13,7 +13,7 @@ export const signInReducer: IReducer<IState> = (state = initialState, action) =>
 
     switch (action.type) {
         case types.AUTHORIZE:
-            console.log(action.param)
+            return action.user;
     }
     return state;
 } 

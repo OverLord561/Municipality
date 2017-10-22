@@ -70,6 +70,8 @@
 
 .sign-in {
     padding: 150px 250px 0 150px;
+    /*background-image:url('/images/Dnepr.jpg');
+    height:750px*/
 }
 
 .sign-up {
@@ -133,4 +135,7 @@
 
 .desc-focus {
     background-color:lightblue;
+}
+.hello {
+    font-size:10px;
 }

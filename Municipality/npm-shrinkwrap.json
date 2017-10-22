@@ -12,6 +12,11 @@
       "from": "@types/history@4.6.0",
       "resolved": "https://registry.npmjs.org/@types/history/-/history-4.6.0.tgz"
     },
+    "@types/jquery": {
+      "version": "3.2.15",
+      "from": "@types/jquery@latest",
+      "resolved": "https://registry.npmjs.org/@types/jquery/-/jquery-3.2.15.tgz"
+    },
     "@types/node": {
       "version": "8.0.7",
       "from": "@types/node@*",

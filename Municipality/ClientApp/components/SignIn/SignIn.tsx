@@ -8,14 +8,20 @@ import * as CounterStore from '../../store/Counter';
 import autobind from 'autobind-decorator';
 
 
-type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
+type IProps = IState & IInnerState & RouteComponentProps<{}> & typeof dispatchProps;
+
+interface IInnerState {
+    password: string;
+    email: string;
+    rememberMe: boolean;
+}
 
 const dispatchProps = {
     authorize: actions.Authorize
 };
 
 
-class SignIn extends React.Component<IProps, IState> {
+class SignIn extends React.Component<IProps, IInnerState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -52,7 +58,7 @@ class SignIn extends React.Component<IProps, IState> {
     @autobind
     SubmitForm(event: any) {
         event.preventDefault();
-        this.props.authorize(this.state, this.props.history.goBack);
+        this.props.authorize(this.state as IState, this.props.history.goBack);
     }
 
     public render() {
@@ -92,8 +98,10 @@ function mapStateToProps(state: ApplicationState): IState {
     return {
         email: state.signIn.email,
         password: state.signIn.password,
-        rememberMe: state.signIn.rememberMe
-    };
+        rememberMe: state.signIn.rememberMe,
+        authorized: state.signIn.authorized,
+        userName: state.signIn.userName
+    }; 
 };
 
 
