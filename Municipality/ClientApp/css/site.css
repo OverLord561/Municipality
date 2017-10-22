@@ -64,3 +64,73 @@
         text-overflow: ellipsis;
     }
 }
+
+
+/*custom styles*/
+
+.sign-in {
+    padding: 150px 250px 0 150px;
+}
+
+.sign-up {
+    padding: 150px 250px 0 150px;
+}
+.create-incident {
+    padding: 150px 250px 0 150px;
+}
+
+@media screen and (max-width: 768px) /* Mobile */ {
+    .sign-in {
+        padding: 50px 0 0 0;
+    }
+
+    .sign-up {
+        padding: 50px 0 0 0;
+    }
+
+    .create-incident {
+        padding: 15px 0 0 0;
+    }
+}
+
+.elem {
+   
+    font-size: 20px;
+    border: 4px double black; /* Параметры границы */
+    width: 100px;
+    padding: 10px;
+}
+.not-focus {
+    color: darkred;
+}
+
+.focus {
+    color: darkgoldenrod;
+}
+
+.block {
+    height: 350px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;   
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.file-name {
+    color:darkred;
+    margin-left:50px;
+}
+
+.hide {
+    display: none;
+}
+.attach:hover {
+    color:grey;
+}
+
+.desc-focus {
+    background-color:lightblue;
+}

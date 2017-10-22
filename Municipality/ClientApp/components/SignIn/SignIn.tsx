@@ -7,6 +7,7 @@ import * as actions from './logic/signInActions';
 import * as CounterStore from '../../store/Counter';
 import autobind from 'autobind-decorator';
 
+
 type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 
 const dispatchProps = {
@@ -19,11 +20,12 @@ class SignIn extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             password: this.props.password,
-            email: this.props.email
+            email: this.props.email,
+            rememberMe: this.props.rememberMe
         }
     }
 
-   
+
 
     @autobind
     SetEmail(event: React.FormEvent<HTMLInputElement>) {
@@ -38,29 +40,59 @@ class SignIn extends React.Component<IProps, IState> {
             password: event.currentTarget.value
         });
     }
+    @autobind
+    RememberMe() {
+        this.setState({
+            rememberMe: !this.state.rememberMe
+        });
+    }
 
-    
+
 
     @autobind
     SubmitForm(event: any) {
         event.preventDefault();
-        this.props.authorize(this.state);
+        this.props.authorize(this.state, this.props.history.goBack);
     }
 
     public render() {
-        return <form onSubmit={this.SubmitForm}>
-            <input value={this.state.email} onChange={this.SetEmail} />
-            <input value={this.state.password} onChange={this.SetPassword} />
-            <input type="submit" value="send" />
+        return <div className="sign-in">
+            <form className="form-horizontal" onSubmit={this.SubmitForm}>
+                <div className="form-group">
+                    <label className="control-label col-sm-2" htmlFor="email">Email:</label>
+                    <div className="col-sm-10">
+                        <input value={this.state.email} type="email" className="form-control" id="email" placeholder="Enter email" onChange={this.SetEmail} />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label className="control-label col-sm-2" htmlFor="pwd">Password:</label>
+                    <div className="col-sm-10">
+                        <input value={this.state.password} type="password" className="form-control" id="pwd" placeholder="Enter password" onChange={this.SetPassword} />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <div className="col-sm-offset-2 col-sm-10">
+                        <div className="checkbox">
+                            <label><input type="checkbox" onChange={this.RememberMe} /> Remember me</label>
+                        </div>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <div className="col-sm-offset-2 col-sm-10">
+                        <button type="submit" className="btn btn-default">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-        </form>;
     }
 }
 
 function mapStateToProps(state: ApplicationState): IState {
     return {
-        email: state.signUp.email,
-        password: state.signUp.password
+        email: state.signIn.email,
+        password: state.signIn.password,
+        rememberMe: state.signIn.rememberMe
     };
 };
 

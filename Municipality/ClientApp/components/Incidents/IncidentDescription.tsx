@@ -4,25 +4,24 @@ import autobind from 'autobind-decorator';
 
 interface IInnerProps {
     incident: IIncident;
-    lat: any;
-    lng: any;
     focusIncident: (id: number, value: boolean) => void;
 }
-export default class Incident extends React.Component<IInnerProps, any>{
+export default class IncidentDescription extends React.Component<IInnerProps, any>{
 
     constructor(props: IInnerProps) {
         super(props);
 
     }
-
     @autobind
     FocusIncident() {
-       
+
         this.props.focusIncident(this.props.incident.id, !this.props.incident.inFocus);
     }
     render() {
-       
-        return <div onClick={this.FocusIncident} className={this.props.incident.inFocus ? "elem focus" : "elem not-focus"}> {this.props.incident.title}</div >;
+        return <tr  onClick={this.FocusIncident} className={this.props.incident.inFocus ? "desc-focus cursor":"cursor"}>
+            <td>{this.props.incident.title}</td>           
+            <td>{this.props.incident.adress}</td>   
+        </tr>
     }
 
 }

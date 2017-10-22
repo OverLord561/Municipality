@@ -11,7 +11,8 @@ const AnyReactComponent = ({ text }: any) => <div className="elem">{text}</div>;
 const Dnipropetrovsk: any = { lat: 48.460861, lng: 35.056737 };
 
 interface IInnerProps {
-    incidents: IIncident[];    
+    incidents: IIncident[];
+    focusIncident: (id: number, value: boolean) => void;
 }
 
 class MapContainer extends React.Component<IInnerProps, any> {
@@ -44,6 +45,8 @@ class MapContainer extends React.Component<IInnerProps, any> {
         const K_MARGIN_BOTTOM = 30;
         const K_MARGIN_LEFT = 30;        
 
+        var _props = this.props; 
+
         return <div  className="col-lg-6 block">
             <GoogleMap
                 bootstrapURLKeys={{
@@ -62,6 +65,7 @@ class MapContainer extends React.Component<IInnerProps, any> {
                         lat={incident.lat}
                         lng={incident.lng}
                         incident={incident}
+                        focusIncident={_props.focusIncident} 
                     />
                 })}
 

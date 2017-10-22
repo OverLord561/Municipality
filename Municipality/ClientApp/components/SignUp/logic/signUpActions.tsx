@@ -3,7 +3,7 @@ import { IState } from './signUpState';
 import { ApplicationState } from '../../../store';
 import axios from 'axios';
 
-export const Register = (data: IState, callback: any) => {
+export const Register = (data: IState, goToPrevPage: any) => {
    
    // let URL = `/api/sign-up/`;
     let URL = '/api/sign-up/';
@@ -14,7 +14,7 @@ export const Register = (data: IState, callback: any) => {
         return axios.post(URL, data)  
             .then(response => {
                 if (response.status == 200) {
-                    callback();                    
+                    goToPrevPage();                    
                 }                 
                 }).catch(error => {
                     console.log(error);

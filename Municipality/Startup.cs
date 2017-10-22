@@ -15,6 +15,8 @@ using Repositories.EntityFramework.Repositories;
 using Repositories;
 using AzureLogger;
 using Municipality.Extensions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Municipality
 {
@@ -34,7 +36,7 @@ namespace Municipality
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
             {
                 // Password settings
                 config.Password.RequiredLength = 6;
@@ -55,10 +57,14 @@ namespace Municipality
 
             services.AddScoped<IIncidentStatusRepository, IncidentStatusRepository>();
             services.AddScoped<IIncidentRepository, IncidentRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc();
-           
 
+            //services.Configure<FormOptions>(x =>
+            //{
+            //    x.ValueLengthLimit = int.MaxValue;               
+            //});
 
             services.AddSingleton(Configuration.GetSection("AzureStorageTables").Get<LoggerPOCO>());
             services.AddScoped<ICosmosLogger, Logger>();

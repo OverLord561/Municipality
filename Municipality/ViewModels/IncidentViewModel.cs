@@ -14,5 +14,7 @@ namespace Municipality.ViewModels
         public double Lat { get; set; }       
         public int StatusId { get; set; }
         public string Status { get; set; }
+        public string Adress { get; set; }
+        public bool InFocus { get; set; }
     }
 }

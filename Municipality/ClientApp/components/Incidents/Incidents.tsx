@@ -5,18 +5,19 @@ import { ApplicationState } from '../../store';
 import { IState, IPoint } from './logic/incidentsState';
 import * as actions from './logic/incidentsActions';
 import autobind from 'autobind-decorator';
-
+import IncidentsDescription from './IncidentsDescription';
 import Creation from "./Creation";
 
 import MapContainer from './MapContainer';
 
-import './Incidents.css';
+
 
 type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 
 const dispatchProps = {
     getIncidents: actions.GetIncidents,
-    createIncident: actions.CreateIncidents
+    createIncident: actions.CreateIncidents,
+    focusIncident: actions.FocusIncident
 };
 
 
@@ -30,15 +31,27 @@ class Incidents extends React.Component<IProps, any> {
 
     public render() {
         return <div className="row">
-           
+
 
             <MapContainer
                 incidents={this.props.incidents}
+                focusIncident={this.props.focusIncident}
             />
-
-            <Creation
-                createIncident={this.props.createIncident}
-            />
+            <div className="col-lg-6 block ">
+                <div className="row">
+                    <div className="col-lg-4">
+                        <Creation
+                            createIncident={this.props.createIncident}
+                        />
+                    </div>
+                    <div className="col-lg-8">
+                        <IncidentsDescription
+                            incidents={this.props.incidents}
+                            focusIncident={this.props.focusIncident}
+                        />
+                    </div>
+                </div>
+            </div>
 
         </div>;
     }
@@ -46,7 +59,7 @@ class Incidents extends React.Component<IProps, any> {
 
 function mapStateToProps(state: ApplicationState): IState {
     return {
-        incidents: state.incidents.incidents       
+        incidents: state.incidents.incidents
     };
 };
 

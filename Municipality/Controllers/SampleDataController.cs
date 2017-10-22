@@ -26,17 +26,7 @@ namespace Municipality.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
         }
-        [HttpPost("api/sign-u/")]
-        public IEnumerable<WeatherForecast> Test([FromBody] SignupViewModel model)
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
-        }
+       
 
         public class WeatherForecast
         {

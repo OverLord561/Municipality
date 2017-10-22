@@ -8,10 +8,11 @@ using IdentityServer4.EntityFramework.Interfaces;
 using IdentityServer4.EntityFramework.Options;
 using IdentityServer4.EntityFramework.Extensions;
 using IdentityServer4.EntityFramework.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Repositories.EntityFramework
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IPersistedGrantDbContext, IConfigurationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>, IPersistedGrantDbContext, IConfigurationDbContext
     {
         private readonly ConfigurationStoreOptions _configurationStoreOptions = new ConfigurationStoreOptions();
         private readonly OperationalStoreOptions _operationalStoreOptions = new OperationalStoreOptions();
@@ -40,6 +41,7 @@ namespace Repositories.EntityFramework
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<ApplicationUser>().Property(p => p.Id).UseSqlServerIdentityColumn();
 
             //Customize the ASP.NET Identity model and override the defaults if needed.
             //For example, you can rename the ASP.NET Identity table names and more.

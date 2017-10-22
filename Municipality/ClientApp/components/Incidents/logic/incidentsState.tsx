@@ -11,6 +11,8 @@ export interface IIncident {
     lat: string;
     status: string;   
     statusId: number;
+    adress: string;
+    inFocus: boolean;
 }
 
 export interface IPoint {
@@ -30,7 +32,9 @@ export function getInitialState(): IState {
             lat: " ",
             lng: " ",
             status: " ",            
-            statusId: 0
+            statusId: 0,
+            adress: " ",
+            inFocus: false
         }]
     }
 }

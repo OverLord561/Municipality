@@ -3,7 +3,7 @@ import { IState } from './signInState';
 import { ApplicationState } from '../../../store';
 import axios from 'axios';
 
-export const Authorize = (data: IState) => {
+export const Authorize = (data: IState, goToPrevPage: any) => {
    
 
     let URL = '/api/sign-in/';
@@ -13,7 +13,9 @@ export const Authorize = (data: IState) => {
         //return axios.post(URL,state)       
         return axios.post(URL,data)  
             .then(response => {
-                console.log(response);                 
+                if (response.status === 200) {
+                    goToPrevPage();
+                }                
                 }).catch(error => {
                     console.log(error);
                 });

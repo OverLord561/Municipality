@@ -41,7 +41,7 @@ namespace Municipality.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
-        [HttpGet("/api/sign-in/")]
+        [HttpGet("api/sign-in/")]
         [AllowAnonymous]
         public async Task<IActionResult> Signin(string returnUrl = null)
         {
@@ -54,27 +54,32 @@ namespace Municipality.Controllers
 
         [HttpPost("api/sign-in/")]
         [AllowAnonymous]              
-        public async Task<IActionResult> Signin(SigninViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Signin([FromBody]SigninViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            StatusCodeResult res = null;
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
-                {                   
-                    return RedirectToLocal(returnUrl);
+                {
+                    res = Ok();
+                    return await Task.FromResult(res);
                 }               
                 else
                 {
+                    res = NotFound();
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    //return View(model);
+                    return await Task.FromResult(res);
                 }
             }
 
+            res = NotFound();
+            return await Task.FromResult(res);
             // If we got this far, something failed, redisplay form
-            return View(model);
+            //return View(model);
         }
 
         [HttpPost("/sign-out/")]
@@ -102,7 +107,7 @@ namespace Municipality.Controllers
             StatusCodeResult res = null;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,EmailConfirmed=true };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

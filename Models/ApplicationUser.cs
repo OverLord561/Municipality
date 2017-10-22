@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Models
 {
 
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<int>
     {
         public string Password { get; set; }
 
@@ -12,6 +13,7 @@ namespace Models
         {
             this.Password = password;
         }
+        public IEnumerable<Incident> Incidents { get; set; }
     }
 }
 

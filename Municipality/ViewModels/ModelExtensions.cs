@@ -14,7 +14,9 @@ namespace Municipality.ViewModels
                 Status = model.IncidentStatus.Name,
                 StatusId = model.IncidentStatusId,
                 Lng = model.Longitude,
-                Lat = model.Latitude
+                Lat = model.Latitude,
+                Adress = model.Adress,
+                InFocus = false
             };
         }
 

@@ -21,7 +21,12 @@ namespace Repositories.EntityFramework.Configuration
                 .HasForeignKey(x => x.IncidentStatusId)
                 .HasConstraintName("FK_Incident_Status_ID")
                 .IsRequired();
-                      
+
+            entity.HasOne(x => x.ApplicationUser)
+                .WithMany(x => x.Incidents)
+                .HasForeignKey(x => x.UserId)
+                .HasConstraintName("FK_Incident_User_ID")
+                .IsRequired();
 
             entity.ToTable("Incident");
         }
