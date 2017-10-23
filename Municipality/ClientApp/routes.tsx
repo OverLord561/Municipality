@@ -10,8 +10,6 @@ import Incidents from './components/Incidents/Incidents';
 
 export const routes = <Layout>
     <Route exact path='/' component={ Home } />
-    <Route path='/counter' component={ Counter } />
-    <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
     <Route path='/sign-up' component={SignUp} />
     <Route path='/sign-in' component={SignIn} />
     <Route path='/incidents' component={Incidents} />

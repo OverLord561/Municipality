@@ -12,6 +12,7 @@ using Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Municipality.Service;
 
 namespace Municipality.Controllers
 {
@@ -23,13 +24,15 @@ namespace Municipality.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly Manager _manager;
 
         public IncidentsController(
             IIncidentRepository incidentsRepository,
             IIncidentStatusRepository incidentStatusesRepository,
             IHostingEnvironment hostingEnvironment,
              UserManager<ApplicationUser> userManager,
-             IHttpContextAccessor httpContextAccessor
+             IHttpContextAccessor httpContextAccessor,
+             Manager manager
             )
         {
             _incidentsRepository = incidentsRepository;
@@ -37,6 +40,7 @@ namespace Municipality.Controllers
             _hostingEnvironment = hostingEnvironment;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
+            _manager = manager;
         }
 
 
@@ -78,6 +82,7 @@ namespace Municipality.Controllers
                   
                     var userId = Convert.ToInt32( _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
+
                     await _incidentsRepository.AddAsync(new Incident
                     {
                         Title = Request.Form["title"],
@@ -96,6 +101,9 @@ namespace Municipality.Controllers
                     {
                         await file.CopyToAsync(fileStream);
                     }
+
+
+                    await _manager.SendMail(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value, Request.Form["title"]);
 
                     result = Ok();
                     return await GetIncidents();

@@ -53,7 +53,7 @@ namespace Municipality.Controllers
         }
 
         [HttpPost("api/sign-in/")]
-        [AllowAnonymous]              
+        [AllowAnonymous]
         public async Task<IActionResult> Signin([FromBody]SigninViewModel model)
         {
             StatusCodeResult res = null;
@@ -66,7 +66,7 @@ namespace Municipality.Controllers
                 {
                     res = Ok();
                     return await Task.FromResult(res);
-                }               
+                }
                 else
                 {
                     res = NotFound();
@@ -82,13 +82,16 @@ namespace Municipality.Controllers
             //return View(model);
         }
 
-        [HttpPost("/sign-out/")]
-        [ValidateAntiForgeryToken]
+        [HttpPost("api/sign-out/")]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Signout()
         {
             await _signInManager.SignOutAsync();
-          
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            StatusCodeResult res = null;
+
+            res = Ok();
+            return await Task.FromResult(res);
+
         }
 
         [HttpGet("api/sign-up/")]
@@ -101,13 +104,13 @@ namespace Municipality.Controllers
 
         [HttpPost("api/sign-up/")]
         [Produces("application/json")]
-        [AllowAnonymous]                
+        [AllowAnonymous]
         public async Task<IActionResult> Signup([FromBody] SignupViewModel model)
         {
             StatusCodeResult res = null;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,EmailConfirmed=true };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -128,7 +131,7 @@ namespace Municipality.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.Index),"Home");
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)

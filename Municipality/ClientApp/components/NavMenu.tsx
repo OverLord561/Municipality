@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from './SignIn/logic/signInActions';
+import autobind from 'autobind-decorator';
 
 import { ApplicationState } from '../store';
 
@@ -9,7 +11,23 @@ interface IStateProps {
     userName?: string;
 }
 
-class NavMenu extends React.Component<IStateProps, {}> {
+
+const dispatchProps = {
+    logOut: actions.LogOut
+};
+
+type IProps = typeof dispatchProps & IStateProps;
+
+class NavMenu extends React.Component<any, {}> {
+    constructor(props: IProps) {
+        super(props);
+    }
+
+    @autobind
+    LogOut() {
+        this.props.logOut();
+    };
+
     public render() {
         return <div className='main-nav'>
             <div className='navbar navbar-inverse'>
@@ -30,11 +48,7 @@ class NavMenu extends React.Component<IStateProps, {}> {
                                 <span className='glyphicon glyphicon-home'></span> Home
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to={'/counter'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-education'></span> Counter
-                            </NavLink>
-                        </li>
+
 
                         <li>
                             <NavLink to={'/incidents'} activeClassName='active'>
@@ -42,11 +56,6 @@ class NavMenu extends React.Component<IStateProps, {}> {
                             </NavLink>
                         </li>
 
-                        <li>
-                            <NavLink to={'/fetchdata'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Fetch data
-                            </NavLink>
-                        </li>
                         <li>
                             <NavLink to={'/sign-up'} activeClassName='active'>
                                 <span className='glyphicon glyphicon-share-alt'></span> Sign Up
@@ -61,9 +70,9 @@ class NavMenu extends React.Component<IStateProps, {}> {
                             </li>
                         }
                         {this.props.authorized &&
-                            < li >
-                            <NavLink to={'/sign-up'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-log-out'></span> Log out
+                            < li onClick={this.LogOut} >
+                                <NavLink to={'/sign-up'} activeClassName='active'>
+                                    <span className='glyphicon glyphicon-log-out'></span> Log out
                                 </NavLink>
                             </li>
                         }
@@ -86,5 +95,5 @@ function mapStateToProps(state: ApplicationState): IStateProps {
 
 export default connect(
     mapStateToProps, // Selects which state properties are merged into the component's props
-    {}                 // Selects which action creators are merged into the component's props
+    dispatchProps                 // Selects which action creators are merged into the component's props
 )(NavMenu) as typeof NavMenu;

@@ -9,7 +9,7 @@ const SetData = (user: IState) => {
         type: types.AUTHORIZE,
         user
     }
-}
+};
 
 
 export const Authorize = (data: IState, goToPrevPage: any) => {
@@ -31,5 +31,24 @@ export const Authorize = (data: IState, goToPrevPage: any) => {
                 console.log(error);
             });
     };
+};
+
+export const LogOut = () => {
+
+    let URL = '/api/sign-out/';
+    return (dispatch: any, getStore: any) => {
+       
+      
+        
+        return axios.post(URL)
+            .then(response => {
+                if (response.status === 200) {
+                    window.location.href = '/';
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+    };
 }
+
 
