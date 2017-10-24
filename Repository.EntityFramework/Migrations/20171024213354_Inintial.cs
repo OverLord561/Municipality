@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Repositories.EntityFramework.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inintial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -547,6 +547,8 @@ namespace Repositories.EntityFramework.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Approved = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IncidentStatusId = table.Column<int>(type: "int", nullable: false),

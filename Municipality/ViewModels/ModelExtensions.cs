@@ -16,7 +16,8 @@ namespace Municipality.ViewModels
                 Lng = model.Longitude,
                 Lat = model.Latitude,
                 Adress = model.Adress,
-                InFocus = false
+                InFocus = false,
+                Approved = model.Approved
             };
         }
 

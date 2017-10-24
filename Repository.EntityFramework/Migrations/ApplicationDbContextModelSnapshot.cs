@@ -672,6 +672,8 @@ namespace Repositories.EntityFramework.Migrations
 
                     b.Property<string>("Adress");
 
+                    b.Property<bool>("Approved");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("FilePath");

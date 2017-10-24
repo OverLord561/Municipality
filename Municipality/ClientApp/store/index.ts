@@ -6,7 +6,8 @@ import * as SignIn from '../components/SignIn/logic/signInState';
 import * as SignInReducer from '../components/SignIn/logic/signInReducer';
 import * as Incidents from '../components/Incidents/logic/incidentsState';
 import * as IncidentsReducer from '../components/Incidents/logic/incidentsReducer';
-
+import * as Admin from '../components/AdminPanel/logic/adminState';
+import * as AdminReducer from '../components/AdminPanel/logic/adminReducer';
 
 // The top-level state object
 export interface ApplicationState {
@@ -15,6 +16,7 @@ export interface ApplicationState {
     signUp: SignUp.IState;
     incidents: Incidents.IState;
     signIn: SignIn.IState;
+    admin: Admin.IState;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -25,7 +27,8 @@ export const reducers = {
     weatherForecasts: WeatherForecasts.reducer,
     signUp: SignUpReducer.signUpReducer,
     incidents: IncidentsReducer.incidentsReducer,
-    signIn: SignInReducer.signInReducer
+    signIn: SignInReducer.signInReducer,
+    admin: AdminReducer.adminReducer
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

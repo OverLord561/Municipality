@@ -1,6 +1,7 @@
 ﻿
 export interface IState {
-    incidents: IIncident[];    
+    notApprovedIncidents: IIncident[];
+    
 }
 
 export interface IIncident {
@@ -26,7 +27,7 @@ const Dnipropetrovsk: IPoint = { lat: 48.460861, lng: 35.056737 };
 export function getInitialState(): IState {
 
     return {
-        incidents: [{
+        notApprovedIncidents: [{
             id: 0,
             title: " ",
             description: " ",

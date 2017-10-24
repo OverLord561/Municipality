@@ -17,6 +17,8 @@ namespace Models
 
         public string Adress { get; set; }
 
+        public bool Approved { get; set; }
+
         public string FilePath { get; set; }
 
         //relationships

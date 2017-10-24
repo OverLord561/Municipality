@@ -76,7 +76,8 @@ namespace Municipality.Extensions
                     Latitude = 48.462592,
                     Longitude = 35.049769,
                     UserId = user.Id,
-                    Adress="проспект Дмитра Яворницького, 42-44, Дніпро́, Дніпропетровська область, Украина"
+                    Adress="проспект Дмитра Яворницького, 42-44, Дніпро́, Дніпропетровська область, Украина",
+                    Approved = false
 
                 },
                 new Incident
@@ -88,7 +89,8 @@ namespace Municipality.Extensions
                     Latitude = 48.466126,
                     Longitude = 35.049526,
                     UserId = user.Id,
-                    Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина"
+                    Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
+                    Approved=true
                 },
                 new Incident
                 {
@@ -99,7 +101,8 @@ namespace Municipality.Extensions
                     Latitude = 48.469868,
                     Longitude = 35.054096,
                     UserId = user.Id,
-                    Adress="вулиця Січеславська Набережна, 35А, Дніпро́, Дніпропетровська область, Украина, 49000"
+                    Adress="вулиця Січеславська Набережна, 35А, Дніпро́, Дніпропетровська область, Украина, 49000",
+                    Approved = true
                 },
                 new Incident
                 {
@@ -110,9 +113,22 @@ namespace Municipality.Extensions
                     Latitude = 48.467271,
                     Longitude = 35.040321,
                     UserId = user2.Id,
-                    Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина"
+                    Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
+                    Approved = false
+                },
+                new Incident
+                {
+                    Title="Пошкоджена лінія електропередач",
+                    Description= "Кабель висить над тротуарною доріжкою",
+                    IncidentStatusId = closed.Id,
+                    IncidentStatus= closed,
+                    Latitude = 48.467271,
+                    Longitude = 35.040321,
+                    UserId = user2.Id,
+                    Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
+                    Approved = true
                 }
-                
+
             };
 
             foreach (Incident log in incidents) {

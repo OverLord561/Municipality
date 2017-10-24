@@ -49,7 +49,7 @@ namespace Municipality.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetIncidents()
         {
-            var items = await _incidentsRepository.AllAsync();
+            var items = await _incidentsRepository.GetAsync(x=>x.IncidentStatus.Name != "Closed");
             return Json(
                             new
                             {

@@ -11,8 +11,8 @@ using System;
 namespace Repositories.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171022120928_Initial")]
-    partial class Initial
+    [Migration("20171024213354_Inintial")]
+    partial class Inintial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -670,6 +670,10 @@ namespace Repositories.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Adress");
+
+                    b.Property<bool>("Approved");
 
                     b.Property<string>("Description");
 

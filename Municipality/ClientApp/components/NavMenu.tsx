@@ -62,6 +62,12 @@ class NavMenu extends React.Component<any, {}> {
                             </NavLink>
                         </li>
 
+                        <li>
+                            <NavLink to={'/admin'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-calendar'></span> Admin Panel
+                            </NavLink>
+                        </li>
+
                         {!this.props.authorized &&
                             <li>
                                 <NavLink to={'/sign-in'} activeClassName='active'>
