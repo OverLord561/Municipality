@@ -68,7 +68,7 @@ namespace Municipality.Extensions
             var incidents = new List<Incident>
             {
                 new Incident
-                {                    
+                {
                     Title="Упало дерево",
                     Description= "Затрудняє рух громадського транспорту",
                     IncidentStatusId = @new.Id,
@@ -77,7 +77,8 @@ namespace Municipality.Extensions
                     Longitude = 35.049769,
                     UserId = user.Id,
                     Adress="проспект Дмитра Яворницького, 42-44, Дніпро́, Дніпропетровська область, Украина",
-                    Approved = false
+                    Approved = false,
+                    FilePath="/images/incidents/Фото0579.jpg"
 
                 },
                 new Incident
@@ -90,7 +91,8 @@ namespace Municipality.Extensions
                     Longitude = 35.049526,
                     UserId = user.Id,
                     Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
-                    Approved=true
+                    Approved=true,
+                    FilePath="/images/incidents/Фото0579.jpg"
                 },
                 new Incident
                 {
@@ -102,7 +104,8 @@ namespace Municipality.Extensions
                     Longitude = 35.054096,
                     UserId = user.Id,
                     Adress="вулиця Січеславська Набережна, 35А, Дніпро́, Дніпропетровська область, Украина, 49000",
-                    Approved = true
+                    Approved = true,
+                    FilePath="/images/incidents/Фото0579.jpg"
                 },
                 new Incident
                 {
@@ -114,7 +117,8 @@ namespace Municipality.Extensions
                     Longitude = 35.040321,
                     UserId = user2.Id,
                     Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
-                    Approved = false
+                    Approved = false,
+                    FilePath="/images/incidents/Фото0579.jpg"
                 },
                 new Incident
                 {
@@ -126,7 +130,8 @@ namespace Municipality.Extensions
                     Longitude = 35.040321,
                     UserId = user2.Id,
                     Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
-                    Approved = true
+                    Approved = true,
+                    FilePath="/images/incidents/Фото0579.jpg"
                 }
 
             };

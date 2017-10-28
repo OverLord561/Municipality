@@ -5,21 +5,24 @@ import Incident from './Incident';
 interface IInnerProps {
     getNotApproved: () => void;
     notApprovedIncidents: IIncident[];
+    approveIncident: (id: number) => void;
+    forbidIncident: (id: number) => void;
 }
 
 
 export default class NotApproved extends React.Component<IInnerProps, any>{
     componentDidMount() {
-        this.props.getNotApproved();
+       this.props.getNotApproved();
     }
     render() {
-        
+        var _props: IInnerProps = this.props;
         return <table className='table'>
             <thead>
                 <tr>
                     <th>Title</th>
                     <th>Description</th>
                     <th>Adress</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -32,11 +35,14 @@ export default class NotApproved extends React.Component<IInnerProps, any>{
 
                     <td><button type="button" className="btn btn-info">Search</button></td>
                     <td></td>
+                   
                 </tr>
-                {this.props.notApprovedIncidents.map(function (incident, index) {
+                {this.props.notApprovedIncidents != undefined && this.props.notApprovedIncidents.map(function (incident, index) {
                     return <Incident
                         key={index}
-                        incident={incident}                        
+                        incident={incident}
+                        approveIncident={_props.approveIncident}
+                        forbidIncident={_props.forbidIncident}
                     />
                 })}
 

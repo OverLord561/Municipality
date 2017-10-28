@@ -16,7 +16,7 @@ namespace Municipality.ViewModels
         public string Status { get; set; }
         public string Adress { get; set; }
         public bool InFocus { get; set; }
-        public bool Approved { get; set;
-        }
+        public bool Approved { get; set;}
+        public string FilePath { get; set; }
     }
 }

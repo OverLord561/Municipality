@@ -18,7 +18,7 @@ const dispatchProps = {
 
 type IProps = typeof dispatchProps & IStateProps;
 
-class NavMenu extends React.Component<any, {}> {
+export default class NavMenu extends React.Component<any, {}> {
     constructor(props: IProps) {
         super(props);
     }
@@ -38,7 +38,9 @@ class NavMenu extends React.Component<any, {}> {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <Link className='navbar-brand' to={'/'}>Municipality <br /> <label className="hello">Hello, <strong>{this.props.userName}</strong></label></Link>
+                    <Link className='navbar-brand' to={'/'}>Municipality
+
+                    </Link>
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
@@ -68,20 +70,20 @@ class NavMenu extends React.Component<any, {}> {
                             </NavLink>
                         </li>
 
-                        {!this.props.authorized &&
-                            <li>
-                                <NavLink to={'/sign-in'} activeClassName='active'>
-                                    <span className='glyphicon glyphicon-home'></span> Sign In
+
+                        <li>
+                            <NavLink to={'/sign-in'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-home'></span> Sign In
                             </NavLink>
-                            </li>
-                        }
-                        {this.props.authorized &&
-                            < li onClick={this.LogOut} >
-                                <NavLink to={'/sign-up'} activeClassName='active'>
-                                    <span className='glyphicon glyphicon-log-out'></span> Log out
+                        </li>
+
+
+                        <li >
+                            <NavLink to={'/sign-out'} >
+                                <span className='glyphicon glyphicon-log-out'></span> Log out
                                 </NavLink>
-                            </li>
-                        }
+                        </li>
+
 
                     </ul>
                 </div>
@@ -90,16 +92,16 @@ class NavMenu extends React.Component<any, {}> {
     }
 }
 
-function mapStateToProps(state: ApplicationState): IStateProps {
-    console.log(state.signIn)
-    return {
-        authorized: state.signIn.authorized,
-        userName: state.signIn.userName
-    };
-};
+//function mapStateToProps(state: ApplicationState): IStateProps {
+//    console.log(state.signIn)
+//    return {
+//        authorized: state.signIn.authorized,
+//        userName: state.signIn.userName
+//    };
+//};
 
 
-export default connect(
-    mapStateToProps, // Selects which state properties are merged into the component's props
-    dispatchProps                 // Selects which action creators are merged into the component's props
-)(NavMenu) as typeof NavMenu;
+//export default connect(
+//    mapStateToProps, // Selects which state properties are merged into the component's props
+//    dispatchProps                 // Selects which action creators are merged into the component's props
+//)(NavMenu) as typeof NavMenu;

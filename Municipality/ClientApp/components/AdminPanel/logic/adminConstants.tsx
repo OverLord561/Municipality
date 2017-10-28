@@ -3,3 +3,5 @@ export const RECEIVE_INCIDENTS = 'RECEIVE_INCIDENTS';
 export const CREATE_INCIDENT = 'CREATE_INCIDENT';
 export const SET_CURRENT_POSITION = 'SET_CURRENT_POSITION';
 export const SET_FOCUS = 'SET_FOCUS';
+export const APPROVE = 'APPROVE';
+export const FORBID = 'FORBID';

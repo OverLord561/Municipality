@@ -8,7 +8,10 @@ interface IInnerProps {
     focusIncident: (id: number, value: boolean) => void;
 }
 export default class IncidentsDescription extends React.Component<IInnerProps, any>{
-
+    constructor(props: IInnerProps)
+    {
+        super(props);
+    }
     render() {
         return <div>                
             {this.renderIncidentsTable()}
@@ -36,6 +39,7 @@ export default class IncidentsDescription extends React.Component<IInnerProps, a
                 <tr>
                     <th>Title</th>
                     <th>Adress</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

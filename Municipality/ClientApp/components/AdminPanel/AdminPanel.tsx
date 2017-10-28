@@ -14,7 +14,9 @@ interface IStateProps {
 type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 
 const dispatchProps = {
-    getIncidents: actions.GetIncidents
+    getIncidents: actions.GetIncidents,
+    approveIncident: actions.ApproveIncident,
+    forbidIncident: actions.ForbidIncident
 };
 
 class AdminPanel extends React.Component<IProps, any> {
@@ -27,7 +29,7 @@ class AdminPanel extends React.Component<IProps, any> {
 
             <ul className="nav nav-tabs">
                 <li className="active"><a data-toggle="tab" href="#home">New incidents</a></li>
-                <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                <li><a data-toggle="tab" href="#menu1">All</a></li>
                 <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
             </ul>
 
@@ -36,10 +38,12 @@ class AdminPanel extends React.Component<IProps, any> {
                     <NotApproved
                         getNotApproved={this.props.getIncidents}
                         notApprovedIncidents={this.props.notApprovedIncidents}
+                        approveIncident={this.props.approveIncident}
+                        forbidIncident={this.props.forbidIncident}
                     />
                 </div>
                 <div id="menu1" className="tab-pane fade">
-                    <h3>Menu 1</h3>
+                    <h3>All</h3>
                     <p>Some content in menu 1.</p>
                 </div>
                 <div id="menu2" className="tab-pane fade">
@@ -53,7 +57,8 @@ class AdminPanel extends React.Component<IProps, any> {
 }
 
 function mapStateToProps(state: ApplicationState): IStateProps {
-    
+    console.log('connect filter');
+    console.log(state);
     return {
         notApprovedIncidents: state.admin.notApprovedIncidents
     };

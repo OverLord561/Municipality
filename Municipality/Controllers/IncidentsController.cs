@@ -49,7 +49,9 @@ namespace Municipality.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetIncidents()
         {
-            var items = await _incidentsRepository.GetAsync(x=>x.IncidentStatus.Name != "Closed");
+            var items = await _incidentsRepository.GetAsync(x => x.IncidentStatus.Name != "Closed" && x.Approved == true);
+            //var items = await _incidentsRepository.GetAsync(x => x.IncidentStatus.Name != "Closed");
+
             return Json(
                             new
                             {
@@ -59,13 +61,31 @@ namespace Municipality.Controllers
 
         }
 
+        [HttpGet("api/incidents/not-approved")]
+        [Produces("application/json")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetNotApproved()
+        {
+            var items = await _incidentsRepository.GetAsync(x=>x.Approved == false);
 
-        [HttpPost("api/incident")]
+            return Json(
+                            new
+                            {
+                                Items = items.Select(x => x.ToViewModel())
+                            }
+                        );
+
+        }
+
+        
+
+
+        [HttpPost("api/incidents")]
         [Produces("application/json")]
         [AllowAnonymous]
         public async Task<IActionResult> CreateIncident(ICollection<IFormFile> files)
         {
-            
+
             var file = Request.Form.Files[0];
             //.SaveAs(Server.MapPath("/Content/Images/Uploads/" + fileName));
             StatusCodeResult result = null;
@@ -79,8 +99,8 @@ namespace Municipality.Controllers
                     string lat = Request.Form["lat"].ToString();
                     string lng = Request.Form["lng"].ToString();
 
-                  
-                    var userId = Convert.ToInt32( _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                    var userId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
 
                     await _incidentsRepository.AddAsync(new Incident
@@ -120,5 +140,41 @@ namespace Municipality.Controllers
         }
 
 
+        [HttpPut("api/incidents/{id}/approve")]
+        [Produces("application/json")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ApproveIncident(int id)
+        {
+            var incident = await _incidentsRepository.SingleOrDefaultAsync(x => x.Id == id);
+            if (incident != null)
+            {
+                incident.Approved = true;
+                await _incidentsRepository.UpdateAsync(incident);
+            }
+            else
+            {
+                return await Task.FromResult(NoContent());
+            }
+
+            return await Task.FromResult(Ok());
+
+        }
+
+        [HttpDelete("api/incidents/{id}")]
+        [Produces("application/json")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteIncident(int id)
+        {
+            var incident = await _incidentsRepository.SingleOrDefaultAsync(x => x.Id == id);
+            if (incident != null)
+            {
+                await _incidentsRepository.RemoveAsync(incident);
+                return await Task.FromResult(Ok());
+            }
+            else
+            {
+                return await Task.FromResult(NoContent());
+            }
+        }
     }
 }

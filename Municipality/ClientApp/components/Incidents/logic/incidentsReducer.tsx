@@ -12,9 +12,8 @@ const initialState = getInitialState();
 export const incidentsReducer: IReducer<IState> = (state = initialState, action) => {  
 
     switch (action.type) {
-        case types.REQUEST_INCIDENTS:
-            console.log(action.param);
-            break;
+               
+
         case types.RECEIVE_INCIDENTS: {
             let newstate = Object.assign({}, state, {
                 incidents: action.incidents               
@@ -30,5 +29,6 @@ export const incidentsReducer: IReducer<IState> = (state = initialState, action)
 
         };
     }
-    return state;
+
+    return getInitialState();
 } 

@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import { IIncident } from './logic/incidentsState';
 import autobind from 'autobind-decorator';
+import * as $ from 'jquery';
 
 interface IInnerProps {
     incident: IIncident;
@@ -16,11 +17,43 @@ export default class IncidentDescription extends React.Component<IInnerProps, an
     FocusIncident() {
 
         this.props.focusIncident(this.props.incident.id, !this.props.incident.inFocus);
+        //(this.refs.modal as HTMLButtonElement).click();
+       
     }
     render() {
-        return <tr  onClick={this.FocusIncident} className={this.props.incident.inFocus ? "desc-focus cursor":"cursor"}>
-            <td>{this.props.incident.title}</td>           
-            <td>{this.props.incident.adress}</td>   
+        if (this.props.incident.inFocus) {
+            (this.refs.modal as HTMLButtonElement).click();
+        }
+        return <tr className={this.props.incident.inFocus ? "desc-focus cursor":"cursor"}>
+            <td onClick={this.FocusIncident}>
+                {this.props.incident.title}
+               
+            </td>           
+            <td>{this.props.incident.adress}</td> 
+            <td>
+                <button ref='modal' type="button" className="btn btn-info btn-lg hide" data-toggle="modal" data-target={`#${this.props.incident.id}`}>Open Modal</button>
+
+                <div className="modal open in " id={`${this.props.incident.id}`} role="dialog">
+                    <div className="modal-dialog">
+
+                        <div className="modal-content">
+                            <div className="modal-header ">
+                                <button type="button" className="close" data-dismiss="modal" onClick={this.FocusIncident}>&times;</button>
+                                <h4 className="modal-title danger">{this.props.incident.title}</h4>
+                            </div>
+                            <div className="modal-body">
+                                <p>{this.props.incident.description}</p>
+                                <p className="modal-description">{this.props.incident.adress}</p>
+                                <img src={this.props.incident.filePath} className="img-responsive" alt="/" /> 
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={this.FocusIncident} >Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </td>  
         </tr>
     }
 

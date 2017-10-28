@@ -5,14 +5,14 @@ import axios from 'axios';
 
 export const GetIncidents = () => {
 
-
+    
     let URL = '/api/incidents';
 
     return (dispatch: any, getStore: any) => {
-
+        
         return axios.get(URL)
             .then(response => {
-                dispatch(ReceiveIncedents(response.data.items));
+                return dispatch(ReceiveIncedents(response.data.items));
             }).catch(error => {
                 console.log(error);
             });
@@ -41,7 +41,7 @@ export const CreateIncidents = (incident: FormData) => {
                 if (response.status === 200) {
                     incident.append("adress", response.data.results[0].formatted_address);
                     console.log(incident.get('adress'))
-                    return axios.post('/api/incident', incident)
+                    return axios.post('/api/incidents', incident)
                         .then(response => {
                             if (response.status == 200) {
                                 dispatch(ReceiveIncedents(response.data.items));

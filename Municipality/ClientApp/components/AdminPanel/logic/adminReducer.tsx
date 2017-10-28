@@ -11,10 +11,9 @@ const initialState = getInitialState();
 
 export const adminReducer: IReducer<IState> = (state = initialState, action) => {  
 
+    console.log(action)
     switch (action.type) {
-        case types.REQUEST_INCIDENTS:
-           
-            break;
+        
         case types.RECEIVE_INCIDENTS: {
           
             let newstate = Object.assign({}, state, {

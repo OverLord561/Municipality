@@ -23,10 +23,10 @@ class Creation extends React.Component<IInnerProps, IInnerState> {
     constructor(props: IInnerProps) {
         super(props);
         this.state = {
-            title: "1",
-            description: "1",
-            lat: "",
-            lng: "",
+            title: "title",
+            description: "description",
+            lat: "0",
+            lng: "0",
             file: "",
             fileName:"no file attached"
         }

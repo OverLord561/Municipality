@@ -17,12 +17,15 @@ type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 const dispatchProps = {
     getIncidents: actions.GetIncidents,
     createIncident: actions.CreateIncidents,
-    focusIncident: actions.FocusIncident  
+    focusIncident: actions.FocusIncident
 };
 
 
 class Incidents extends React.Component<IProps, any> {
 
+    constructor(props: IProps) {
+        super(props);
+    }
 
     componentDidMount() {
         this.props.getIncidents();
@@ -36,12 +39,13 @@ class Incidents extends React.Component<IProps, any> {
             <MapContainer
                 incidents={this.props.incidents}
                 focusIncident={this.props.focusIncident}
+
             />
             <div className="col-lg-6 block ">
                 <div className="row">
                     <div className="col-lg-4">
                         <Creation
-                            createIncident={this.props.createIncident}                           
+                            createIncident={this.props.createIncident}
                         />
                     </div>
                     <div className="col-lg-8">
@@ -49,6 +53,7 @@ class Incidents extends React.Component<IProps, any> {
                             incidents={this.props.incidents}
                             focusIncident={this.props.focusIncident}
                         />
+                                                
                     </div>
                 </div>
             </div>
@@ -58,6 +63,8 @@ class Incidents extends React.Component<IProps, any> {
 }
 
 function mapStateToProps(state: ApplicationState): IState {
+    console.log('connect incidents');
+    console.log(state);
     return {
         incidents: state.incidents.incidents
     };
