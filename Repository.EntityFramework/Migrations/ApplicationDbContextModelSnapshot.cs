@@ -674,7 +674,11 @@ namespace Repositories.EntityFramework.Migrations
 
                     b.Property<bool>("Approved");
 
+                    b.Property<DateTime>("DateOfApprove");
+
                     b.Property<string>("Description");
+
+                    b.Property<double>("Estimate");
 
                     b.Property<string>("FilePath");
 
@@ -683,6 +687,8 @@ namespace Repositories.EntityFramework.Migrations
                     b.Property<double>("Latitude");
 
                     b.Property<double>("Longitude");
+
+                    b.Property<int>("PriorityId");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -693,6 +699,8 @@ namespace Repositories.EntityFramework.Migrations
                         .HasName("PK_Incident_ID");
 
                     b.HasIndex("IncidentStatusId");
+
+                    b.HasIndex("PriorityId");
 
                     b.HasIndex("UserId");
 
@@ -713,6 +721,18 @@ namespace Repositories.EntityFramework.Migrations
                         .HasName("PK_IncidentStatus_ID");
 
                     b.ToTable("IncidentStatus");
+                });
+
+            modelBuilder.Entity("Models.Priority", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Priorities");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceClaim", b =>
@@ -878,6 +898,12 @@ namespace Repositories.EntityFramework.Migrations
                         .WithMany("Incidents")
                         .HasForeignKey("IncidentStatusId")
                         .HasConstraintName("FK_Incident_Status_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Models.Priority", "Priority")
+                        .WithMany("Incidents")
+                        .HasForeignKey("PriorityId")
+                        .HasConstraintName("FK_Incident_Priority_ID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Models.ApplicationUser", "ApplicationUser")

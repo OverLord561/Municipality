@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,17 +10,31 @@ namespace Municipality.Service
 {
     public class Manager
     {
-        public Task SendMail(string userName,string title)
+        public Task SendMailToEmployee(string userName,Incident incident, string toUser= null)
         {
             return Task.Factory.StartNew(() =>
             {
                 var fromAddress = new MailAddress("municipality561@gmail.com", userName);
-               
-                System.Net.Mail.MailAddress toAddress = new MailAddress("serviceemployee561@gmail.com");
-               
+                System.Net.Mail.MailAddress toAddress = null;
+                string body = "";
+                //send to employee
+                if (toUser == null)
+                {
+                    body = incident.Title;
+                    toAddress = new MailAddress("serviceemployee561@gmail.com");
+                }
+                //send to client
+                else
+                {
+                    toAddress = new MailAddress(toUser);
+                    body = "Your incident - " + incident.Title + " was approved. Time for liquidation: " + incident.Estimate + " hours";
+
+                }
+
                 const string fromPassword = "89ZXcvbNM";
                 const string subject = "New incident";
-                string body = title;
+               
+               
 
                 var smtp = new SmtpClient
                 {

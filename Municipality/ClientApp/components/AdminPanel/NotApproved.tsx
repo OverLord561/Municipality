@@ -5,7 +5,7 @@ import Incident from './Incident';
 interface IInnerProps {
     getNotApproved: () => void;
     notApprovedIncidents: IIncident[];
-    approveIncident: (id: number) => void;
+    approveIncident: (incident: IIncident) => void;
     forbidIncident: (id: number) => void;
 }
 
@@ -23,8 +23,7 @@ export default class NotApproved extends React.Component<IInnerProps, any>{
                     <th>Description</th>
                     <th>Adress</th>
                     <th></th>
-                    <th></th>
-                    <th></th>
+                    <th></th>                    
                 </tr>
             </thead>
             <tbody>

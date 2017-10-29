@@ -22,7 +22,9 @@ export default class Incident extends React.Component<IInnerProps, any>{
     }
     render() {
        
-        return <div onClick={this.FocusIncident} className={this.props.incident.inFocus ? "elem focus" : "elem not-focus"}> {this.props.incident.title}</div >;
+        return <div onClick={this.FocusIncident} className={this.props.incident.inFocus ? "marker focus" : "marker not-focus"}>
+            <div className="title"> {this.props.incident.title} </div>
+        </div >;
     }
 
 }

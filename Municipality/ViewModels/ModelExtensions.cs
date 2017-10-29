@@ -1,4 +1,6 @@
 ﻿using Models;
+using System;
+
 namespace Municipality.ViewModels
 {
     public static class ModelExtensions
@@ -18,7 +20,11 @@ namespace Municipality.ViewModels
                 Adress = model.Adress,
                 InFocus = false,
                 Approved = model.Approved,
-                FilePath = model.FilePath
+                FilePath = model.FilePath,
+                PriorityId = model.PriorityId,
+                Priority = model.Priority.Name,
+                Estimate = model.Estimate,
+                TimeLeft = (model.DateOfApprove.AddHours(model.Estimate) - DateTime.Now).TotalHours.ToString("N2")
             };
         }
 

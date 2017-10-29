@@ -16,7 +16,9 @@ namespace Repositories.EntityFramework.Repositories
         protected override IQueryable<Incident> Include()
         {
             return base.Include()
-                .Include(x => x.IncidentStatus);              
+                .Include(x => x.IncidentStatus)
+                .Include(x => x.Priority)
+                .Include(x => x.ApplicationUser);
         }
     }
 }

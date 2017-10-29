@@ -15,6 +15,7 @@ export interface IIncident {
     inFocus: boolean;
     approved: boolean;
     filePath: string;
+    timeLeft: string;
 }
 
 export interface IPoint {
@@ -38,7 +39,8 @@ export function getInitialState(): IState {
             adress: " ",
             inFocus: false,
             approved: false,
-            filePath:" "
+            filePath: " ",
+            timeLeft:"0"
         }]
     }
 }

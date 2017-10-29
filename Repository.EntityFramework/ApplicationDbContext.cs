@@ -19,7 +19,8 @@ namespace Repositories.EntityFramework
         
         public DbSet<Incident> Incidents { get; set; }
         public DbSet<IncidentStatus> IncidentStatuses { get; set; }
-       
+        public DbSet<Priority> Priorities { get; set; }
+
         // Identity server
         public DbSet<PersistedGrant> PersistedGrants { get; set; }
         public DbSet<IdentityServer4.EntityFramework.Entities.Client> Clients { get; set; }

@@ -29,7 +29,9 @@ export default class IncidentDescription extends React.Component<IInnerProps, an
                 {this.props.incident.title}
                
             </td>           
-            <td>{this.props.incident.adress}</td> 
+            <td onClick={this.FocusIncident}>
+                {this.props.incident.adress}
+            </td> 
             <td>
                 <button ref='modal' type="button" className="btn btn-info btn-lg hide" data-toggle="modal" data-target={`#${this.props.incident.id}`}>Open Modal</button>
 
@@ -40,6 +42,7 @@ export default class IncidentDescription extends React.Component<IInnerProps, an
                             <div className="modal-header ">
                                 <button type="button" className="close" data-dismiss="modal" onClick={this.FocusIncident}>&times;</button>
                                 <h4 className="modal-title danger">{this.props.incident.title}</h4>
+                                <h5><strong>Times remain: </strong>{this.props.incident.timeLeft} hours</h5>
                             </div>
                             <div className="modal-body">
                                 <p>{this.props.incident.description}</p>

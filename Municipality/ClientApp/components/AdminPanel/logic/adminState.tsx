@@ -16,6 +16,9 @@ export interface IIncident {
     inFocus: boolean;
     approved: boolean;
     filePath: string;
+    priority: string;
+    priorityId: number;
+    estimate: number;
 }
 
 export interface IPoint {
@@ -39,7 +42,10 @@ export function getInitialState(): IState {
             adress: " ",
             inFocus: false,
             approved: false,
-            filePath:" "
+            filePath: " ",
+            priority: "",
+            priorityId: 0,
+            estimate:1
         }]
     }
 }

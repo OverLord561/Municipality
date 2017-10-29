@@ -28,6 +28,12 @@ namespace Repositories.EntityFramework.Configuration
                 .HasConstraintName("FK_Incident_User_ID")
                 .IsRequired();
 
+            entity.HasOne(x => x.Priority)
+                .WithMany(x => x.Incidents)
+                .HasForeignKey(x => x.PriorityId)
+                .HasConstraintName("FK_Incident_Priority_ID")
+                .IsRequired();
+
             entity.ToTable("Incident");
         }
     }

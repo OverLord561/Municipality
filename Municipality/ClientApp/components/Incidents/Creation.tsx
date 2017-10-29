@@ -60,14 +60,19 @@ class Creation extends React.Component<IInnerProps, IInnerState> {
         });
        
         this.props.createIncident(incident);
-
+        (this.refs.form as HTMLFormElement).reset(); //to reset file attachment
+        this.setState({
+            title: "title",
+            description: "description",            
+            fileName: "no file attached"
+        });
     }
 
     @autobind
     UploadFile(event: any) {
         var files = event.currentTarget.files;
         
-        console.log(files[0])
+       
         this.setState({
             file: files[0],
             fileName: files[0].name
@@ -84,7 +89,7 @@ class Creation extends React.Component<IInnerProps, IInnerState> {
     }
 
     render() {
-        return <form onSubmit={this.CreateIncident}>
+        return <form ref="form" onSubmit={this.CreateIncident}>
             <div className="form-group">
                 <label htmlFor="title">Title:*</label>
                 <input className="form-control" value={this.state.title} required onChange={this.SetTitle} id="title" placeholder="Enter title..." />

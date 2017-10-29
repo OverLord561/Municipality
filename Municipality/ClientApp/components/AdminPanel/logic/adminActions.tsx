@@ -28,20 +28,20 @@ export const ReceiveIncedents = (notApprovedIncidents: IIncident[]) => {
 }
 
 
-export const ApproveIncident = (id:number) => {
+export const ApproveIncident = (incident: IIncident) => {
 
-    let URL = `/api/incidents/${id}/approve`;
+    let URL = `/api/incidents/${incident.id}/approve`;
 
     return (dispatch: any, getStore: any) => {
 
-        return axios.put(URL)
+        return axios.put(URL, incident)
             .then(response => {
                 if (response.status == 200) {
 
                     var copy: IIncident[] = [ ...getStore().admin.notApprovedIncidents ];
                     console.log(copy);
                     var incidents: IIncident[] = copy.filter(function (_incident, index) {
-                        if (_incident.id != id) {
+                        if (_incident.id != incident.id) {
                             return _incident;
                         }
                     });

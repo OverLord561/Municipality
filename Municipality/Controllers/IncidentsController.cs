@@ -102,8 +102,7 @@ namespace Municipality.Controllers
 
                     var userId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-
-                    await _incidentsRepository.AddAsync(new Incident
+                    Incident _newIncident = new Incident
                     {
                         Title = Request.Form["title"],
                         Description = Request.Form["description"],
@@ -113,8 +112,10 @@ namespace Municipality.Controllers
                         IncidentStatusId = 1,
                         IncidentStatus = _incidentStatusesRepository.SingleOrDefault(x => x.Id == 1),
                         UserId = userId,
-                        Adress = Request.Form["adress"]
-                    });
+                        Adress = Request.Form["adress"],
+                        PriorityId = 1
+                    };
+                    await _incidentsRepository.AddAsync(_newIncident);
 
                     // сохраняем файл в папку Files в каталоге wwwroot
                     using (var fileStream = new FileStream(_hostingEnvironment.WebRootPath + path, FileMode.Create))
@@ -123,7 +124,7 @@ namespace Municipality.Controllers
                     }
 
 
-                    await _manager.SendMail(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value, Request.Form["title"]);
+                    await _manager.SendMailToEmployee(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value, _newIncident);
 
                     result = Ok();
                     return await GetIncidents();
@@ -143,13 +144,20 @@ namespace Municipality.Controllers
         [HttpPut("api/incidents/{id}/approve")]
         [Produces("application/json")]
         [AllowAnonymous]
-        public async Task<IActionResult> ApproveIncident(int id)
+        public async Task<IActionResult> ApproveIncident(int id, [FromBody]IncidentViewModel incident)
         {
-            var incident = await _incidentsRepository.SingleOrDefaultAsync(x => x.Id == id);
-            if (incident != null)
+            var _incident = await _incidentsRepository.SingleOrDefaultAsync(x => x.Id == id);
+            if (_incident != null)
             {
-                incident.Approved = true;
-                await _incidentsRepository.UpdateAsync(incident);
+                _incident.Approved = true;
+                _incident.PriorityId = incident.PriorityId;
+                _incident.Estimate = incident.Estimate;
+                _incident.DateOfApprove = DateTime.Now;
+
+                await _incidentsRepository.UpdateAsync(_incident);
+                await _manager.SendMailToEmployee(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value, _incident, _incident.ApplicationUser.Email);
+
+                await _incidentsRepository.UpdateAsync(_incident);
             }
             else
             {

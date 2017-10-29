@@ -40,10 +40,11 @@ export const CreateIncidents = (incident: FormData) => {
             .then(response => {
                 if (response.status === 200) {
                     incident.append("adress", response.data.results[0].formatted_address);
-                    console.log(incident.get('adress'))
+                    
                     return axios.post('/api/incidents', incident)
                         .then(response => {
                             if (response.status == 200) {
+                                alert("request accepted");
                                 dispatch(ReceiveIncedents(response.data.items));
                             }
                         }).catch(error => {

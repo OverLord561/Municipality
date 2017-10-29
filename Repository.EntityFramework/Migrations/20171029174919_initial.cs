@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Repositories.EntityFramework.Migrations
 {
-    public partial class Inintial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -160,6 +160,19 @@ namespace Repositories.EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PersistedGrants", x => x.Key);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Priorities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Priorities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -549,11 +562,14 @@ namespace Repositories.EntityFramework.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Approved = table.Column<bool>(type: "bit", nullable: false),
+                    DateOfApprove = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estimate = table.Column<double>(type: "float", nullable: false),
                     FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IncidentStatusId = table.Column<int>(type: "int", nullable: false),
                     Latitude = table.Column<double>(type: "float", nullable: false),
                     Longitude = table.Column<double>(type: "float", nullable: false),
+                    PriorityId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -565,6 +581,12 @@ namespace Repositories.EntityFramework.Migrations
                         column: x => x.IncidentStatusId,
                         principalTable: "IncidentStatus",
                         principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Incident_Priority_ID",
+                        column: x => x.PriorityId,
+                        principalTable: "Priorities",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Incident_User_ID",
@@ -733,6 +755,11 @@ namespace Repositories.EntityFramework.Migrations
                 column: "IncidentStatusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Incident_PriorityId",
+                table: "Incident",
+                column: "PriorityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Incident_UserId",
                 table: "Incident",
                 column: "UserId");
@@ -819,6 +846,9 @@ namespace Repositories.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "IncidentStatus");
+
+            migrationBuilder.DropTable(
+                name: "Priorities");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
