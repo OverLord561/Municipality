@@ -17,13 +17,15 @@ export default class Incident extends React.Component<IInnerProps, any>{
 
     @autobind
     FocusIncident() {
-       
+
         this.props.focusIncident(this.props.incident.id, !this.props.incident.inFocus);
     }
     render() {
-       
-        return <div onClick={this.FocusIncident} className={this.props.incident.inFocus ? "marker focus" : "marker not-focus"}>
-            <div className="title"> {this.props.incident.title} </div>
+
+        return <div onClick={this.FocusIncident} className="marker">
+            <div className={this.props.incident.inFocus ? "image focus" : "image"}>
+                <div className="title"> 1 </div>
+            </div>
         </div >;
     }
 

@@ -63,8 +63,7 @@ class Incidents extends React.Component<IProps, any> {
 }
 
 function mapStateToProps(state: ApplicationState): IState {
-    console.log('connect incidents');
-    console.log(state);
+   
     return {
         incidents: state.incidents.incidents
     };
