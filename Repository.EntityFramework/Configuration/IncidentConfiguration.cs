@@ -4,9 +4,9 @@ using Models;
 
 namespace Repositories.EntityFramework.Configuration
 {
-    internal class IncidentConfiguration : DbEntityConfiguration<Incident>
+    internal class IncidentConfiguration : IEntityTypeConfiguration<Incident>
     {
-        public override void Configure(EntityTypeBuilder<Incident> entity)
+        public void Configure(EntityTypeBuilder<Incident> entity)
         {
             entity.HasKey(x => x.Id).HasName("PK_Incident_ID");
 

@@ -5,9 +5,9 @@ using Models;
 
 namespace Repositories.EntityFramework.Configuration
 {
-    internal class PriorityConfiguration : DbEntityConfiguration<Priority>
+    internal class PriorityConfiguration : IEntityTypeConfiguration<Priority>
     {
-        public override void Configure(EntityTypeBuilder<Priority> entity)
+        public void Configure(EntityTypeBuilder<Priority> entity)
         {
             entity.HasKey(x => x.Id)
                 .HasName("PK_IncidentStatus_ID");
@@ -18,7 +18,7 @@ namespace Repositories.EntityFramework.Configuration
 
             entity.Property(x => x.Name)
                 .IsRequired();
-            entity.ToTable("Priority");
+            entity.ToTable("Priorities");
         }
     }
 }

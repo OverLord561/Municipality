@@ -1,54 +1,69 @@
 ﻿import * as types from './signInConstants';
-import { IState } from './signInState';
+import { ILoginModel } from './signInState';
 import { ApplicationState } from '../../../store';
 import axios from 'axios';
+import * as globalConstants from '../../../constants/constants';
 
+export const Authorize = (goToPrevPage: any) => (dispatch: any, getStore: any) => {
 
-const SetData = (user: IState) => {
-    return {
-        type: types.AUTHORIZE,
-        user
-    }
-};
+  let URL = '/api/sign-in/';
+  const model: ILoginModel = getStore().signIn.loginModel;
+  dispatch({
+    type: globalConstants.IS_FETCHING,
+    isFetching: true,
+  });
+  axios.post(URL, model)
+    .then(response => {
+      dispatch({
+        type: globalConstants.IS_FETCHING,
+        isFetching: false,
+      });
+      //data.authorized = true;
+      //data.userName = data.email;
 
+      goToPrevPage();
 
-export const Authorize = (data: IState, goToPrevPage: any) => {
-
-    let URL = '/api/sign-in/';
-    return (dispatch: any, getStore: any) => {
-        let state: IState = getStore().signUp;
-        console.log(state)
-        //return axios.post(URL,state)       
-        return axios.post(URL, data)
-            .then(response => {
-                if (response.status === 200) {
-                    data.authorized = true;
-                    data.userName = data.email;
-                    dispatch(SetData(data));
-                    goToPrevPage();
-                }
-            }).catch(error => {
-                console.log(error);
-            });
-    };
+    }).catch(error => {
+      dispatch({
+        type: globalConstants.IS_FETCHING,
+        isFetching: false,
+      });
+      if (error.response.status === 409) {
+        dispatch({
+          type: globalConstants.ADD_VALIDATION_ERROR,
+          errors: error.response.data,
+        });
+      }
+    });
 };
 
 export const LogOut = () => {
 
-    let URL = '/api/sign-out/';
-    return (dispatch: any, getStore: any) => {
-       
-      
-        
-        return axios.post(URL)
-            .then(response => {
-                if (response.status === 200) {
-                    window.location.href = '/';
-                }
-            }).catch(error => {
-                console.log(error);
-            });
-    };
+  let URL = '/api/sign-out/';
+  return (dispatch: any, getStore: any) => {
+
+    return axios.post(URL)
+      .then(response => {
+        if (response.status === 200) {
+          window.location.href = '/';
+        }
+      }).catch(error => {
+        console.log(error);
+      });
+  };
 }
+
+
+export const SetFormData = (property: string, value: string | boolean) => (dispatch: any, getStore: any) => {
+  const model: ILoginModel = { ...getStore().signIn.loginModel };
+  model[property] = value;
+
+  dispatch({
+    type: types.SET_LOGIN_DATA,
+    loginModel: model,
+  });
+};
+
+
 
 

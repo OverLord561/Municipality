@@ -1,1 +1,1 @@
-﻿export const REGISTER = 'REGISTER';
+﻿export const SET_REGISTER_DATA = 'SET_REGISTER_DATA';

@@ -1,9 +1,8 @@
-E:\Diploma Master\Municipality\Models\bin\Debug\netcoreapp2.0\Models.deps.json
-E:\Diploma Master\Municipality\Models\bin\Debug\netcoreapp2.0\Models.dll
-E:\Diploma Master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.csprojResolveAssemblyReference.cache
-E:\Diploma Master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.csproj.CoreCompileInputs.cache
-E:\Diploma Master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.AssemblyInfoInputs.cache
-E:\Diploma Master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.AssemblyInfo.cs
-E:\Diploma Master\Municipality\Models\bin\Debug\netcoreapp2.0\Models.pdb
-E:\Diploma Master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.dll
-E:\Diploma Master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.pdb
+E:\Diploma master\Municipality\Models\bin\Debug\netcoreapp2.0\Models.deps.json
+E:\Diploma master\Municipality\Models\bin\Debug\netcoreapp2.0\Models.dll
+E:\Diploma master\Municipality\Models\bin\Debug\netcoreapp2.0\Models.pdb
+E:\Diploma master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.csproj.CoreCompileInputs.cache
+E:\Diploma master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.AssemblyInfoInputs.cache
+E:\Diploma master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.AssemblyInfo.cs
+E:\Diploma master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.dll
+E:\Diploma master\Municipality\Models\obj\Debug\netcoreapp2.0\Models.pdb

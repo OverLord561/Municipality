@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Models;
 using Repositories.EntityFramework;
 using System;
@@ -8,63 +9,75 @@ using System.Threading.Tasks;
 
 namespace Municipality.Extensions
 {
-    public static class ApplicationDbContextExtensions
+  public static class ApplicationDbContextExtensions
+  {
+
+    public static void EnsureSeedData(this ApplicationDbContext context, IHostingEnvironment env)
     {
 
-        public static void EnsureSeedData(this ApplicationDbContext context, IHostingEnvironment env)
-        {
-            var user = new ApplicationUser
-            {
-                ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
-                Email = "roman@test.com",
-                NormalizedEmail = "ROMAN@TEST.COM",
-                UserName = "roman@test.com",
-                NormalizedUserName = "ROMAN@TEST.COM",
-                PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
-                SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
-                AccessFailedCount = 0,
-                EmailConfirmed = true,
-                LockoutEnabled = true,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                PhoneNumber = "0953393611",
-               
-            };
+      var adminRole = new IdentityRole<int> { Name = "Admin" };
+      var citizenRole = new IdentityRole<int> { Name = "Citizen" };
+      context.Roles.Add(adminRole);
+      context.Roles.Add(citizenRole);
+      context.SaveChanges();
+
+      var roman = new ApplicationUser
+      {
+        ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
+        Email = "roman@test.com",
+        NormalizedEmail = "ROMAN@TEST.COM",
+        UserName = "roman@test.com",
+        NormalizedUserName = "ROMAN@TEST.COM",
+        PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
+        SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
+        AccessFailedCount = 0,
+        EmailConfirmed = true,
+        LockoutEnabled = true,
+        PhoneNumberConfirmed = false,
+        TwoFactorEnabled = false,
+        PhoneNumber = "0953393611",
+
+      };
 
 
-           
-            var user2 = new ApplicationUser
-            {
-                ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
-                Email = "yurapuk452@gmail.com",
-                NormalizedEmail = "YURAPUK452@GMAIL.COM",
-                UserName = "yurapuk452@gmail.com",
-                NormalizedUserName = "YURAPUK452@GMAIL.COM",
-                PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
-                SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
-                AccessFailedCount = 0,
-                EmailConfirmed = true,
-                LockoutEnabled = true,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                PhoneNumber = "0953393612"
 
-            };
+      var yurii = new ApplicationUser
+      {
+        ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
+        Email = "yurapuk452@gmail.com",
+        NormalizedEmail = "YURAPUK452@GMAIL.COM",
+        UserName = "yurapuk452@gmail.com",
+        NormalizedUserName = "YURAPUK452@GMAIL.COM",
+        PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
+        SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
+        AccessFailedCount = 0,
+        EmailConfirmed = true,
+        LockoutEnabled = true,
+        PhoneNumberConfirmed = false,
+        TwoFactorEnabled = false,
+        PhoneNumber = "0953393612"
 
+      };
 
-            var @new = new IncidentStatus { Name = "New" };
-            var progress = new IncidentStatus { Name = "In Progress" };          
-            var closed = new IncidentStatus { Name = "Closed" };
+      context.Users.Add(roman);
+      context.Users.Add(yurii);
+      context.SaveChanges();
 
-
-            context.IncidentStatuses.Add(@new);
-            context.IncidentStatuses.Add(progress);           
-            context.IncidentStatuses.Add(closed);
-            context.Users.Add(user);
-            context.Users.Add(user2);
+      var romanAdminRole = new IdentityUserRole<int>() { RoleId = adminRole.Id, UserId = roman.Id };
+      var yuriiCitizenRole = new IdentityUserRole<int>() { RoleId = citizenRole.Id, UserId = yurii.Id };
 
 
-            var _priorities = new List<Priority> {
+      var @new = new IncidentStatus { Name = "New" };
+      var progress = new IncidentStatus { Name = "In Progress" };
+      var closed = new IncidentStatus { Name = "Closed" };
+
+
+      context.IncidentStatuses.Add(@new);
+      context.IncidentStatuses.Add(progress);
+      context.IncidentStatuses.Add(closed);
+      
+
+      var _priorities = new List<Priority> {
                 new Priority{
                     Name = "Zero"
                 },
@@ -78,17 +91,17 @@ namespace Municipality.Extensions
                     Name = "High"
                 },
             };
-            foreach (var pr in _priorities)
-            {
-                context.Priorities.Add(pr);
-            }
+      foreach (var pr in _priorities)
+      {
+        context.Priorities.Add(pr);
+      }
 
-            context.SaveChanges();
-
-
+      context.SaveChanges();
 
 
-            var incidents = new List<Incident>
+
+
+      var incidents = new List<Incident>
             {
                 new Incident
                 {
@@ -97,7 +110,7 @@ namespace Municipality.Extensions
                     IncidentStatusId = @new.Id,
                     Latitude = 48.462592,
                     Longitude = 35.049769,
-                    UserId = user.Id,
+                    UserId = yurii.Id,
                     Adress="проспект Дмитра Яворницького, 42-44, Дніпро́, Дніпропетровська область, Украина",
                     Approved = true,
                     FilePath="/images/incidents/tree.png",
@@ -113,7 +126,37 @@ namespace Municipality.Extensions
                     IncidentStatusId = progress.Id,
                     Latitude = 48.466126,
                     Longitude = 35.049526,
-                    UserId = user.Id,
+                    UserId = yurii.Id,
+                    Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
+                    Approved=true,
+                    FilePath="/images/incidents/water.png",
+                     PriorityId =_priorities[1].Id,
+                    DateOfApprove = DateTime.Now.AddDays(-1),
+                    Estimate = 15
+                },
+                new Incident
+                {
+                    Title="Прорвана труба3",
+                    Description= "Прохід громадян неможливий",
+                    IncidentStatusId = progress.Id,
+                    Latitude = 48.466126,
+                    Longitude = 35.049526,
+                    UserId = yurii.Id,
+                    Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
+                    Approved=true,
+                    FilePath="/images/incidents/water.png",
+                     PriorityId =_priorities[1].Id,
+                    DateOfApprove = DateTime.Now.AddDays(-1),
+                    Estimate = 15
+                },
+                new Incident
+                {
+                    Title="Прорвана труба2",
+                    Description= "Прохід громадян неможливий",
+                    IncidentStatusId = progress.Id,
+                    Latitude = 48.466126,
+                    Longitude = 35.049526,
+                    UserId = yurii.Id,
                     Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
                     Approved=true,
                     FilePath="/images/incidents/water.png",
@@ -128,7 +171,7 @@ namespace Municipality.Extensions
                     IncidentStatusId = @new.Id,
                     Latitude = 48.469868,
                     Longitude = 35.054096,
-                    UserId = user.Id,
+                    UserId = yurii.Id,
                     Adress="вулиця Січеславська Набережна, 35А, Дніпро́, Дніпропетровська область, Украина, 49000",
                     Approved = true,
                     FilePath="/images/incidents/dtp.png",
@@ -138,12 +181,27 @@ namespace Municipality.Extensions
                 },
                 new Incident
                 {
-                    Title="Воронка в дорожньому полотні",
+                    Title="ДТП",
+                    Description= "Тролебус виїхав на обочину",
+                    IncidentStatusId = @new.Id,
+                    Latitude = 48.469868,
+                    Longitude = 35.054096,
+                    UserId = yurii.Id,
+                    Adress="вулиця Січеславська Набережна, 35А, Дніпро́, Дніпропетровська область, Украина, 49000",
+                    Approved = true,
+                    FilePath="/images/incidents/dtp.png",
+                     PriorityId =_priorities[2].Id,
+                    DateOfApprove = DateTime.Now.AddDays(-2),
+                    Estimate = 4
+                },
+                new Incident
+                {
+                    Title="Воронка в дорожньому полотні2",
                     Description= "Прорив водної магістралі. Машина провалилась.",
                     IncidentStatusId = @new.Id,
                     Latitude = 48.467271,
                     Longitude = 35.040321,
-                    UserId = user2.Id,
+                    UserId = yurii.Id,
                     Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
                     Approved = false,
                     FilePath="/images/incidents/hole.png",
@@ -158,7 +216,7 @@ namespace Municipality.Extensions
                     IncidentStatusId = closed.Id,
                     Latitude = 48.467271,
                     Longitude = 35.040321,
-                    UserId = user2.Id,
+                    UserId = yurii.Id,
                     Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
                     Approved = true,
                     FilePath="/images/incidents/electricity.png",
@@ -169,12 +227,13 @@ namespace Municipality.Extensions
 
             };
 
-            foreach (Incident log in incidents) {
-                context.Incidents.Add(log);
-            }
-            context.SaveChanges();
-
-        }
+      foreach (Incident log in incidents)
+      {
+        context.Incidents.Add(log);
+      }
+      context.SaveChanges();
 
     }
+
+  }
 }

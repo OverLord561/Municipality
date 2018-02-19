@@ -1,20 +1,29 @@
-﻿
-export interface IState {
-    email: string;
-    password: string;
-    rememberMe: boolean;
-    authorized: boolean;
-    userName: string;
+﻿import { IModel, IValidationError } from '../../../store/index';
+
+export interface IState extends IModel {
+  loginModel: ILoginModel;
+  authorized: boolean;
+  userName: string;
 }
 
+export interface ILoginModel {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+  [key: string]: string | boolean;
+}
 
-export function getInitialState(): IState{
+export function getInitialState(): IState {
 
-    return {
-        email: "yurapuk452@gmail.com",
-        password: "123Qaz-",
-        rememberMe: false,
-        authorized: false,
-        userName:""
-    }
+  return {
+    loginModel: {
+      email: "yurapuk452@gmail.com",
+      password: "123Qaz-",
+      rememberMe: false,
+    },
+    authorized: false,
+    userName: "",
+    errors: [],
+    isFetching: false,
+  };
 }

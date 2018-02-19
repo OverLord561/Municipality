@@ -4,16 +4,16 @@ using System.Collections.Generic;
 namespace Models
 {
 
-    public class ApplicationUser : IdentityUser<int>
-    {
-        public string Password { get; set; }
+  public class ApplicationUser : IdentityUser<int>
+  {
+    public string Name => UserName;
 
-        public ApplicationUser() { }
-        public ApplicationUser(string password)
-        {
-            this.Password = password;
-        }
-        public IEnumerable<Incident> Incidents { get; set; }
-    }
+    public virtual IEnumerable<IdentityUserRole<int>> Roles { get; set; }
+
+    public virtual IEnumerable<ApplicationUserLogin> Logins { get; set; }
+
+    public virtual IEnumerable<IdentityUserClaim<int>> Claims { get; set; }
+    public IEnumerable<Incident> Incidents { get; set; }
+  }
 }
 

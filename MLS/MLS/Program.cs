@@ -10,13 +10,13 @@ namespace MLS
         static void Main(string[] args)
         {
 
-            MLS();
+            LMS();
 
             Console.ReadLine();
 
         }
 
-        public async static void MLS()
+        public async static void LMS()
         {
             (double T1, double T2, double MIN_SUM) res = (0, 0, 10000);
 
@@ -25,15 +25,19 @@ namespace MLS
                 for (var thousand = 0; thousand < 1; thousand++)
                     Task.Factory.StartNew(() =>
                     {
-                        int K0 = 1;
-                        double[] time = new double[12] { 0, 0.0027, 0.0058, 0.0083, 0.0088, 0.0138, 5, 13.3, 16.6, 33.33, 39.166, 0.0054 };
-                        double[] y = new double[12] { 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 0.1 };
+                        int K0 = 2;
+                        // double[] time = new double[20] { 0, 0.0027, 0.0058, 0.0083, 0.0088, 5,      5.0138,   13.3, 33.33, 39.166, 39.8, 0.02944, 0.02972, 0.03, 0.84667, 1.71, 26.71556, 26.73223,30.8,30.9};
+                        // double[] y = new double[20]    { 0, 0.1,    0.2,    0.3,    0.4,    0.5,    0.6,      0.7,  0.8,   0.9,    1,    0.2,     0.3,     0.4,  0.5,     0.6,  0.7,      0.8,     0.9,  1 };
+                         double[] time = new double[11] { 0, 0.0075, 0.8375, 27.2, 46.4035, 73.5035, 73.50572,  96.2, 135.25, 169, 169.1};
+                         double[] y = new double[11]    { 0, 0.2,    0.4,      0.6,    0.8,      1,     1.2,      1.4,  1.6,   1.8,    2    };
 
-                        for (double i =1; i < 1000 * thousand + 1; i++)
+
+
+                        for (double i =1; i < 100 * thousand + 1; i+=0.1)
                         {
 
 
-                            for (double j = 1 ; j < 1000 * thousand + 1; j++)
+                            for (double j = 1 ; j < 100 * thousand + 1; j+=0.1)
                             {
                                 
                                 double t1 = i;
@@ -69,7 +73,7 @@ namespace MLS
 
 
 
-            Console.WriteLine(res);
+            Console.WriteLine("T1 = {0}  T2={1}  МНК={2} ",res.T1, res.T2, res.MIN_SUM);
             Console.ReadLine();
 
         }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace SmartService.ViewModels
+namespace Municipality.ViewModels
 {
     public class SigninViewModel
     {

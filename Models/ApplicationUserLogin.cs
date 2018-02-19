@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Models
 {
-    public class ApplicationRole:IdentityRole<int>
-    {
-    }
+  public class ApplicationUserLogin : IdentityUserLogin<int>
+  {
+    public virtual ApplicationUser User { get; set; }
+  }
 }

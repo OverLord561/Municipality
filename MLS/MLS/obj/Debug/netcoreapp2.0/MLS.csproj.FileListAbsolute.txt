@@ -9,3 +9,14 @@ D:\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.AssemblyInfoInputs.cache
 D:\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.AssemblyInfo.cs
 D:\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.dll
 D:\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.pdb
+E:\Diploma master\Municipality\MLS\MLS\bin\Debug\netcoreapp2.0\MLS.deps.json
+E:\Diploma master\Municipality\MLS\MLS\bin\Debug\netcoreapp2.0\MLS.runtimeconfig.json
+E:\Diploma master\Municipality\MLS\MLS\bin\Debug\netcoreapp2.0\MLS.runtimeconfig.dev.json
+E:\Diploma master\Municipality\MLS\MLS\bin\Debug\netcoreapp2.0\MLS.dll
+E:\Diploma master\Municipality\MLS\MLS\bin\Debug\netcoreapp2.0\MLS.pdb
+E:\Diploma master\Municipality\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.csprojResolveAssemblyReference.cache
+E:\Diploma master\Municipality\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.csproj.CoreCompileInputs.cache
+E:\Diploma master\Municipality\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.AssemblyInfoInputs.cache
+E:\Diploma master\Municipality\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.AssemblyInfo.cs
+E:\Diploma master\Municipality\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.dll
+E:\Diploma master\Municipality\MLS\MLS\obj\Debug\netcoreapp2.0\MLS.pdb

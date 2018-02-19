@@ -370,8 +370,6 @@ namespace Repositories.EntityFramework.Repositories
 
             return await projection.SingleOrDefaultAsync();
 
-            //var entity = await _context.Set<TEntity>().Where(predicate).SingleOrDefaultAsync();
-            //return Mapper.Map<TEntity, TProjection>(entity);
         }
 
         public virtual IEnumerable<TEntity> All()
@@ -394,11 +392,6 @@ namespace Repositories.EntityFramework.Repositories
             return await _context.Set<TEntity>().ProjectTo<TProjection>().ToListAsync();
         }
 
-        /// <summary>
-        /// Removes entity from the database.
-        /// </summary>
-        /// <param name="entity">Entity to remove.</param>
-        /// <returns></returns>
         public virtual int Remove(TEntity entity)
         {
             if (entity == null)
@@ -410,11 +403,6 @@ namespace Repositories.EntityFramework.Repositories
             return _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Removes entity from the database.
-        /// </summary>
-        /// <param name="entity">Entity to remove.</param>
-        /// <returns></returns>
         public virtual async Task<int> RemoveAsync(TEntity entity)
         {
             if (entity == null)
@@ -426,22 +414,12 @@ namespace Repositories.EntityFramework.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Removes a collection of entities from the database.
-        /// </summary>
-        /// <param name="entities">Collection of entities to remove.</param>
-        /// <returns></returns>
         public virtual int RemoveRange(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().RemoveRange(entities);
             return _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Removes a collection of entities from the database.
-        /// </summary>
-        /// <param name="entities">Collection of entities to remove.</param>
-        /// <returns></returns>
         public virtual async Task<int> RemoveRangeAsync(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().RemoveRange(entities);

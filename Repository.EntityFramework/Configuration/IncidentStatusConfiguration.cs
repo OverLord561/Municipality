@@ -5,9 +5,9 @@ using Models;
 
 namespace Repositories.EntityFramework.Configuration
 {
-    internal class IncidentStatusConfiguration : DbEntityConfiguration<IncidentStatus>
+    internal class IncidentStatusConfiguration : IEntityTypeConfiguration<IncidentStatus>
     {
-        public override void Configure(EntityTypeBuilder<IncidentStatus> entity)
+        public void Configure(EntityTypeBuilder<IncidentStatus> entity)
         {
             entity.HasKey(x => x.Id)
                 .HasName("PK_IncidentStatus_ID");

@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\reducer\" />
     <Folder Include="wwwroot\images\incidents\" />
     <Folder Include="Extensions\" />
   </ItemGroup>

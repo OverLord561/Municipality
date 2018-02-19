@@ -3734,7 +3734,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Yurgens\\.nuget\\packages\\": {},
+    "C:\\Users\\yura\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -3743,18 +3744,20 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\Diploma Master\\Municipality\\Models\\Models.csproj",
+      "projectUniqueName": "E:\\Diploma master\\Municipality\\Models\\Models.csproj",
       "projectName": "Models",
-      "projectPath": "E:\\Diploma Master\\Municipality\\Models\\Models.csproj",
-      "packagesPath": "C:\\Users\\Yurgens\\.nuget\\packages\\",
-      "outputPath": "E:\\Diploma Master\\Municipality\\Models\\obj\\",
+      "projectPath": "E:\\Diploma master\\Municipality\\Models\\Models.csproj",
+      "packagesPath": "C:\\Users\\yura\\.nuget\\packages\\",
+      "outputPath": "E:\\Diploma master\\Municipality\\Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Yurgens\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\yura\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -3779,12 +3782,12 @@
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
-            "version": "2.0.0"
+            "version": "[2.0.0, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           }
         },

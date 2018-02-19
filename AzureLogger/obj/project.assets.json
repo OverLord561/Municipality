@@ -3584,7 +3584,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Yurgens\\.nuget\\packages\\": {},
+    "C:\\Users\\yura\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -3593,18 +3594,20 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\Diploma Master\\Municipality\\AzureLogger\\AzureLogger.csproj",
+      "projectUniqueName": "E:\\Diploma master\\Municipality\\AzureLogger\\AzureLogger.csproj",
       "projectName": "AzureLogger",
-      "projectPath": "E:\\Diploma Master\\Municipality\\AzureLogger\\AzureLogger.csproj",
-      "packagesPath": "C:\\Users\\Yurgens\\.nuget\\packages\\",
-      "outputPath": "E:\\Diploma Master\\Municipality\\AzureLogger\\obj\\",
+      "projectPath": "E:\\Diploma master\\Municipality\\AzureLogger\\AzureLogger.csproj",
+      "packagesPath": "C:\\Users\\yura\\.nuget\\packages\\",
+      "outputPath": "E:\\Diploma master\\Municipality\\AzureLogger\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Yurgens\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\yura\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -3630,12 +3633,12 @@
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           },
           "WindowsAzure.Storage": {
             "target": "Package",
-            "version": "8.5.0"
+            "version": "[8.5.0, )"
           }
         },
         "imports": [
