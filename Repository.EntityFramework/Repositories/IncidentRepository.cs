@@ -18,7 +18,7 @@ namespace Repositories.EntityFramework.Repositories
             return base.Include()
                 .Include(x => x.IncidentStatus)
                 .Include(x => x.Priority)
-                .Include(x => x.ApplicationUser);
+                .Include(x => x.User);
         }
     }
 }

@@ -34,7 +34,7 @@ class Incidents extends React.Component<IProps, any> {
 
     public render() {
         return <div className="row">
-
+            <button onClick={this.props.getIncidents} value='test'>clisk me</button>
 
             <MapContainer
                 incidents={this.props.incidents}

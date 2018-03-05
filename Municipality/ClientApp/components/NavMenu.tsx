@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { NavLink, Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from './SignIn/logic/signInActions';
 import autobind from 'autobind-decorator';
+import * as actions from './SignIn/logic/signInActions';
+
 
 import { ApplicationState } from '../store';
 

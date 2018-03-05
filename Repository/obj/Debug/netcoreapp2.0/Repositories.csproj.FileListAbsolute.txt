@@ -9,3 +9,4 @@ E:\Diploma master\Municipality\Repository\obj\Debug\netcoreapp2.0\Repositories.A
 E:\Diploma master\Municipality\Repository\obj\Debug\netcoreapp2.0\Repositories.AssemblyInfo.cs
 E:\Diploma master\Municipality\Repository\obj\Debug\netcoreapp2.0\Repositories.dll
 E:\Diploma master\Municipality\Repository\obj\Debug\netcoreapp2.0\Repositories.pdb
+E:\Diploma master\Municipality\Repository\obj\Debug\netcoreapp2.0\Repositories.csproj.CopyComplete

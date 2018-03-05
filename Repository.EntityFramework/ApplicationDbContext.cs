@@ -1,22 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Models;
-using System.Threading;
-using System.Threading.Tasks;
-using Repositories.EntityFramework.Configuration;
-
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Repositories.EntityFramework
 {
-  public class ApplicationDbContext : CustomIdentityDbContext
+  public class ApplicationDbContext : MunicipalityDbContext
   {
-
-    public DbSet<Incident> Incidents { get; set; }
-    public DbSet<IncidentStatus> IncidentStatuses { get; set; }
-    public DbSet<Priority> Priorities { get; set; }
-
-
 
     public ApplicationDbContext(DbContextOptions options)
         : base(options)
@@ -32,12 +22,7 @@ namespace Repositories.EntityFramework
     protected override void OnModelCreating(ModelBuilder builder)
     {
       base.OnModelCreating(builder);
-
-      
-      builder.ApplyConfiguration(new IncidentStatusConfiguration());
-      builder.ApplyConfiguration(new PriorityConfiguration());
-      builder.ApplyConfiguration(new IncidentConfiguration());
     }
-
   }
+
 }

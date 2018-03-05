@@ -217,5 +217,7 @@ namespace Repositories
         void DetachAllEntities();
 
         Task<TResult> Max<TResult>(Expression<Func<TEntity, TResult>> selector, Expression<Func<TEntity, bool>> predicate = null) where TResult : struct;
+
+
     }
 }

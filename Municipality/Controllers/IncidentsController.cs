@@ -14,6 +14,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Municipality.Service;
 using Municipality.Services.Interfaces;
+using Municipality.Features.Incidents;
 
 namespace Municipality.Controllers
 {
@@ -45,13 +46,13 @@ namespace Municipality.Controllers
     }
 
 
-    [HttpGet("api/incidents")]
+    [HttpGet("/api/incidents")]
     [Produces("application/json")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetIncidents()
+    public async Task<IActionResult> GetIncidents([FromQuery] IncidentsQuery query = null)
     {
-      //.Select(x => x.ToViewModel())
-      return Json(new { Items = await _incidentService.GetActiveIncidentsAsync() });
+            //.Select(x => x.ToViewModel())
+      return Json(new { Items =  await _incidentService.GetActiveIncidentsAsync(query)});
 
     }
 

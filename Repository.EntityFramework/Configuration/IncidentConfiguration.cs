@@ -22,7 +22,7 @@ namespace Repositories.EntityFramework.Configuration
                 .HasConstraintName("FK_Incident_Status_ID")
                 .IsRequired();
 
-            entity.HasOne(x => x.ApplicationUser)
+            entity.HasOne(x => x.User)
                 .WithMany(x => x.Incidents)
                 .HasForeignKey(x => x.UserId)
                 .HasConstraintName("FK_Incident_User_ID")
@@ -34,7 +34,7 @@ namespace Repositories.EntityFramework.Configuration
                 .HasConstraintName("FK_Incident_Priority_ID")
                 .IsRequired();
 
-            entity.ToTable("Incident");
+            entity.ToTable("Incidents");
         }
     }
 }

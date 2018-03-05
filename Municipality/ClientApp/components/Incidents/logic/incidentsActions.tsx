@@ -3,22 +3,19 @@ import { IState, IIncident, IPoint } from './incidentsState';
 import { ApplicationState } from '../../../store';
 import axios from 'axios';
 
-export const GetIncidents = () => {
+export const GetIncidents = () => (dispatch: any, getStore: any) => {
 
-    
-    let URL = '/api/incidents';
+    let URL = '/api/incidents?IsApproved=true';
 
-    return (dispatch: any, getStore: any) => {
-        
-        return axios.get(URL)
-            .then(response => {
-                return dispatch(ReceiveIncedents(response.data.items));
-            }).catch(error => {
-                console.log(error);
-            });
-    };
+    axios.get(URL)
+        .then(response => {
+            return dispatch(ReceiveIncedents(response.data.items));
+        }).catch(error => {
+            console.log(error);
+        });
+};
 
-}
+
 
 export const ReceiveIncedents = (incidents: IIncident[]) => {
     return {
@@ -34,13 +31,13 @@ export const CreateIncidents = (incident: FormData) => {
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
         let lat: any = incident.get('lat');
         let lng: any = incident.get('lng');
-       
+
 
         return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAxVVyh7rh6kKCYhxyWZSY_xkDNZ4YIK3k`)
             .then(response => {
                 if (response.status === 200) {
                     incident.append("adress", response.data.results[0].formatted_address);
-                    
+
                     return axios.post('/api/incidents', incident)
                         .then(response => {
                             if (response.status == 200) {
@@ -55,7 +52,7 @@ export const CreateIncidents = (incident: FormData) => {
             }).catch(error => {
                 console.log(error);
             });
-        
+
     }
 }
 

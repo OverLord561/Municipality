@@ -1,4 +1,6 @@
 ﻿using Models;
+using Municipality.Features.Incidents;
+using Municipality.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace Municipality.Services.Interfaces
 {
   public interface IIncidentService
   {
-    Task<IEnumerable<Incident>> GetActiveIncidentsAsync();
+    Task<IEnumerable<IncidentViewModel>> GetActiveIncidentsAsync(IncidentsQuery query);
     Task<IEnumerable<Incident>> GetNotApprovedAsync();
   }
 }

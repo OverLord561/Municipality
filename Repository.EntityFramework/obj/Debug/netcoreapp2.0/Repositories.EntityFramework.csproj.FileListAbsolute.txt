@@ -13,3 +13,4 @@ E:\Diploma master\Municipality\Repository.EntityFramework\bin\Debug\netcoreapp2.
 E:\Diploma master\Municipality\Repository.EntityFramework\bin\Debug\netcoreapp2.0\Repositories.pdb
 E:\Diploma master\Municipality\Repository.EntityFramework\obj\Debug\netcoreapp2.0\Repositories.EntityFramework.dll
 E:\Diploma master\Municipality\Repository.EntityFramework\obj\Debug\netcoreapp2.0\Repositories.EntityFramework.pdb
+E:\Diploma master\Municipality\Repository.EntityFramework\obj\Debug\netcoreapp2.0\Repositories.EntityFramework.csproj.CopyComplete

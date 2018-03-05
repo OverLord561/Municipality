@@ -452,5 +452,14 @@ namespace Repositories.EntityFramework.Repositories
             return (items, total);
         }
 
+        Task<global::Repositories.PagedResult<TEntity>> IRepository<TEntity>.GetAsync(Expression<Func<TEntity, bool>> predicate, int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<global::Repositories.PagedResult<TEntity>> IRepository<TEntity>.GetAsync<TKey>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TKey>> keySelector, bool descending, int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

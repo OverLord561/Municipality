@@ -10,6 +10,8 @@ namespace Repositories.EntityFramework
 {
   public abstract class CustomIdentityDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
   {
+
+
     public CustomIdentityDbContext(DbContextOptions options)
         : base(options)
     {
@@ -28,21 +30,16 @@ namespace Repositories.EntityFramework
       //Customize the ASP.NET Identity model and override the defaults if needed.
       //For example, you can rename the ASP.NET Identity table names and more.
       //Add your customizations after calling base.OnModelCreating(builder);
-
       builder.Entity<ApplicationUser>()
-          .Property(p => p.Id)
-          .UseSqlServerIdentityColumn();
-
-      builder.Entity<ApplicationUser>()
-          .HasMany(e => e.Claims)
-          .WithOne()
-          .HasForeignKey(e => e.UserId)
-          .IsRequired()
-          .OnDelete(DeleteBehavior.Cascade);
+             .HasMany(e => e.Claims)
+             .WithOne()
+             .HasForeignKey(e => e.UserId)
+             .IsRequired()
+             .OnDelete(DeleteBehavior.Cascade);
 
       builder.Entity<ApplicationUser>()
           .HasMany(e => e.Logins)
-          .WithOne(x => x.User)
+          .WithOne()
           .HasForeignKey(e => e.UserId)
           .IsRequired()
           .OnDelete(DeleteBehavior.Cascade);

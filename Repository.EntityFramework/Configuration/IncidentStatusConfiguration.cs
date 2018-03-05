@@ -18,7 +18,7 @@ namespace Repositories.EntityFramework.Configuration
 
             entity.Property(x => x.Name)
                 .IsRequired();
-            entity.ToTable("IncidentStatus");
+            entity.ToTable("IncidentStatuses");
         }
     }
 }

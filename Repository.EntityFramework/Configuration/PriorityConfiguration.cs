@@ -10,7 +10,7 @@ namespace Repositories.EntityFramework.Configuration
         public void Configure(EntityTypeBuilder<Priority> entity)
         {
             entity.HasKey(x => x.Id)
-                .HasName("PK_IncidentStatus_ID");
+                .HasName("PK_IncidentPriority_ID");
 
             entity.Property(x => x.Id)
                 .UseSqlServerIdentityColumn()

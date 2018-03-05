@@ -118,8 +118,8 @@ function mapStateToProps(state: ApplicationState): IStateProps {
 
 
 export default connect(
-  mapStateToProps, // Selects which state properties are merged into the component's props
-  dispatchProps                 // Selects which action creators are merged into the component's props
+  mapStateToProps, 
+  dispatchProps               
 )(SignIn) as typeof SignIn;
 
 

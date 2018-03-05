@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "dependencies": {
     "@types/google-map-react": "^0.23.0",
-    "@types/history": "4.6.0",
     "@types/jquery": "^3.2.15",
     "@types/react": "15.0.35",
     "@types/react-dom": "15.5.1",
@@ -22,13 +21,12 @@
     "awesome-typescript-loader": "3.2.1",
     "axios": "^0.16.2",
     "bootstrap": "3.3.7",
-    "css-loader": "0.28.4",
+    "css-loader": "^0.28.7",
     "domain-task": "^3.0.3",
     "event-source-polyfill": "0.0.9",
     "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "0.11.2",
     "google-map-react": "^0.24.0",
-    "history": "4.6.3",
     "jquery": "3.2.1",
     "json-loader": "0.5.4",
     "node-noop": "1.0.0",
@@ -46,7 +44,13 @@
     "url-loader": "0.5.9",
     "webpack": "2.5.1",
     "webpack-hot-middleware": "2.18.2",
-    "webpack-merge": "4.1.0"
+    "webpack-merge": "4.1.0",
+    "webpack-polyfill-injector": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.7.0",
+    "tslint-loader": "^3.5.3",
+    "tslint-webpack-plugin": "^1.0.0"
+  }
 }
