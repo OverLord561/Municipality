@@ -114,17 +114,17 @@ namespace Municipality
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-            //if (env.IsDevelopment())
-            //{
-            //  using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            //  {
-            //    var appContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            if (env.IsDevelopment())
+            {
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var appContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
-            //    appContext.Database.EnsureDeleted();
-            //    appContext.Database.Migrate();
-            //    appContext.EnsureSeedData(env);
-            //  }
-            //}
+                    //appContext.Database.EnsureDeleted();
+                    appContext.Database.Migrate();
+                    appContext.EnsureSeedData(env);
+                }
+            }
         }
     }
 }

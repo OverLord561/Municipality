@@ -34,6 +34,11 @@ namespace Repositories.EntityFramework.Configuration
                 .HasConstraintName("FK_Incident_Priority_ID")
                 .IsRequired();
 
+            entity.HasMany(x => x.AttachedFiles)
+                .WithOne(x => x.Incident)
+                .HasForeignKey(x => x.IncidentId)
+                .HasConstraintName("FK_Files_Incident_ID");
+
             entity.ToTable("Incidents");
         }
     }

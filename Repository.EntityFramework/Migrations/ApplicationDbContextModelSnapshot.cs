@@ -178,7 +178,7 @@ namespace Repositories.EntityFramework.Migrations
 
             modelBuilder.Entity("Models.Incident", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -192,8 +192,6 @@ namespace Repositories.EntityFramework.Migrations
                     b.Property<string>("Description");
 
                     b.Property<double>("Estimate");
-
-                    b.Property<string>("FilePath");
 
                     b.Property<int?>("IncidentStatusId")
                         .IsRequired();
@@ -221,6 +219,41 @@ namespace Repositories.EntityFramework.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Incidents");
+                });
+
+            modelBuilder.Entity("Models.IncidentFile", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("Date")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<long>("IncidentId")
+                        .HasColumnName("IncidentID");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("UploadedById")
+                        .HasColumnName("UploadedByID");
+
+                    b.HasKey("Id")
+                        .HasName("PK_IncidentFile_ID");
+
+                    b.HasIndex("IncidentId");
+
+                    b.HasIndex("UploadedById");
+
+                    b.ToTable("IncidentFiles");
                 });
 
             modelBuilder.Entity("Models.IncidentStatus", b =>
@@ -318,6 +351,20 @@ namespace Repositories.EntityFramework.Migrations
                         .WithMany("Incidents")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_Incident_User_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Models.IncidentFile", b =>
+                {
+                    b.HasOne("Models.Incident", "Incident")
+                        .WithMany("AttachedFiles")
+                        .HasForeignKey("IncidentId")
+                        .HasConstraintName("FK_IncidentFile_Incident_IncidentID");
+
+                    b.HasOne("Models.ApplicationUser", "UploadedBy")
+                        .WithMany("IncidentFiles")
+                        .HasForeignKey("UploadedById")
+                        .HasConstraintName("FK_IncidentFile_User_UploadedByID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -1,86 +1,21 @@
 ﻿import * as React from 'react';
-import autobind from 'autobind-decorator';
-import axios from 'axios';
-import { IIncident, IPoint } from './logic/incidentsState';
 import { GeolocatedProps, geolocated } from 'react-geolocated';
+import autobind from 'autobind-decorator';
 
+import { IIncident, IPoint, getIncidentCreateModel } from './logic/incidentsState';
 
-interface IInnerState {
-    title: string;
-    description: string;
-    lat: any;
-    lng: any;
-    file: any;  
-    [key: string]: string;
-
-}
 
 interface IInnerProps {
-    createIncident: (incident: FormData) => void;   
+    createIncident: (incident: IIncident, callback: Function) => void;
 }
 
-class Creation extends React.Component<IInnerProps, IInnerState> {
+class Creation extends React.Component<IInnerProps, IIncident> {
     constructor(props: IInnerProps) {
         super(props);
-        this.state = {
-            title: "title",
-            description: "description",
-            lat: "0",
-            lng: "0",
-            file: "",
-            fileName:"no file attached"
-        }
-    }
-    @autobind
-    SetTitle(event: React.FormEvent<HTMLInputElement>) {
-        this.setState({
-            title: event.currentTarget.value
-        });
+        this.state = getIncidentCreateModel();
     }
 
-    @autobind
-    SetDescription(event: React.FormEvent<HTMLTextAreaElement>) {
-        this.setState({
-            description: event.currentTarget.value
-        });
-    }
-
-    @autobind
-    CreateIncident(event: React.FormEvent<HTMLFormElement>) {
-       
-        event.preventDefault();
-
-        var incident = new FormData();     
-      
-
-        var state: IInnerState = this.state;
-
-        Object.keys(state).map(function (key) {           
-            incident.append(key.toString(), state[key]);
-        });
-       
-        this.props.createIncident(incident);
-        (this.refs.form as HTMLFormElement).reset(); //to reset file attachment
-        this.setState({
-            title: "title",
-            description: "description",            
-            fileName: "no file attached"
-        });
-    }
-
-    @autobind
-    UploadFile(event: any) {
-        var files = event.currentTarget.files;
-        
-       
-        this.setState({
-            file: files[0],
-            fileName: files[0].name
-        });
-
-
-    }
-    componentWillReceiveProps(nextProps: any, nextState: IInnerState) {
+    componentWillReceiveProps(nextProps: any, nextState: IIncident) {
 
         this.setState({
             lat: nextProps.coords && nextProps.coords.latitude,
@@ -88,21 +23,55 @@ class Creation extends React.Component<IInnerProps, IInnerState> {
         });
     }
 
+    @autobind
+    setTitle(event: React.FormEvent<HTMLInputElement>) {
+        this.setState({
+            title: event.currentTarget.value
+        });
+    }
+
+    @autobind
+    setDescription(event: React.FormEvent<HTMLTextAreaElement>) {
+        this.setState({
+            description: event.currentTarget.value
+        });
+    }
+
+    @autobind
+    createIncident(event: React.FormEvent<HTMLFormElement>) {
+
+        event.preventDefault();
+
+        this.props.createIncident(this.state, () => {
+            (this.refs.form as HTMLFormElement).reset(); //to reset file attachment
+        });
+
+    }
+
+    @autobind
+    uploadFile(event: any) {
+        this.setState({
+            files: event.currentTarget.files
+        });
+
+    }
+    
+
     render() {
-        return <form ref="form" onSubmit={this.CreateIncident}>
+        return <form ref="form" onSubmit={this.createIncident}>
             <div className="form-group">
                 <label htmlFor="title">Title:*</label>
-                <input className="form-control" value={this.state.title} required onChange={this.SetTitle} id="title" placeholder="Enter title..." />
+                <input className="form-control" value={this.state.title} required onChange={this.setTitle} id="title" placeholder="Enter title..." />
             </div>
 
             <div className="form-group">
                 <label htmlFor="desc">Description:*</label>
-                <textarea type="email" className="form-control" value={this.state.description} required onChange={this.SetDescription} id="desc" placeholder="Enter description..." />
+                <textarea type="email" className="form-control" value={this.state.description} required onChange={this.setDescription} id="desc" placeholder="Enter description..." />
             </div>
 
             <div className="form-group">
                 <label htmlFor="attach-button" className="cursor attach">Attach File*</label>
-                <input onChange={this.UploadFile} className="hide" id="attach-button" type="file" accept="image/*" required />
+                <input onChange={this.uploadFile} className="hide" id="attach-button" type="file" accept="image/*" required />
                 <label className="file-name"> {this.state.fileName} </label>
             </div>
 
@@ -111,7 +80,7 @@ class Creation extends React.Component<IInnerProps, IInnerState> {
 
             <button type="submit" className="btn btn-default">Create</button>
         </form>;
-        
+
     }
 }
 

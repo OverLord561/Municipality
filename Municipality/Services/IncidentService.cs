@@ -33,7 +33,12 @@ namespace Municipality.Services
 
         }
 
-        public async Task<IEnumerable<IncidentViewModel>> GetActiveIncidentsAsync(IncidentsQuery query)
+        public Task<bool> CreateIncident(Incident incident)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<IncidentViewModel>> GetIncidentsAsync(IncidentsQuery query)
         {
             try
             {

@@ -20,7 +20,6 @@ namespace Municipality.ViewModels
                 Adress = model.Adress,
                 InFocus = false,
                 Approved = model.Approved,
-                FilePath = model.FilePath,
                 PriorityId = model.PriorityId.Value,
                 Priority = model.Priority.Name,
                 Estimate = model.Estimate,

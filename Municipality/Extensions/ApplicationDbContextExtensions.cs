@@ -9,75 +9,75 @@ using System.Threading.Tasks;
 
 namespace Municipality.Extensions
 {
-  public static class ApplicationDbContextExtensions
-  {
-
-    public static void EnsureSeedData(this ApplicationDbContext context, IHostingEnvironment env)
+    public static class ApplicationDbContextExtensions
     {
 
-      var adminRole = new IdentityRole<int> { Name = "Admin" };
-      var citizenRole = new IdentityRole<int> { Name = "Citizen" };
-      context.Roles.Add(adminRole);
-      context.Roles.Add(citizenRole);
-      context.SaveChanges();
+        public static void EnsureSeedData(this ApplicationDbContext context, IHostingEnvironment env)
+        {
 
-      var roman = new ApplicationUser
-      {
-        ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
-        Email = "roman@test.com",
-        NormalizedEmail = "ROMAN@TEST.COM",
-        UserName = "roman@test.com",
-        NormalizedUserName = "ROMAN@TEST.COM",
-        PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
-        SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
-        AccessFailedCount = 0,
-        EmailConfirmed = true,
-        LockoutEnabled = true,
-        PhoneNumberConfirmed = false,
-        TwoFactorEnabled = false,
-        PhoneNumber = "0953393611",
+            var adminRole = new IdentityRole<int> { Name = "Admin" };
+            var citizenRole = new IdentityRole<int> { Name = "Citizen" };
+            context.Roles.Add(adminRole);
+            context.Roles.Add(citizenRole);
+            context.SaveChanges();
 
-      };
+            var roman = new ApplicationUser
+            {
+                ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
+                Email = "roman@test.com",
+                NormalizedEmail = "ROMAN@TEST.COM",
+                UserName = "roman@test.com",
+                NormalizedUserName = "ROMAN@TEST.COM",
+                PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
+                SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
+                AccessFailedCount = 0,
+                EmailConfirmed = true,
+                LockoutEnabled = true,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                PhoneNumber = "0953393611",
 
+            };
 
+            var yurii = new ApplicationUser
+            {
+                ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
+                Email = "yurapuk452@gmail.com",
+                NormalizedEmail = "YURAPUK452@GMAIL.COM",
+                UserName = "yurapuk452@gmail.com",
+                NormalizedUserName = "YURAPUK452@GMAIL.COM",
+                PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
+                SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
+                AccessFailedCount = 0,
+                EmailConfirmed = true,
+                LockoutEnabled = true,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                PhoneNumber = "0953393612"
 
-      var yurii = new ApplicationUser
-      {
-        ConcurrencyStamp = "6b3b9b11-8f97-4dc2-bfa0-b80b40ae890d",
-        Email = "yurapuk452@gmail.com",
-        NormalizedEmail = "YURAPUK452@GMAIL.COM",
-        UserName = "yurapuk452@gmail.com",
-        NormalizedUserName = "YURAPUK452@GMAIL.COM",
-        PasswordHash = "AQAAAAEAACcQAAAAEH8NJi0ZOAkATkqABxRdwrALqMd10IW35NNnRlvVddLMC3eLb35Hu4v+KDMO0/M9gQ==",
-        SecurityStamp = "73a61f09-5ad8-4cd8-bc3a-7ad9d21eb0f3",
-        AccessFailedCount = 0,
-        EmailConfirmed = true,
-        LockoutEnabled = true,
-        PhoneNumberConfirmed = false,
-        TwoFactorEnabled = false,
-        PhoneNumber = "0953393612"
+            };
 
-      };
+            context.Users.Add(roman);
+            context.Users.Add(yurii);
+            context.SaveChanges();
 
-      context.Users.Add(roman);
-      context.Users.Add(yurii);
-      context.SaveChanges();
-
-      var romanAdminRole = new IdentityUserRole<int>() { RoleId = adminRole.Id, UserId = roman.Id };
-      var yuriiCitizenRole = new IdentityUserRole<int>() { RoleId = citizenRole.Id, UserId = yurii.Id };
-
-
-      var @new = new IncidentStatus { Name = "New" };
-      var progress = new IncidentStatus { Name = "In Progress" };
-      var closed = new IncidentStatus { Name = "Closed" };
+            var romanAdminRole = new IdentityUserRole<int>() { RoleId = adminRole.Id, UserId = roman.Id };
+            var yuriiCitizenRole = new IdentityUserRole<int>() { RoleId = citizenRole.Id, UserId = yurii.Id };
 
 
-      context.IncidentStatuses.Add(@new);
-      context.IncidentStatuses.Add(progress);
-      context.IncidentStatuses.Add(closed);
-      
+            var @new = new IncidentStatus { Name = "New" };
+            var progress = new IncidentStatus { Name = "In Progress" };
+            var closed = new IncidentStatus { Name = "Closed" };
 
-      var _priorities = new List<Priority> {
+
+            context.IncidentStatuses.Add(@new);
+            context.IncidentStatuses.Add(progress);
+            context.IncidentStatuses.Add(closed);
+
+            context.SaveChanges();
+
+
+            var _priorities = new List<Priority> {
                 new Priority{
                     Name = "Zero"
                 },
@@ -91,17 +91,15 @@ namespace Municipality.Extensions
                     Name = "High"
                 },
             };
-      foreach (var pr in _priorities)
-      {
-        context.Priorities.Add(pr);
-      }
+            foreach (var pr in _priorities)
+            {
+                context.Priorities.Add(pr);
+            }
 
-      context.SaveChanges();
+            context.SaveChanges();
 
-
-
-
-      var incidents = new List<Incident>
+            
+            var incidents = new List<Incident>
             {
                 new Incident
                 {
@@ -113,7 +111,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="проспект Дмитра Яворницького, 42-44, Дніпро́, Дніпропетровська область, Украина",
                     Approved = true,
-                    FilePath="/images/incidents/tree.png",
+                    //FilePath="/images/incidents/tree.png",
                     PriorityId =_priorities[0].Id,
                     DateOfApprove = DateTime.Now,
                     Estimate = 3
@@ -129,7 +127,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
                     Approved=true,
-                    FilePath="/images/incidents/water.png",
+                    //FilePath="/images/incidents/water.png",
                      PriorityId =_priorities[1].Id,
                     DateOfApprove = DateTime.Now.AddDays(-1),
                     Estimate = 15
@@ -144,7 +142,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
                     Approved=true,
-                    FilePath="/images/incidents/water.png",
+                    //FilePath="/images/incidents/water.png",
                      PriorityId =_priorities[1].Id,
                     DateOfApprove = DateTime.Now.AddDays(-1),
                     Estimate = 15
@@ -159,7 +157,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="вулиця Глінки, 11, Дніпро́, Дніпропетровська область, Украина",
                     Approved=true,
-                    FilePath="/images/incidents/water.png",
+                    //FilePath="/images/incidents/water.png",
                      PriorityId =_priorities[1].Id,
                     DateOfApprove = DateTime.Now.AddDays(-1),
                     Estimate = 15
@@ -174,7 +172,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="вулиця Січеславська Набережна, 35А, Дніпро́, Дніпропетровська область, Украина, 49000",
                     Approved = true,
-                    FilePath="/images/incidents/dtp.png",
+                    //FilePath="/images/incidents/dtp.png",
                      PriorityId =_priorities[2].Id,
                     DateOfApprove = DateTime.Now.AddDays(-2),
                     Estimate = 4
@@ -189,7 +187,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="вулиця Січеславська Набережна, 35А, Дніпро́, Дніпропетровська область, Украина, 49000",
                     Approved = true,
-                    FilePath="/images/incidents/dtp.png",
+                    //FilePath="/images/incidents/dtp.png",
                      PriorityId =_priorities[2].Id,
                     DateOfApprove = DateTime.Now.AddDays(-2),
                     Estimate = 4
@@ -204,7 +202,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
                     Approved = false,
-                    FilePath="/images/incidents/hole.png",
+                    //FilePath="/images/incidents/hole.png",
                      PriorityId =_priorities[0].Id,
                     DateOfApprove = DateTime.Now,
                     Estimate = 10
@@ -219,7 +217,7 @@ namespace Municipality.Extensions
                     UserId = yurii.Id,
                     Adress="проспект Дмитра Яворницького, 75-77, Дніпро́, Дніпропетровська область, Украина",
                     Approved = true,
-                    FilePath="/images/incidents/electricity.png",
+                    //FilePath="/images/incidents/electricity.png",
                      PriorityId =_priorities[3].Id,
                     DateOfApprove = DateTime.Now,
                     Estimate = 16
@@ -227,13 +225,13 @@ namespace Municipality.Extensions
 
             };
 
-      foreach (Incident log in incidents)
-      {
-        context.Incidents.Add(log);
-      }
-      context.SaveChanges();
+            foreach (Incident incident in incidents)
+            {
+                context.Incidents.Add(incident);
+            }
+            context.SaveChanges();
+
+        }
 
     }
-
-  }
 }

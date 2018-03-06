@@ -1,6 +1,6 @@
 ﻿
 export interface IState {
-    incidents: IIncident[];    
+    incidents: IIncident[];
 }
 
 export interface IIncident {
@@ -9,13 +9,15 @@ export interface IIncident {
     description: string;
     lng: string;
     lat: string;
-    status: string;   
+    status: string;
     statusId: number;
     adress: string;
     inFocus: boolean;
     approved: boolean;
     filePath: string;
     timeLeft: string;
+    files: File[];
+    [key: string]: string | number | boolean | File[];
 }
 
 export interface IPoint {
@@ -25,22 +27,27 @@ export interface IPoint {
 
 const Dnipropetrovsk: IPoint = { lat: 48.460861, lng: 35.056737 };
 
-export function getInitialState(): IState {
+export const getInitialState = (): IState => {
 
     return {
-        incidents: [{
-            id: 0,
-            title: " ",
-            description: " ",
-            lat: " ",
-            lng: " ",
-            status: " ",            
-            statusId: 0,
-            adress: " ",
-            inFocus: false,
-            approved: false,
-            filePath: " ",
-            timeLeft:"0"
-        }]
-    }
-}
+        incidents: [],
+    };
+};
+
+export const getIncidentCreateModel = (): IIncident => {
+    return {
+        title: 'test title',
+        description: 'test description',
+        lat: '0',
+        lng: '0',
+        adress: '',
+        approved: false,
+        filePath: '',
+        id: 0,
+        inFocus: false,
+        status: '',
+        statusId: 0,
+        timeLeft: '',
+        files: [],
+    };
+};

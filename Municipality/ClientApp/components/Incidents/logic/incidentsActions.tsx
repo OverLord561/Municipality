@@ -26,24 +26,28 @@ export const ReceiveIncedents = (incidents: IIncident[]) => {
 
 
 
-export const CreateIncidents = (incident: FormData) => {
+export const CreateIncidents = (incident: IIncident, callback: Function) => {
     return (dispatch: any, getStore: any) => {
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        let lat: any = incident.get('lat');
-        let lng: any = incident.get('lng');
+        let lat: any = incident.lat;
+        let lng: any = incident.lng;
 
 
         return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAxVVyh7rh6kKCYhxyWZSY_xkDNZ4YIK3k`)
             .then(response => {
                 if (response.status === 200) {
-                    incident.append("adress", response.data.results[0].formatted_address);
+                    incident.adress = response.data.results[0].formatted_address;
 
-                    return axios.post('/api/incidents', incident)
+                    const form: FormData = new FormData();
+
+                    form.append('incident', JSON.stringify(incident));
+                    for (let i = 0; i < incident.files.length; i++) {
+                        form.append(incident.files[i].name, incident.files[i]);
+                    }
+
+                    return axios.post('/api/incidents', form)
                         .then(response => {
-                            if (response.status == 200) {
-                                alert("request accepted");
-                                dispatch(ReceiveIncedents(response.data.items));
-                            }
+                            alert("request accepted");
+                            dispatch(ReceiveIncedents(response.data.items));
                         }).catch(error => {
                             console.log(error);
                         });
