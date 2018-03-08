@@ -212,4 +212,6 @@
         border: none;
     }
 
-    
+.pagination.incidents {
+color:black;
+}    

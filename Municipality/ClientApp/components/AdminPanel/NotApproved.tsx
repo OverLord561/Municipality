@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
-import { IState, IIncident } from './logic/adminState';
+import { IState } from './logic/adminState';
+import { IIncident } from '../Incidents/logic/incidentsState';
 import Incident from './Incident';
+
 
 interface IInnerProps {
     getNotApproved: () => void;

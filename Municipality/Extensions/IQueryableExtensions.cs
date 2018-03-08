@@ -12,7 +12,8 @@ namespace Municipality.Extensions
         public static IQueryable<Incident> Include(this IQueryable<Incident> queryable)
         {
             return queryable.Include(x => x.IncidentStatus)
-                .Include(x=>x.Priority);
+                .Include(x => x.Priority)
+                .Include(x => x.AttachedFiles);
         }
     }
 }

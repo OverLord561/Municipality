@@ -1,7 +1,8 @@
 ﻿import * as React from 'react';
-import { IIncident } from './logic/incidentsState';
 import autobind from 'autobind-decorator';
-import * as $ from 'jquery';
+
+import { IIncident } from './logic/incidentsState';
+import Carouse from '../Incidents/Carousel';
 
 interface IInnerProps {
     incident: IIncident;
@@ -18,20 +19,20 @@ export default class IncidentDescription extends React.Component<IInnerProps, an
 
         this.props.focusIncident(this.props.incident.id, !this.props.incident.inFocus);
         //(this.refs.modal as HTMLButtonElement).click();
-       
+
     }
     render() {
         if (this.props.incident.inFocus) {
             (this.refs.modal as HTMLButtonElement).click();
         }
-        return <tr className={this.props.incident.inFocus ? "desc-focus cursor":"cursor"}>
+        return <tr className={this.props.incident.inFocus ? "desc-focus cursor" : "cursor"}>
             <td onClick={this.FocusIncident}>
                 {this.props.incident.title}
-               
-            </td>           
+
+            </td>
             <td onClick={this.FocusIncident}>
                 {this.props.incident.adress}
-            </td> 
+            </td>
             <td>
                 <button ref='modal' type="button" className="btn btn-info btn-lg hide" data-toggle="modal" data-target={`#${this.props.incident.id}`}>Open Modal</button>
 
@@ -47,17 +48,19 @@ export default class IncidentDescription extends React.Component<IInnerProps, an
                             <div className="modal-body">
                                 <p>{this.props.incident.description}</p>
                                 <p className="modal-description">{this.props.incident.adress}</p>
-                                <img src={this.props.incident.filePath} className="img-responsive" alt="/" /> 
+                                <Carouse
+                                    incident={this.props.incident}
+                                />
                             </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={this.FocusIncident} >Close</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={this.FocusIncident} >Close</button>
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
-            </td>  
+            </td>
         </tr>
-    }
+            }
 
 }

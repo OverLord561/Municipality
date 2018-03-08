@@ -193,21 +193,18 @@ namespace Repositories.EntityFramework.Migrations
 
                     b.Property<double>("Estimate");
 
-                    b.Property<int?>("IncidentStatusId")
-                        .IsRequired();
+                    b.Property<int>("IncidentStatusId");
 
                     b.Property<double>("Latitude");
 
                     b.Property<double>("Longitude");
 
-                    b.Property<int?>("PriorityId")
-                        .IsRequired();
+                    b.Property<int>("PriorityId");
 
                     b.Property<string>("Title")
                         .IsRequired();
 
-                    b.Property<int?>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id")
                         .HasName("PK_Incident_ID");
@@ -235,6 +232,9 @@ namespace Repositories.EntityFramework.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired();
 
                     b.Property<long>("IncidentId")
                         .HasColumnName("IncidentID");

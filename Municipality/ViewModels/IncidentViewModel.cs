@@ -22,7 +22,7 @@ namespace Municipality.ViewModels
         public double Estimate { get; set; }
         public string TimeLeft { get; set; }
         public ICollection<AttachedFileViewModel> AttachedFiles { get; set; }
-
+        public IEnumerable<string> FilePaths { get; set; }
 
     }
 }

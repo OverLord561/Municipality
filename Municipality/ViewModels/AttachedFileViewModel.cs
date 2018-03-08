@@ -12,6 +12,8 @@ namespace Municipality.ViewModels
         public string Name { get; set; }
 
         public string ContentType { get; set; }
+        public string FilePath { get; set; }
+
         [JsonIgnore]
         public IFormFile FormFile { get; set; }
     }

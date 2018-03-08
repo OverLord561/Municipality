@@ -2,20 +2,23 @@
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
-import { IState, IPoint } from './logic/incidentsState';
+import { IState, IPoint, IIncident } from './logic/incidentsState';
 import * as actions from './logic/incidentsActions';
 import autobind from 'autobind-decorator';
-import IncidentsDescription from './IncidentsDescription';
+import IncidentsTable from './IncidentsTable';
 import Creation from "./Creation";
 
 import MapContainer from './MapContainer';
 
+interface IStateProps {
+    incidents: IIncident[];
+}
 
 
-type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
+type IProps = IStateProps & RouteComponentProps<{}> & typeof dispatchProps;
 
 const dispatchProps = {
-    getIncidents: actions.GetIncidents,
+    getIncidents: actions.RequestIncidents,
     createIncident: actions.CreateIncidents,
     focusIncident: actions.FocusIncident
 };
@@ -39,7 +42,6 @@ class Incidents extends React.Component<IProps, any> {
             <MapContainer
                 incidents={this.props.incidents}
                 focusIncident={this.props.focusIncident}
-
             />
             <div className="col-lg-6 block ">
                 <div className="row">
@@ -49,11 +51,9 @@ class Incidents extends React.Component<IProps, any> {
                         />
                     </div>
                     <div className="col-lg-8">
-                        <IncidentsDescription
-                            incidents={this.props.incidents}
-                            focusIncident={this.props.focusIncident}
-                        />
-                                                
+
+                        <IncidentsTable />
+
                     </div>
                 </div>
             </div>
@@ -62,8 +62,8 @@ class Incidents extends React.Component<IProps, any> {
     }
 }
 
-function mapStateToProps(state: ApplicationState): IState {
-   
+function mapStateToProps(state: ApplicationState): IStateProps {
+
     return {
         incidents: state.incidents.incidents
     };

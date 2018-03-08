@@ -52,7 +52,8 @@ namespace Municipality.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> GetIncidents([FromQuery] IncidentsQuery query = null)
         {
-            return Json(new { Items = await _incidentService.GetIncidentsAsync(query) });
+            IPagedEnumerable<IncidentViewModel> result = await _incidentService.GetIncidentsAsync(query);
+            return Json(new { Items = result.Items, totalCount = result.TotalCount  });
         }
 
         [HttpGet("api/incidents/not-approved")]
@@ -81,6 +82,11 @@ namespace Municipality.Controllers
             //var file = Request.Form.Files[0];
             ////.SaveAs(Server.MapPath("/Content/Images/Uploads/" + fileName));
             StatusCodeResult result = null;
+
+            if (await _incidentService.CreateIncident(model))
+            {
+                return Ok();
+            }
             //try
             //{
             //    if (file != null)

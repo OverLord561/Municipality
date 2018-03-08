@@ -12,6 +12,8 @@ namespace Models
 
         public string ContentType { get; set; }
 
+        public string FilePath { get; set; }
+
         public long IncidentId { get; set; }
 
         public virtual Incident Incident { get; set; }

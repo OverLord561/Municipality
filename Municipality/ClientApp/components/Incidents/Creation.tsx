@@ -71,7 +71,7 @@ class Creation extends React.Component<IInnerProps, IIncident> {
 
             <div className="form-group">
                 <label htmlFor="attach-button" className="cursor attach">Attach File*</label>
-                <input onChange={this.uploadFile} className="hide" id="attach-button" type="file" accept="image/*" required />
+                <input onChange={this.uploadFile} className="hide" id="attach-button" type="file" accept="image/*" required multiple />
                 <label className="file-name"> {this.state.fileName} </label>
             </div>
 

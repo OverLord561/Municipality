@@ -18,17 +18,17 @@ namespace Models
 
 
         //relationships
-        public int? IncidentStatusId { get; set; }
+        public int IncidentStatusId { get; set; }
         public virtual IncidentStatus IncidentStatus { get; set; }
 
 
-        public int? PriorityId { get; set; }
+        public int PriorityId { get; set; }
         public virtual Priority Priority { get; set; }
 
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        public virtual IEnumerable<IncidentFile> AttachedFiles { get; set; }
+        public virtual ICollection<IncidentFile> AttachedFiles { get; set; }
 
     }
 }

@@ -2,7 +2,8 @@
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
-import { IState, IIncident } from './logic/adminState';
+import { IState } from './logic/adminState';
+import { IIncident } from '../Incidents/logic/incidentsState';
 import * as actions from './logic/adminActions';
 import autobind from 'autobind-decorator';
 import NotApproved from './NotApproved';
@@ -14,7 +15,7 @@ interface IStateProps {
 type IProps = IState & RouteComponentProps<{}> & typeof dispatchProps;
 
 const dispatchProps = {
-    getIncidents: actions.GetIncidents,
+    getIncidents: actions.RequestIncidents,
     approveIncident: actions.ApproveIncident,
     forbidIncident: actions.ForbidIncident
 };
@@ -24,7 +25,7 @@ class AdminPanel extends React.Component<IProps, any> {
         super();
     }
     public render() {
-       
+
         return <div>
 
             <ul className="nav nav-tabs">

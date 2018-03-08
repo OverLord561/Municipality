@@ -1,5 +1,6 @@
 ﻿using Models;
 using System;
+using System.Linq;
 
 namespace Municipality.ViewModels
 {
@@ -14,16 +15,17 @@ namespace Municipality.ViewModels
                 Title = model.Title,
                 Description = model.Description,
                 Status = model.IncidentStatus.Name,
-                StatusId = model.IncidentStatusId.Value,
+                StatusId = model.IncidentStatusId,
                 Lng = model.Longitude,
                 Lat = model.Latitude,
                 Adress = model.Adress,
                 InFocus = false,
                 Approved = model.Approved,
-                PriorityId = model.PriorityId.Value,
+                PriorityId = model.PriorityId,
                 Priority = model.Priority.Name,
                 Estimate = model.Estimate,
-                TimeLeft = (model.DateOfApprove.AddHours(model.Estimate) - DateTime.Now).TotalHours.ToString("N2")
+                TimeLeft = (model.DateOfApprove.AddHours(model.Estimate) - DateTime.Now).TotalHours.ToString("N2"),
+                FilePaths = model.AttachedFiles !=null ? model.AttachedFiles.Select(x=>x.FilePath) : null
             };
         }
 

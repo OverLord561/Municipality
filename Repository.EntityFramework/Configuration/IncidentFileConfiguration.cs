@@ -32,6 +32,9 @@ namespace Repositories.EntityFramework.Configuration
                   .HasMaxLength(50)
                   .IsRequired();
 
+            entity.Property(x => x.FilePath)
+                  .IsRequired();
+
             entity.Property(x => x.Date)
                   .HasDefaultValueSql("GETUTCDATE()");
 

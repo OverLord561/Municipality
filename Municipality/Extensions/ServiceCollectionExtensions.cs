@@ -18,10 +18,14 @@ namespace Municipality.Extensions
     {
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
+            services.AddScoped<IUserHelper, UserHelperService>();
+
             services.AddScoped<IIncidentStatusRepository, IncidentStatusRepository>();
             services.AddScoped<IIncidentRepository, IncidentRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IFilterExpressionBuilder<IncidentsQuery, Incident>, IncidentsFilterExpressionBuilder>();
+            services.AddScoped<IIncidentFilesRepository, IncidentFilesRepository>();
+
 
             services.AddScoped<IIncidentService, IncidentService>();
 

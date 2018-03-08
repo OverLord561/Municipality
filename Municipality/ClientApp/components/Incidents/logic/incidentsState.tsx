@@ -1,6 +1,10 @@
 ﻿
 export interface IState {
     incidents: IIncident[];
+    listOfPages: number[];
+    page: number;
+    totalCount: number;
+    totalPages: number;
 }
 
 export interface IIncident {
@@ -11,13 +15,16 @@ export interface IIncident {
     lat: string;
     status: string;
     statusId: number;
+    priority: string;
+    priorityId: number;
     adress: string;
     inFocus: boolean;
     approved: boolean;
-    filePath: string;
+    filePaths: string[];
     timeLeft: string;
     files: File[];
-    [key: string]: string | number | boolean | File[];
+    estimate: number;
+    [key: string]: string | number | boolean | File[] | string[];
 }
 
 export interface IPoint {
@@ -31,6 +38,10 @@ export const getInitialState = (): IState => {
 
     return {
         incidents: [],
+        listOfPages: [],
+        page: 1,
+        totalCount: 0,
+        totalPages: 0,
     };
 };
 
@@ -42,12 +53,15 @@ export const getIncidentCreateModel = (): IIncident => {
         lng: '0',
         adress: '',
         approved: false,
-        filePath: '',
+        filePaths: [],
         id: 0,
         inFocus: false,
         status: '',
         statusId: 0,
+        priority: '',
+        priorityId: 0,
         timeLeft: '',
         files: [],
+        estimate: 0,
     };
 };

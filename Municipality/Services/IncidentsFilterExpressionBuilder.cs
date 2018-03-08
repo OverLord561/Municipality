@@ -26,7 +26,7 @@ namespace Municipality.Services
             {
                 result = result.AndAlso(x => x.IncidentStatus.Name.ToLower() == query.StatusName.ToLower());
             }
-            result = result.AndAlso(x => x.Approved == true);
+            result = result.AndAlso(x => x.Approved == query.IsApproved);
 
             if (result == null) return x => true;
 

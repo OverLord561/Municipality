@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
-import { IIncident } from './logic/adminState';
 import autobind from 'autobind-decorator';
+import { IIncident } from '../Incidents/logic/incidentsState';
+import Carousel from '../Incidents/Carousel';
+
 
 interface IInnerProps {
     incident: IIncident;
@@ -64,7 +66,7 @@ export default class Incident extends React.Component<IInnerProps, IInnerState> 
             <td>{this.props.incident.title}</td>
             <td>{this.props.incident.description}</td>
             <td>{this.props.incident.adress}</td>
-            
+
             <td><button type="button" className="btn btn-danger" onClick={this.Forbid}>Forbid</button></td>
             <td>
 
@@ -81,7 +83,7 @@ export default class Incident extends React.Component<IInnerProps, IInnerState> 
                                 <h4 className="modal-title danger inline-block">{this.props.incident.title}</h4>
 
                                 <div className="dropdown inline-block">
-                                    <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{this.state.priority == "" ? "set priority ! ":this.state.priority}
+                                    <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{this.state.priority == "" ? "set priority ! " : this.state.priority}
                                         <span className="caret"></span>
                                     </button>
                                     <ul className="dropdown-menu">
@@ -95,15 +97,19 @@ export default class Incident extends React.Component<IInnerProps, IInnerState> 
                             <div className="modal-body">
                                 <p>{this.props.incident.description}</p>
                                 <p className="modal-description">{this.props.incident.adress}</p>
-                                <img src={this.props.incident.filePath} className="img-responsive" alt="/" />
-                                <br/>
+
+                                <Carousel
+                                    incident={this.props.incident}
+                                />
+
+                                <br />
                                 <div className="form-group">
                                     <label htmlFor="estimate">Estimate: hours</label>
                                     <input type="text" required className="form-control" id="estimate" placeholder="Enter estimate..." value={this.state.estimate} onChange={this.SetEstimate} />
                                 </div>
                             </div>
 
-                            
+
 
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-success" data-dismiss="modal" onClick={this.Approve}>Approve</button>
@@ -116,7 +122,7 @@ export default class Incident extends React.Component<IInnerProps, IInnerState> 
                 </div>
             </td>
 
-        </tr>
+        </tr >
     };
 
 }
