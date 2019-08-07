@@ -1,14 +1,13 @@
 ﻿using Models;
-using AzureLogger;
 
 namespace Repositories.EntityFramework.Repositories
 {
-    
 
-    public class IncidentStatusRepository : LoggableRepository<IncidentStatus>, IIncidentStatusRepository
+
+    public class IncidentStatusRepository : Repository<IncidentStatus>, IIncidentStatusRepository
     {
-        public IncidentStatusRepository(ApplicationDbContext context, ICosmosLogger logger)
-    : base(context, logger)
+        public IncidentStatusRepository(ApplicationDbContext context)
+            : base(context)
         {
         }
     }

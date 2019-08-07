@@ -6,4 +6,4 @@ E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.A
 E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.AssemblyInfo.cs
 E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.dll
 E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.pdb
-E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.csprojResolveAssemblyReference.cache
+E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.csprojAssemblyReference.cache

@@ -7,10 +7,8 @@ using Municipality.Services.Interfaces;
 using Repositories;
 using Repositories.EntityFramework.Queries;
 using Repositories.EntityFramework.Repositories;
-using System;
+using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Municipality.Extensions
 {
@@ -30,6 +28,36 @@ namespace Municipality.Extensions
             services.AddScoped<IIncidentService, IncidentService>();
 
             return services;
+        }
+
+
+        public static void ServiceCollectionAddSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "API for Municipality",
+                    Description = "First release for Municipality API for v1 methods.",
+                    TermsOfService = "None",
+                });
+
+                // Swagger 2.+ support
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(security);
+            });
         }
 
     }

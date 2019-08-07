@@ -1,5 +1,4 @@
-﻿using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -30,38 +29,6 @@ namespace Repositories.EntityFramework.Repositories
         protected virtual IQueryable<TEntity> Include()
         {
             return _context.Set<TEntity>();
-        }
-
-        protected virtual string[] HandleException(Exception ex)
-        {
-            if (ex is DbUpdateException)
-            {
-                var dbUpdateEx = ex as DbUpdateException;
-
-                var sqlEx = dbUpdateEx?.InnerException?.InnerException as SqlException;
-
-                if (sqlEx != null)
-                {
-                    switch (sqlEx.Number)
-                    {
-                        case 2627: // Unique constraint error
-                        case 547:  // Constraint check violation
-                        case 2601: // Duplicate key row error
-                            string[] errors = new string[sqlEx.Errors.Count];
-
-                            for (int i = 0; i < sqlEx.Errors.Count; i++)
-                            {
-                                errors[i] = sqlEx.Errors[i].Message;
-                            }
-
-                            return errors;
-                        default:
-                            throw ex;
-                    }
-                }
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -190,101 +157,6 @@ namespace Repositories.EntityFramework.Repositories
             return Include().Where(predicate).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
-       
-        /// <summary>
-        /// Filters and projects the sequence of values based on a predicate using the provided mapping engine.
-        /// </summary>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <returns>A sequence of values matched by function.</returns>
-        public IEnumerable<TProjection> Get<TProjection>(Expression<Func<TEntity, bool>> predicate)
-        {
-            return _context.Set<TEntity>().Where(predicate).ProjectTo<TProjection>().ToList();
-        }
-
-        /// <summary>
-        /// Filters and projects the sequence of values based on a predicate using the provided mapping engine.
-        /// </summary>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <param name="page">Page number to take.</param>
-        /// <param name="pageSize">Page size to take.</param>
-        /// <returns>A sequence of values matched by function.</returns>
-        public IEnumerable<TProjection> Get<TProjection>(Expression<Func<TEntity, bool>> predicate, int page, int pageSize)
-        {
-            return _context.Set<TEntity>().Where(predicate).Skip((page - 1) * pageSize).Take(pageSize).ProjectTo<TProjection>().ToList();
-        }
-
-        /// <summary>
-        /// Asynchronously filters the sequence of values based on a predicate.
-        /// </summary>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <returns>A sequence of values matched by function.</returns>
-        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await Include().Where(predicate).ToListAsync();
-        }
-
-        /// <summary>
-        /// Asynchronously filters and projects the sequence of values based on a predicate.
-        /// </summary>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <param name="page">Page number to take.</param>
-        /// <param name="pageSize">Page size to take.</param>
-        /// <returns>A sequence of values matched by function.</returns>
-        public virtual async Task<PagedResult<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate, int page, int pageSize)
-        {
-            var query = Include().Where(predicate);
-            var count = await query.CountAsync();
-            var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PagedResult<TEntity>(items, count, page, count / pageSize + 1, pageSize);
-        }
-
-        /// <summary>
-        /// Asynchronously filters and projects the sequence of values based on a predicate.
-        /// </summary>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <param name="page">Page number to take.</param>
-        /// <param name="pageSize">Page size to take.</param>
-        /// <returns>A sequence of values matched by function.</returns>
-        public virtual async Task<PagedResult<TEntity>> GetAsync<TKey>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TKey>> keySelector, bool descending, int page, int pageSize)
-        {
-            var query = Include().Where(predicate);
-            var count = await query.CountAsync();
-
-            if (descending)
-            {
-                query = query.OrderByDescending(keySelector);
-            }
-            else
-            {
-                query = query.OrderBy(keySelector);
-            }
-
-            var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PagedResult<TEntity>(items, count, page, count / pageSize + 1, pageSize);
-        }
-
-        /// <summary>
-        /// Asynchronously filters and projects the sequence of values based on a predicate.
-        /// </summary>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <returns>A sequence of values matched by function.</returns>
-        public virtual async Task<IEnumerable<TProjection>> GetAsync<TProjection>(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _context.Set<TEntity>().Where(predicate).ProjectTo<TProjection>().ToListAsync();
-        }
-
-        /// <summary>
-        /// Asynchronously filters and projects the sequence of values based on a predicate.
-        /// </summary>
-        /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <param name="page">Page number to take.</param>
-        /// <param name="pageSize">Page size to take.</param>
-        /// <returns>A sequence of values matched by function.</returns>
-        public virtual async Task<IEnumerable<TProjection>> GetAsync<TProjection>(Expression<Func<TEntity, bool>> predicate, int page, int pageSize)
-        {
-            return await _context.Set<TEntity>().Where(predicate).ProjectTo<TProjection>().Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-        }
-
         /// <summary>
         /// Returns the only element of a sequence, or a default value if the sequence is empty;
         /// this method throws an exception if there is more than one element in the sequence.
@@ -300,34 +172,7 @@ namespace Repositories.EntityFramework.Repositories
             return Include().SingleOrDefault(predicate);
         }
 
-        /// <summary>
-        /// Returns a projection of the only element of a sequence using the provided mapping engine,
-        /// or a default value if the sequence is empty;
-        /// this method throws an exception if there is more than one element in the sequence.
-        /// </summary>
-        /// <returns>
-        /// The single element of the input sequence, or <see cref="default(TSource)"/> if the sequence
-        /// containts no element.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">source is null.</exception>
-        /// <exception cref="InvalidOperationException">source has more than one element.</exception>
-        public virtual TProjection SingleOrDefault<TProjection>(Expression<Func<TEntity, bool>> predicate, object parameters = null)
-        {
-            IQueryable<TProjection> projection;
-            var query = _context.Set<TEntity>().Where(predicate);
-
-            if (parameters != null)
-            {
-                projection = query.ProjectTo<TProjection>(parameters);
-            }
-            else
-            {
-                projection = query.ProjectTo<TProjection>();
-            }
-
-            return projection.SingleOrDefault();
-        }
-
+        
         /// <summary>
         /// Asynchronous returns the only element of a sequence that satisfies condition or a default if no such element exists;
         /// this method throws an exception if there is more than one element in the sequence.
@@ -343,55 +188,16 @@ namespace Repositories.EntityFramework.Repositories
             return await Include().SingleOrDefaultAsync(predicate);
         }
 
-        /// <summary>
-        /// Asynchronous returns a projection of the only element of a sequence that satisfies condition using 
-        /// the provided mapping engine or a default if no such element exists;
-        /// this method throws an exception if there is more than one element in the sequence.
-        /// </summary>
-        /// <returns>
-        /// The single element of the input sequence, or <see cref="default(TSource)"/> if the sequence
-        /// containts no element.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">source is null.</exception>
-        /// <exception cref="InvalidOperationException">source has more than one element.</exception>
-        public virtual async Task<TProjection> SingleOrDefaultAsync<TProjection>(Expression<Func<TEntity, bool>> predicate, object parameters = null)
-        {
-            IQueryable<TProjection> projection;
-            var query = _context.Set<TEntity>().Where(predicate);
-
-            if (parameters != null)
-            {
-                projection = query.ProjectTo<TProjection>(parameters);
-            }
-            else
-            {
-                projection = query.ProjectTo<TProjection>();
-            }
-
-            return await projection.SingleOrDefaultAsync();
-
-        }
-
         public virtual IEnumerable<TEntity> All()
         {
             return Include().ToList();
         }
 
-        public virtual IEnumerable<TProjection> All<TProjection>()
-        {
-            return _context.Set<TEntity>().ProjectTo<TProjection>().ToList();
-        }
-
+ 
         public virtual async Task<IEnumerable<TEntity>> AllAsync()
         {
             return await Include().ToListAsync();
         }
-
-        public virtual async Task<IEnumerable<TProjection>> AllAsync<TProjection>()
-        {
-            return await _context.Set<TEntity>().ProjectTo<TProjection>().ToListAsync();
-        }
-
         public virtual int Remove(TEntity entity)
         {
             if (entity == null)
@@ -452,14 +258,10 @@ namespace Repositories.EntityFramework.Repositories
             return (items, total);
         }
 
-        Task<global::Repositories.PagedResult<TEntity>> IRepository<TEntity>.GetAsync(Expression<Func<TEntity, bool>> predicate, int page, int pageSize)
+        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await Include().Where(predicate).ToListAsync();
         }
 
-        Task<global::Repositories.PagedResult<TEntity>> IRepository<TEntity>.GetAsync<TKey>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TKey>> keySelector, bool descending, int page, int pageSize)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

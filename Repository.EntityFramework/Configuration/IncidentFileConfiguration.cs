@@ -11,12 +11,7 @@ namespace Repositories.EntityFramework.Configuration
     {
         public void Configure(EntityTypeBuilder<IncidentFile> entity)
         {
-            entity.HasKey(x => x.Id)
-                  .HasName("PK_IncidentFile_ID");
-
-            entity.Property(x => x.Id)
-                  .HasColumnName("ID")
-                  .UseSqlServerIdentityColumn();
+            entity.HasKey(x => x.Id);          
 
             entity.Property(x => x.IncidentId)
                   .HasColumnName("IncidentID");

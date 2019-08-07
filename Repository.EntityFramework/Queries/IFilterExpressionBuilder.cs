@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Repositories.EntityFramework.Models;
+using System;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Repositories.EntityFramework.Queries
 {

@@ -1,15 +1,13 @@
-﻿
-using AzureLogger;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Models;
 using System.Linq;
 
 namespace Repositories.EntityFramework.Repositories
 {
-    public class IncidentRepository: LoggableRepository<Incident>, IIncidentRepository
+    public class IncidentRepository : Repository<Incident>, IIncidentRepository
     {
-        public IncidentRepository(ApplicationDbContext context, ICosmosLogger logger)
-    : base(context, logger)
+        public IncidentRepository(ApplicationDbContext context)
+            : base(context)
         {
 
         }

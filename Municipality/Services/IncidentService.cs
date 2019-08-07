@@ -15,6 +15,7 @@ using Municipality.ViewModels.Enums;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Security.Claims;
+using Repositories.EntityFramework.Models;
 
 namespace Municipality.Services
 {
@@ -88,20 +89,25 @@ namespace Municipality.Services
 
         }
 
-        public async Task<IPagedEnumerable<IncidentViewModel>> GetIncidentsAsync(IncidentsQuery query)
+        public async Task<IEnumerable<IncidentViewModel>> GetIncidentsAsync(IncidentsQuery query)
         {
             try
             {
+                var expr = _expressionBuilder.BuildWhere(query);
+                if (expr == null)
+                {
+                    return null;
+                }
+
                 return await _context.Incidents
                     .Include()
-                    .Where(_expressionBuilder.BuildWhere(query))
+                    .Where(expr)
                     .Select(x => x.ToViewModel())
-                    .ToPagedEnumerableAsync(query.Page, query.Size);
+                    .ToPagedEnumerableAsync(query.Page, query.Size, query.SortBy, query.SortDirection);
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
-                throw;
+                return null;
             }
         }
 

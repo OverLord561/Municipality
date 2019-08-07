@@ -1,10 +1,5 @@
 ﻿using Models;
-using Municipality.ViewModels;
-using Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Repositories.EntityFramework.Models;
 
 namespace Municipality.Features.Incidents
 {
