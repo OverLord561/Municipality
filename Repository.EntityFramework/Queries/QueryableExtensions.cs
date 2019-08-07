@@ -19,7 +19,7 @@ namespace Repositories.EntityFramework.Queries
             { "transactiondatetime","OriginalTransactionDateTime"},
         };
 
-        public static async Task<IPagedEnumerable<T>> ToPagedEnumerableAsync<T>(this IQueryable<T> source, int page, int size, string sortBy, string sortDirection) where T : class, new()
+        public static async Task<IPagedResult<T>> ToPagedEnumerableAsync<T>(this IQueryable<T> source, int page, int size, string sortBy, string sortDirection) where T : class, new()
         {
             var isSortByValid = !string.IsNullOrEmpty(sortBy) ? source.IsSortByValid(sortBy) : true;
             if (!isSortByValid)
@@ -59,7 +59,7 @@ namespace Repositories.EntityFramework.Queries
             return new PagedResult<T>(items, pageInfo);
         }
 
-        public static IPagedEnumerable<T> ToPagedEnumerable<T>(this IEnumerable<T> source, int page, int size, string sortBy, string sortDirection) where T : class, new()
+        public static IPagedResult<T> ToPagedEnumerable<T>(this IEnumerable<T> source, int page, int size, string sortBy, string sortDirection) where T : class, new()
         {
             var isSortByValid = !string.IsNullOrEmpty(sortBy) ? source.AsQueryable().IsSortByValid(sortBy) : true;
             if (!isSortByValid)

@@ -2,10 +2,10 @@
 
 namespace Repositories.EntityFramework.Models
 {
-    public interface IPagedEnumerable<out TEntity> : IEnumerable<TEntity>
+    public interface IPagedResult<out TEntity>
     {
         IEnumerable<TEntity> Items { get; }
 
-         PageInfo PageInfo { get; }
+        PageInfo PageInfo { get; }
     }
 }

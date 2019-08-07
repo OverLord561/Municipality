@@ -1,32 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Repositories.EntityFramework.Models
 {
-    public class PagedResult<TEntity> : IPagedEnumerable<TEntity>
+    public class PagedResult<TEntity> : IPagedResult<TEntity>
     {
-        private readonly IEnumerable<TEntity> _items;
-        private readonly PageInfo _pageInfo;
 
-        public IEnumerable<TEntity> Items => _items;
+        public IEnumerable<TEntity> Items { get; }
 
-        public PageInfo PageInfo => _pageInfo;
+        public PageInfo PageInfo { get; }
 
 
         public PagedResult(IEnumerable<TEntity> items, PageInfo pageInfo)
         {
-            _items = items;
-            _pageInfo = pageInfo;
-        }
-
-        public IEnumerator<TEntity> GetEnumerator()
-        {
-            return _items.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _items.GetEnumerator();
+            Items = items;
+            PageInfo = pageInfo;
         }
     }
 }
