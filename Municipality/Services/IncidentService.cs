@@ -1,53 +1,43 @@
-﻿using Models;
-using Municipality.Services.Interfaces;
-using Municipality.ViewModels;
-using Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Models;
 using Municipality.Extensions;
 using Municipality.Features.Incidents;
-using Repositories.EntityFramework;
-using Microsoft.EntityFrameworkCore;
-using Repositories.EntityFramework.Queries;
+using Municipality.Services.Interfaces;
+using Municipality.ViewModels;
 using Municipality.ViewModels.Enums;
+using Repositories;
+using Repositories.EntityFramework;
+using Repositories.EntityFramework.Models;
+using Repositories.EntityFramework.Queries;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using System.Security.Claims;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Municipality.Services
 {
     public class IncidentService : IIncidentService
     {
-        private readonly IUserHelper _userHelper;
-        private readonly IIncidentRepository _incidentsRepository;
-        private readonly ApplicationDbContext _context;
         private readonly IFilterExpressionBuilder<IncidentsQuery, Incident> _expressionBuilder;
+        private readonly IIncidentRepository _incidentsRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly IIncidentFilesRepository _incidentFilesRepository;
+        private readonly ApplicationDbContext _context;
+        private readonly IUserHelper _userHelper;
 
-
-
-
-
-        public IncidentService(ApplicationDbContext context, IIncidentRepository incidentsRepository,
-                        IFilterExpressionBuilder<IncidentsQuery, Incident> expressionBuilder,
-                                    IHostingEnvironment hostingEnvironment, IUserHelper userHelper, IIncidentFilesRepository incidentFilesRepository
-
-
-
-            )
+        public IncidentService(ApplicationDbContext context
+            , IFilterExpressionBuilder<IncidentsQuery, Incident> expressionBuilder
+            , IIncidentRepository incidentsRepository
+            , IHostingEnvironment hostingEnvironment
+            , IUserHelper userHelper
+        )
         {
             _userHelper = userHelper ?? throw new ArgumentNullException(nameof(userHelper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _incidentsRepository = incidentsRepository ?? throw new ArgumentNullException(nameof(incidentsRepository));
             _expressionBuilder = expressionBuilder ?? throw new ArgumentNullException(nameof(expressionBuilder));
             _hostingEnvironment = hostingEnvironment;
-            _incidentFilesRepository = incidentFilesRepository ?? throw new ArgumentNullException(nameof(incidentFilesRepository));
-
-
-
         }
 
         public async Task<bool> CreateIncident(IncidentViewModel model)
@@ -81,27 +71,32 @@ namespace Municipality.Services
                 }
             }
 
-            int i = await _incidentsRepository.AddAsync(incident);
+             await _incidentsRepository.AddAsync(incident);
 
-
-            return i > 0;
-
+            return await _incidentsRepository.SaveChangesAsync();
         }
 
-        public async Task<IPagedEnumerable<IncidentViewModel>> GetIncidentsAsync(IncidentsQuery query)
+        public async Task<IPagedResult<IncidentViewModel>> GetIncidentsAsync(IncidentsQuery query)
         {
             try
             {
-                return await _context.Incidents
+                var expr = _expressionBuilder.BuildWhere(query);
+                if (expr == null)
+                {
+                    return null;
+                }
+
+                var result = await _context.Incidents
                     .Include()
-                    .Where(_expressionBuilder.BuildWhere(query))
+                    .Where(expr)
                     .Select(x => x.ToViewModel())
-                    .ToPagedEnumerableAsync(query.Page, query.Size);
+                    .ToPagedEnumerableAsync(query.Page, query.Size, query.SortBy, query.SortDirection);
+
+                return result;
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
-                throw;
+                return null;
             }
         }
 

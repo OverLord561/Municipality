@@ -9,12 +9,7 @@ namespace Repositories.EntityFramework.Configuration
     {
         public void Configure(EntityTypeBuilder<Priority> entity)
         {
-            entity.HasKey(x => x.Id)
-                .HasName("PK_IncidentPriority_ID");
-
-            entity.Property(x => x.Id)
-                .UseSqlServerIdentityColumn()
-                .HasColumnName("ID");
+            entity.HasKey(x => x.Id);
 
             entity.Property(x => x.Name)
                 .IsRequired();

@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace Repositories.EntityFramework.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,9 +14,9 @@ namespace Repositories.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,20 +29,20 @@ namespace Repositories.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,26 +53,26 @@ namespace Repositories.EntityFramework.Migrations
                 name: "IncidentStatuses",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IncidentStatus_ID", x => x.ID);
+                    table.PrimaryKey("PK_IncidentStatuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Priorities",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IncidentPriority_ID", x => x.ID);
+                    table.PrimaryKey("PK_Priorities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,9 +81,9 @@ namespace Repositories.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<int>(nullable: false)
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,9 +102,9 @@ namespace Repositories.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -186,34 +185,34 @@ namespace Repositories.EntityFramework.Migrations
                 name: "Incidents",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Adress = table.Column<string>(nullable: true),
-                    Approved = table.Column<bool>(nullable: false),
-                    DateOfApprove = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Estimate = table.Column<double>(nullable: false),
-                    IncidentStatusId = table.Column<int>(nullable: false),
-                    Latitude = table.Column<double>(nullable: false),
+                    DateOfApprove = table.Column<DateTime>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
+                    Latitude = table.Column<double>(nullable: false),
+                    Adress = table.Column<string>(nullable: true),
+                    Approved = table.Column<bool>(nullable: false),
+                    IncidentStatusId = table.Column<int>(nullable: false),
                     PriorityId = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Incident_ID", x => x.ID);
+                    table.PrimaryKey("PK_Incidents", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Incident_Status_ID",
                         column: x => x.IncidentStatusId,
                         principalTable: "IncidentStatuses",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Incident_Priority_ID",
                         column: x => x.PriorityId,
                         principalTable: "Priorities",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Incident_User_ID",
@@ -227,22 +226,23 @@ namespace Repositories.EntityFramework.Migrations
                 name: "IncidentFiles",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ContentType = table.Column<string>(maxLength: 50, nullable: false),
-                    Date = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()"),
-                    IncidentID = table.Column<long>(nullable: false),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
-                    UploadedByID = table.Column<int>(nullable: false)
+                    ContentType = table.Column<string>(maxLength: 50, nullable: false),
+                    FilePath = table.Column<string>(nullable: false),
+                    IncidentID = table.Column<long>(nullable: false),
+                    UploadedByID = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IncidentFile_ID", x => x.ID);
+                    table.PrimaryKey("PK_IncidentFiles", x => x.Id);
                     table.ForeignKey(
                         name: "FK_IncidentFile_Incident_IncidentID",
                         column: x => x.IncidentID,
                         principalTable: "Incidents",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_IncidentFile_User_UploadedByID",

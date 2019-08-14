@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "fbe059d19b19a540cbe06f7f97e22321c7fe96d1"
+    "signature": ""
   },
   "compilationOptions": {},
   "targets": {
@@ -487,21 +487,21 @@
     "Microsoft.Data.Edm/5.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-P/d8DxA6MFHroBEn/jW0LMQSIKnsRRibrZtRCLfov2boQfrQ1R1BVgkJ5oIhcQsOm0l4POv+I2ny6RBsclNbOw==",
+      "sha512": "sha512-4HF+DacTEmNarD1/Q98es0ExiGMP3n7VHvc17OBsy6SSmylBDDBOJ44r0EsyOjZRaeTPbXjTpr08aiCESZI1mw==",
       "path": "microsoft.data.edm/5.8.2",
       "hashPath": "microsoft.data.edm.5.8.2.nupkg.sha512"
     },
     "Microsoft.Data.OData/5.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oEIUtXcRiKogF0yZxA+QdgxoBJ34989qL/5xOSrTfxAhzNJV5Hw6DRdWgUCpeXFMoJUQx7ptbHCN+My/LCQfsg==",
+      "sha512": "sha512-mkCqLbT3oNBJZ/n7VUdUoZjiQAANNZmg75XeVurckIhMG4dSRN6evzNxYTXjMU2uBFwwC0/LZjdIdSO9mGeFew==",
       "path": "microsoft.data.odata/5.8.2",
       "hashPath": "microsoft.data.odata.5.8.2.nupkg.sha512"
     },
     "Microsoft.NETCore.Targets/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rkn+fKobF/cbWfnnfBOQHKVKIOpxMZBvlSHkqDWgBpwGDcLRduvs3D9OLGeV6GWGvVwNlVi2CBbTjuPmtHvyNw==",
+      "sha512": "sha512-uoCrgIGGKOGgZcw9rv+LHPFAUtVvJC5JUhMrYNQjg9tiNJpdvj3Z7K9RiDEoI6xm79pYuDHi537R+SXCb6y8oQ==",
       "path": "microsoft.netcore.targets/1.0.1",
       "hashPath": "microsoft.netcore.targets.1.0.1.nupkg.sha512"
     },
@@ -683,7 +683,7 @@
     "System.Spatial/5.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0RfZZJ8RlrfjoBPAF6pczX4Nd2kyLM8EX1PCP5Rqs/jOhJBUPYhpXjIsVAYN7kocj9IJ9XoJWAxWgXIDtJY2Ag==",
+      "sha512": "sha512-a8F8IWjMbxUOoX2rq5r7MJQZ7Gux+5j5WeVoI/++hg0pOraJ3d9mSyDLpyOvNBfwZURQ26a+tsMDN1/Q9zRFTA==",
       "path": "system.spatial/5.8.2",
       "hashPath": "system.spatial.5.8.2.nupkg.sha512"
     },

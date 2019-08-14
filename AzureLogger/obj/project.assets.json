@@ -924,10 +924,12 @@
       ]
     },
     "Microsoft.Data.Edm/5.8.2": {
-      "sha512": "P/d8DxA6MFHroBEn/jW0LMQSIKnsRRibrZtRCLfov2boQfrQ1R1BVgkJ5oIhcQsOm0l4POv+I2ny6RBsclNbOw==",
+      "sha512": "4HF+DacTEmNarD1/Q98es0ExiGMP3n7VHvc17OBsy6SSmylBDDBOJ44r0EsyOjZRaeTPbXjTpr08aiCESZI1mw==",
       "type": "package",
       "path": "microsoft.data.edm/5.8.2",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "lib/net40/Microsoft.Data.Edm.dll",
         "lib/net40/Microsoft.Data.Edm.xml",
         "lib/net40/de/Microsoft.Data.Edm.resources.dll",
@@ -988,10 +990,12 @@
       ]
     },
     "Microsoft.Data.OData/5.8.2": {
-      "sha512": "oEIUtXcRiKogF0yZxA+QdgxoBJ34989qL/5xOSrTfxAhzNJV5Hw6DRdWgUCpeXFMoJUQx7ptbHCN+My/LCQfsg==",
+      "sha512": "mkCqLbT3oNBJZ/n7VUdUoZjiQAANNZmg75XeVurckIhMG4dSRN6evzNxYTXjMU2uBFwwC0/LZjdIdSO9mGeFew==",
       "type": "package",
       "path": "microsoft.data.odata/5.8.2",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "lib/net40/Microsoft.Data.OData.dll",
         "lib/net40/Microsoft.Data.OData.xml",
         "lib/net40/de/Microsoft.Data.OData.resources.dll",
@@ -1052,7 +1056,7 @@
       ]
     },
     "Microsoft.NETCore.App/2.0.0": {
-      "sha512": "aEj44yEbsK+XlDwPNSM7CeaYDg33NMk492y2kFRIOMPOVmXvXNO0LTDm8lUhS4Jlm2uNFsIDDH4ggt9lnSDejQ==",
+      "sha512": "8Lrz5RgmfIUMtpTmGG1Z+nVlCr14bFco/aQdiNYfb7uys37vQ6dVtds9xPIFANVyf6HFePhD9nGmqFcfv5eKMQ==",
       "type": "package",
       "path": "microsoft.netcore.app/2.0.0",
       "files": [
@@ -1346,7 +1350,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostPolicy/2.0.0": {
-      "sha512": "RAMrQqBFMiF4dbpHJEvcwwXG+ISoKRck8zXlfr49waPc7xllEpv/ANHi4c3pCTkVIdNNSdDYf71YjbkaRSHJgg==",
+      "sha512": "uYoVFwvMIp9KtOjW6huBedoBP+50Pny0aIrmJGPoaHJ9anAtrvCjS+iKFR5MIS8amJRKsLc3YEtpT/AYfYmIdA==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostpolicy/2.0.0",
       "files": [
@@ -1360,7 +1364,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostResolver/2.0.0": {
-      "sha512": "LrZ1AcFJF7+da03Is+5RKdqjnDVNnoi1MBRAi4LRif3uO9rRntfNUezeNcG/OO/yGYzyEwGJkioyw8ZWGJiKWg==",
+      "sha512": "HYXxywd3EaAw1M2K5ox6oUu0NgG90oDIpyq70IBvOf2keNuMJWYTWZUAoTlpv8E0Ks09DA+gczoA64tCdII5Xw==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostresolver/2.0.0",
       "files": [
@@ -1374,7 +1378,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "CCf4NjmDOoise7FAij2VPuHIgKKsu696vkTwhOkPVQfLsTmB2WLFfQ4yeO5Udtk8FD636UBMx6Y9eovzJKT76A==",
+      "sha512": "5BdAWDgMNwf90L0J+C/eh6kfHDa37ViL1cBL1nv5zPA4TB2cGV51YiQyvzCEy9DBE0LwwMI4+PkUpIekKyocSA==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.0",
       "files": [
@@ -1391,10 +1395,12 @@
       ]
     },
     "Microsoft.NETCore.Targets/1.0.1": {
-      "sha512": "rkn+fKobF/cbWfnnfBOQHKVKIOpxMZBvlSHkqDWgBpwGDcLRduvs3D9OLGeV6GWGvVwNlVi2CBbTjuPmtHvyNw==",
+      "sha512": "uoCrgIGGKOGgZcw9rv+LHPFAUtVvJC5JUhMrYNQjg9tiNJpdvj3Z7K9RiDEoI6xm79pYuDHi537R+SXCb6y8oQ==",
       "type": "package",
       "path": "microsoft.netcore.targets/1.0.1",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -1404,7 +1410,7 @@
       ]
     },
     "NETStandard.Library/2.0.0": {
-      "sha512": "49ZAcrnNn56GIJwGoiaI7NpwcEJ8mjUyfSqVYIJMDhOBzPe8HSHS74swF2H0v8fzj7pxLfcYjS9P5PdIqsTQxw==",
+      "sha512": "sn4JwjEN5iNfqc0bd0Qje5oBZBB9wyuNn4GkQvEzfKVnZ3QH0HHoN9exxydlJGptiCMVdAZu7At9TNj0r8Z0yg==",
       "type": "package",
       "path": "netstandard.library/2.0.0",
       "files": [
@@ -2331,12 +2337,10 @@
       ]
     },
     "System.Reflection.Emit/4.0.1": {
-      "sha512": "/3dmiGuUUUjqZaSeTdxkgzY0De8sLpS4J3tYRETskSbZaRjwvL62IBalMGI6iczZ6udJ1iBlsBBYOHtdCfx90Q==",
+      "sha512": "P2wqAj72fFjpP6wb9nSfDqNBMab+2ovzSDzUZK7MVIm54tBJEPr9jWfSjjoTpPwj1LeKcmX3vr0ttyjSSFM47g==",
       "type": "package",
       "path": "system.reflection.emit/4.0.1",
       "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3006,10 +3010,12 @@
       ]
     },
     "System.Spatial/5.8.2": {
-      "sha512": "0RfZZJ8RlrfjoBPAF6pczX4Nd2kyLM8EX1PCP5Rqs/jOhJBUPYhpXjIsVAYN7kocj9IJ9XoJWAxWgXIDtJY2Ag==",
+      "sha512": "a8F8IWjMbxUOoX2rq5r7MJQZ7Gux+5j5WeVoI/++hg0pOraJ3d9mSyDLpyOvNBfwZURQ26a+tsMDN1/Q9zRFTA==",
       "type": "package",
       "path": "system.spatial/5.8.2",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "lib/net40/System.Spatial.dll",
         "lib/net40/System.Spatial.xml",
         "lib/net40/de/System.Spatial.resources.dll",
@@ -3598,23 +3604,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yurii.puk\\.nuget\\packages\\": {},
+    "C:\\Users\\yura\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\2c2p\\Municipality\\AzureLogger\\AzureLogger.csproj",
+      "projectUniqueName": "E:\\Diploma master\\Municipality\\AzureLogger\\AzureLogger.csproj",
       "projectName": "AzureLogger",
-      "projectPath": "C:\\projects\\2c2p\\Municipality\\AzureLogger\\AzureLogger.csproj",
-      "packagesPath": "C:\\Users\\yurii.puk\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\2c2p\\Municipality\\AzureLogger\\obj\\",
+      "projectPath": "E:\\Diploma master\\Municipality\\AzureLogger\\AzureLogger.csproj",
+      "packagesPath": "C:\\Users\\yura\\.nuget\\packages\\",
+      "outputPath": "E:\\Diploma master\\Municipality\\AzureLogger\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\yurii.puk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yura\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3650,7 +3656,12 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true

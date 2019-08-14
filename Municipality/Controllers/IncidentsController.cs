@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Repositories;
-using Microsoft.AspNetCore.Authorization;
-using Municipality.ViewModels;
-using System.IO;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Models;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Municipality.Service;
-using Municipality.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Models;
 using Municipality.Features.Incidents;
 using Municipality.ModelBinder;
+using Municipality.Service;
+using Municipality.Services.Interfaces;
+using Municipality.ViewModels;
+using Repositories;
+using System.Threading.Tasks;
 
 namespace Municipality.Controllers
 {
-    
+    //[Authorize]
+    //[ApiController]
     public class IncidentsController : Controller
     {
 
@@ -52,8 +48,14 @@ namespace Municipality.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> GetIncidents([FromQuery] IncidentsQuery query = null)
         {
-            IPagedEnumerable<IncidentViewModel> result = await _incidentService.GetIncidentsAsync(query);
-            return Json(new { Items = result.Items, totalCount = result.TotalCount  });
+            var result = await _incidentService.GetIncidentsAsync(query);
+
+            if (result == null)
+            {
+                return new BadRequestResult();
+            }
+
+            return Json(result);
         }
 
         [HttpGet("api/incidents/not-approved")]

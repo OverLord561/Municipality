@@ -2,11 +2,7 @@
 using Municipality.Features.Incidents;
 using Repositories.EntityFramework.Queries;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Municipality.Extensions;
 
 namespace Municipality.Services
 {
@@ -15,6 +11,12 @@ namespace Municipality.Services
         public Expression<Func<Incident, bool>> BuildWhere(IncidentsQuery query)
         {
             query.StatusName = "New";
+
+            var areParametersValid = query.AreBaseParametersValid();
+            if (!areParametersValid)
+            {
+                return null;
+            }
 
             Expression<Func<Incident, bool>> result = null;
 
