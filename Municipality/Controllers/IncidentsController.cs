@@ -19,7 +19,7 @@ using Municipality.ModelBinder;
 
 namespace Municipality.Controllers
 {
-    [Authorize]
+    
     public class IncidentsController : Controller
     {
 

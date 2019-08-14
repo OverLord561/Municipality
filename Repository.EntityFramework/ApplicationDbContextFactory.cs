@@ -18,7 +18,7 @@ namespace Repositories.EntityFramework
 
             //builder.UseSqlServer(_config.GetConnectionString("Defa‌​ultConnection"));
             
-              builder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=Municipality;Integrated Security=True;MultipleActiveResultSets=true;");
+              builder.UseSqlServer("Data Source=WS-LV-CP2364;Integrated Security = True;Initial Catalog=Municipality;App=EntityFramework");
 
             return new ApplicationDbContext(builder.Options);
         }

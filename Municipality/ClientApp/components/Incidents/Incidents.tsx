@@ -38,22 +38,13 @@ class Incidents extends React.Component<IProps, any> {
     public render() {
         return <div className="row">
             <button onClick={this.props.getIncidents} value='test'>clisk me</button>
-
-            <MapContainer
-                incidents={this.props.incidents}
-                focusIncident={this.props.focusIncident}
-            />
+           
             <div className="col-lg-6 block ">
                 <div className="row">
                     <div className="col-lg-4">
                         <Creation
                             createIncident={this.props.createIncident}
                         />
-                    </div>
-                    <div className="col-lg-8">
-
-                        <IncidentsTable />
-
                     </div>
                 </div>
             </div>

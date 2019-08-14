@@ -7,3 +7,12 @@ E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.A
 E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.dll
 E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.pdb
 E:\Diploma master\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.csprojResolveAssemblyReference.cache
+C:\projects\2c2p\Municipality\AzureLogger\bin\Debug\netcoreapp2.0\AzureLogger.deps.json
+C:\projects\2c2p\Municipality\AzureLogger\bin\Debug\netcoreapp2.0\AzureLogger.dll
+C:\projects\2c2p\Municipality\AzureLogger\bin\Debug\netcoreapp2.0\AzureLogger.pdb
+C:\projects\2c2p\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.csprojAssemblyReference.cache
+C:\projects\2c2p\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.csproj.CoreCompileInputs.cache
+C:\projects\2c2p\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.AssemblyInfoInputs.cache
+C:\projects\2c2p\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.AssemblyInfo.cs
+C:\projects\2c2p\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.dll
+C:\projects\2c2p\Municipality\AzureLogger\obj\Debug\netcoreapp2.0\AzureLogger.pdb

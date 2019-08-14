@@ -114,6 +114,7 @@ namespace Municipality
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
             //if (env.IsDevelopment())
             //{
             //    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())

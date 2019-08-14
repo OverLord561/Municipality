@@ -14,6 +14,7 @@ namespace Municipality.Services
     {
         public Expression<Func<Incident, bool>> BuildWhere(IncidentsQuery query)
         {
+            query.StatusName = "New";
 
             Expression<Func<Incident, bool>> result = null;
 
@@ -27,6 +28,9 @@ namespace Municipality.Services
                 result = result.AndAlso(x => x.IncidentStatus.Name.ToLower() == query.StatusName.ToLower());
             }
             result = result.AndAlso(x => x.Approved == query.IsApproved);
+
+            result = result.AndAlso(x => x.Priority.Name == "Low");
+
 
             if (result == null) return x => true;
 
